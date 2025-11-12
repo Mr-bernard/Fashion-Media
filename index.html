@@ -1,529 +1,2712 @@
-<!doctype doctype>
+<!doctype html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fashion Media - B2B Fashion Commerce Platform</title>
+  <title>Fashion Media - B2B Fashion Marketplace</title>
+  <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       box-sizing: border-box;
     }
     
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    :root {
+      --bg-primary: #FEFEFE;
+      --bg-secondary: #F8F9FB;
+      --bg-card: #FFFFFF;
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B7280;
+      --border-color: #E5E7EB;
+      --accent-primary: #1E3A8A;
+      --accent-secondary: #D97706;
+      --accent-hover: #1E40AF;
+      --gold-accent: #F59E0B;
+      --loyal-blue: #1E3A8A;
     }
     
-    .animate-fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
+    [data-theme="dark"] {
+      --bg-primary: #0F172A;
+      --bg-secondary: #1E293B;
+      --bg-card: #334155;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --border-color: #475569;
+      --accent-primary: #3B82F6;
+      --accent-secondary: #F59E0B;
+      --accent-hover: #2563EB;
+      --gold-accent: #FBBF24;
+      --loyal-blue: #3B82F6;
     }
     
-    .delay-1 { animation-delay: 0.2s; opacity: 0; }
-    .delay-2 { animation-delay: 0.4s; opacity: 0; }
-    .delay-3 { animation-delay: 0.6s; opacity: 0; }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    body {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     
-    .card-hover {
+    .bg-primary {
+      background-color: var(--bg-primary);
+    }
+    
+    .bg-secondary {
+      background-color: var(--bg-secondary);
+    }
+    
+    .bg-card {
+      background-color: var(--bg-card);
+    }
+    
+    .text-primary {
+      color: var(--text-primary);
+    }
+    
+    .text-secondary {
+      color: var(--text-secondary);
+    }
+    
+    .border-custom {
+      border-color: var(--border-color);
+    }
+    
+    .accent-bg {
+      background-color: var(--accent-primary);
+    }
+    
+    .accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    
+    .product-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
     }
     
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
     
-    .page {
-      display: none;
+    .category-chip {
+      transition: all 0.3s ease;
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
     }
     
-    .page.active {
-      display: block;
+    .category-chip:hover {
+      transform: scale(1.05);
     }
     
-    .user-category-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
+    .category-chip.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #DC3545;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    
+    .star-filled {
+      color: #FFC107;
+    }
+    
+    .star-empty {
+      color: #6C757D;
+    }
+    
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--bg-card);
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 20px;
+    }
+    
+    .theme-toggle-btn:hover {
+      transform: scale(1.1);
+      border-color: var(--accent-primary);
+    }
+    
+    .modal-overlay {
+      backdrop-filter: blur(4px);
+    }
+    
+    input, select, textarea {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
- <body class="font-sans"><!-- Navigation -->
-  <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+ <body><!-- Header -->
+  <header class="bg-primary shadow-md sticky top-0 z-50 border-b border-custom">
    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
+    <div class="flex justify-between items-center h-16"><!-- Logo -->
      <div class="flex items-center">
-      <div class="flex-shrink-0">
-       <h1 class="text-2xl font-bold gradient-bg bg-clip-text text-transparent">Fashion Media</h1>
+      <h1 id="site-title" class="text-2xl font-bold text-primary">Fashion Media</h1>
+     </div><!-- Search Bar -->
+     <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+      <div class="relative w-full"><input type="text" id="search-input" placeholder="Search fabrics, accessories, materials..." class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
+       <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+       </svg>
       </div>
+     </div><!-- Actions -->
+     <div class="flex items-center space-x-6"><!-- Theme Toggle Button --> <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme"> <span id="theme-icon">☀️</span> </button> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative hidden md:block">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+       </svg><span id="wishlist-count" class="cart-badge hidden">0</span> </button> <button id="cart-btn" class="text-primary hover:opacity-70 transition-opacity relative">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+       </svg><span id="cart-count" class="cart-badge hidden">0</span> </button> <button id="signin-btn" class="accent-bg text-white px-6 py-2 rounded-lg font-semibold transition-all"> Sign In </button>
      </div>
-     <div class="hidden md:flex items-center space-x-8"><a href="#" class="nav-link text-gray-700 hover:text-purple-600 transition-colors" data-page="home">Home</a> <a href="#" class="nav-link text-gray-700 hover:text-purple-600 transition-colors" data-page="features">Features</a> <a href="#" class="nav-link text-gray-700 hover:text-purple-600 transition-colors" data-page="users">For Users</a> <a href="#" class="nav-link text-gray-700 hover:text-purple-600 transition-colors" data-page="marketplace">Marketplace</a> <a href="#" class="nav-link text-gray-700 hover:text-purple-600 transition-colors" data-page="contact">Contact</a> <button class="nav-link bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors" data-page="get-started">Get Started</button>
-     </div>
-     <div class="md:hidden"><button id="mobile-menu-btn" class="text-gray-700 hover:text-purple-600">
-       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-       </svg></button>
-     </div>
-    </div>
-   </div><!-- Mobile Menu -->
-   <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-    <div class="px-4 pt-2 pb-4 space-y-2"><a href="#" class="nav-link block px-3 py-2 text-gray-700 hover:bg-purple-50 rounded-md" data-page="home">Home</a> <a href="#" class="nav-link block px-3 py-2 text-gray-700 hover:bg-purple-50 rounded-md" data-page="features">Features</a> <a href="#" class="nav-link block px-3 py-2 text-gray-700 hover:bg-purple-50 rounded-md" data-page="users">For Users</a> <a href="#" class="nav-link block px-3 py-2 text-gray-700 hover:bg-purple-50 rounded-md" data-page="marketplace">Marketplace</a> <a href="#" class="nav-link block px-3 py-2 text-gray-700 hover:bg-purple-50 rounded-md" data-page="contact">Contact</a> <button class="nav-link w-full bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors" data-page="get-started">Get Started</button>
+    </div><!-- Mobile Search -->
+    <div class="md:hidden pb-3"><input type="text" placeholder="Search products..." class="w-full px-4 py-2 rounded-lg border focus:outline-none">
     </div>
    </div>
-  </nav><!-- HOME PAGE -->
-  <div id="home-page" class="page active"><!-- Hero Section -->
-   <section class="gradient-bg pt-32 pb-20 px-4">
-    <div class="max-w-7xl mx-auto text-center">
-     <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">Africa's Premier Fashion<br>
-      Commerce Network</h2>
-     <p class="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto animate-fade-in-up delay-1">Connect, Trade, and Grow Your Fashion Business. A B2B marketplace meets social commerce platform for designers, suppliers, and brands.</p>
-     <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-2"><button class="nav-link bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg" data-page="get-started"> Join as Designer </button> <button class="nav-link bg-purple-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-colors shadow-lg" data-page="get-started"> Join as Supplier </button>
+  </header><!-- Hero Banner -->
+  <section class="accent-bg text-white py-12 px-4">
+   <div class="max-w-7xl mx-auto text-center">
+    <h2 id="hero-title" class="text-3xl md:text-4xl font-bold mb-3">Discover Premium Fashion Materials</h2>
+    <p id="hero-subtitle" class="text-lg opacity-90">Source quality fabrics, accessories &amp; more from verified suppliers</p>
+   </div>
+  </section><!-- Category Filter -->
+  <section class="bg-primary border-b border-custom sticky top-16 z-40">
+   <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex items-center space-x-3 overflow-x-auto pb-2"><button class="category-chip active px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="all">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+      </svg> All Products </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="fabrics">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0a4 4 0 004-4v-4a2 2 0 012-2h4a2 2 0 012 2v4a4 4 0 01-4 4h-4z"></path>
+      </svg> Fabrics </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="accessories">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+      </svg> Accessories </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="buttons">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg> Buttons &amp; Zippers </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="threads">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg> Threads </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="lace">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+      </svg> Lace &amp; Trims </button> <button class="category-chip px-6 py-2 rounded-lg font-medium whitespace-nowrap" data-category="tools">
+      <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg> Tools &amp; Notions </button>
+    </div>
+   </div>
+  </section><!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+   <div class="flex gap-8"><!-- Sidebar Categories (Hidden by default, shown when category selected) -->
+    <aside id="category-sidebar" class="w-64 hidden">
+     <div class="bg-card rounded-xl border border-custom p-6 sticky top-32">
+      <h3 id="sidebar-title" class="text-lg font-bold text-primary mb-4">Categories</h3>
+      <div id="sidebar-content" class="space-y-2"><!-- Dynamic subcategories will be inserted here -->
+      </div>
+     </div>
+    </aside><!-- Products Area -->
+    <div class="flex-1">
+     <div class="flex justify-between items-center mb-6">
+      <h3 id="products-title" class="text-2xl font-bold text-primary">Featured Products</h3><select id="sort-select" class="px-4 py-2 rounded-lg border border-custom focus:outline-none"> <option>Sort by: Featured</option> <option>Price: Low to High</option> <option>Price: High to Low</option> <option>Newest First</option> </select>
+     </div>
+     <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Products will be dynamically inserted here -->
      </div>
     </div>
-   </section><!-- Stats Section -->
-   <section class="bg-white py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div class="animate-fade-in-up">
-       <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
-        10K+
-       </div>
-       <div class="text-gray-600 text-sm md:text-base">
-        Active Designers
-       </div>
-      </div>
-      <div class="animate-fade-in-up delay-1">
-       <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
-        5K+
-       </div>
-       <div class="text-gray-600 text-sm md:text-base">
-        Verified Suppliers
-       </div>
-      </div>
-      <div class="animate-fade-in-up delay-2">
-       <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
-        50K+
-       </div>
-       <div class="text-gray-600 text-sm md:text-base">
-        Products Listed
-       </div>
-      </div>
-      <div class="animate-fade-in-up delay-3">
-       <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
-        30+
-       </div>
-       <div class="text-gray-600 text-sm md:text-base">
-        Countries Served
-       </div>
-      </div>
+   </div>
+  </main><!-- Product Detail Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 overflow-y-auto">
+   <div class="min-h-full flex items-center justify-center p-4">
+    <div class="bg-card rounded-2xl max-w-4xl w-full max-h-[90%] overflow-y-auto relative"><button id="close-product-modal" class="absolute top-4 right-4 z-10 bg-card rounded-full p-2 shadow-lg hover:opacity-70">
+      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg></button>
+     <div id="product-detail-content" class="p-8"><!-- Product details will be inserted here -->
      </div>
     </div>
-   </section><!-- CTA Section -->
-   <section class="gradient-bg py-20 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-     <h3 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Transform Your Fashion Business?</h3>
-     <p class="text-xl text-purple-100 mb-8">Join thousands of designers, suppliers, and brands already growing on Fashion Media</p>
-     <div class="flex flex-col sm:flex-row gap-4 justify-center"><button class="nav-link bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg" data-page="get-started"> Create Free Account </button> <button class="bg-purple-800 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-colors shadow-lg border-2 border-white"> Schedule Demo </button>
-     </div>
+   </div>
+  </div><!-- Cart Sidebar -->
+  <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-primary shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+   <div class="flex flex-col h-full">
+    <div class="flex justify-between items-center p-6 border-b border-custom">
+     <h3 class="text-xl font-bold text-primary">Shopping Cart</h3><button id="close-cart" class="text-secondary hover:text-primary">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg></button>
     </div>
-   </section>
-  </div><!-- FEATURES PAGE -->
-  <div id="features-page" class="page">
-   <section class="bg-gray-50 pt-32 pb-20 px-4">
-    <div class="max-w-7xl mx-auto">
-     <div class="text-center mb-16">
-      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Platform Features</h3>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Everything you need to grow your fashion business in one powerful platform</p>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Feature Card 1 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">B2B Marketplace</h4>
-       <p class="text-gray-600">Source materials, accessories, and production partners with bulk pricing and MOQ options.</p>
-      </div><!-- Feature Card 2 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">Social Network</h4>
-       <p class="text-gray-600">Connect with designers, share collections, and build your fashion community with posts and stories.</p>
-      </div><!-- Feature Card 3 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">Trade Assurance</h4>
-       <p class="text-gray-600">Secure escrow system holds payments until delivery confirmation for safe transactions.</p>
-      </div><!-- Feature Card 4 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">Direct Messaging</h4>
-       <p class="text-gray-600">Negotiate deals, request quotes, and collaborate through integrated chat system.</p>
-      </div><!-- Feature Card 5 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">Custom Requests</h4>
-       <p class="text-gray-600">Request custom fabric prints, specific materials, or tailored production work from suppliers.</p>
-      </div><!-- Feature Card 6 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-       </div>
-       <h4 class="text-2xl font-bold text-gray-900 mb-3">AI Matching</h4>
-       <p class="text-gray-600">Smart recommendations for suppliers, fabrics, and partners based on your activity and needs.</p>
-      </div>
-     </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+     <p class="text-secondary text-center py-8">Your cart is empty</p>
     </div>
-   </section>
-  </div><!-- FOR USERS PAGE -->
-  <div id="users-page" class="page">
-   <section class="bg-white pt-32 pb-20 px-4">
-    <div class="max-w-7xl mx-auto">
-     <div class="text-center mb-16">
-      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Who We Serve</h3>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tailored solutions for every player in the fashion industry</p>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6"><!-- User Type 1 -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
-       <svg class="user-category-image" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="#E9D5FF" /> <circle cx="200" cy="80" r="35" fill="#9333EA" /> <path d="M 150 120 Q 200 140 250 120 L 250 200 L 150 200 Z" fill="#9333EA" /> <line x1="170" y1="140" x2="190" y2="180" stroke="#FFF" stroke-width="3" /> <line x1="230" y1="140" x2="210" y2="180" stroke="#FFF" stroke-width="3" /> <path d="M 180 100 L 200 120 L 220 100" stroke="#FFF" stroke-width="3" fill="none" />
-       </svg>
-       <div class="p-6 text-center">
-        <h4 class="text-xl font-bold text-gray-900 mb-2">Designers &amp; Tailors</h4>
-        <p class="text-gray-700 text-sm">Source materials, showcase work, and connect with clients</p>
-       </div>
-      </div><!-- User Type 2 -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
-       <svg class="user-category-image" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="#DBEAFE" /> <rect x="120" y="60" width="160" height="100" fill="#2563EB" rx="5" /> <rect x="140" y="80" width="40" height="40" fill="#FFF" opacity="0.3" /> <rect x="220" y="80" width="40" height="40" fill="#FFF" opacity="0.3" /> <rect x="140" y="130" width="120" height="8" fill="#FFF" opacity="0.5" /> <rect x="140" y="145" width="80" height="8" fill="#FFF" opacity="0.5" />
-       </svg>
-       <div class="p-6 text-center">
-        <h4 class="text-xl font-bold text-gray-900 mb-2">Suppliers &amp; Vendors</h4>
-        <p class="text-gray-700 text-sm">List products, manage bulk orders, and grow your business</p>
-       </div>
-      </div><!-- User Type 3 -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
-       <svg class="user-category-image" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="#FEF3C7" /> <path d="M 150 50 L 200 30 L 250 50 L 250 150 L 150 150 Z" fill="#F59E0B" /> <rect x="180" y="120" width="40" height="30" fill="#FFF" /> <rect x="170" y="70" width="25" height="30" fill="#FFF" opacity="0.7" /> <rect x="205" y="70" width="25" height="30" fill="#FFF" opacity="0.7" /> <circle cx="200" cy="125" r="3" fill="#F59E0B" />
-       </svg>
-       <div class="p-6 text-center">
-        <h4 class="text-xl font-bold text-gray-900 mb-2">Brands &amp; Boutiques</h4>
-        <p class="text-gray-700 text-sm">Wholesale purchasing and partnership opportunities</p>
-       </div>
-      </div><!-- User Type 4 -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
-       <svg class="user-category-image" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="#FCE7F3" /> <circle cx="200" cy="70" r="30" fill="#EC4899" /> <path d="M 160 110 Q 200 130 240 110 L 240 180 L 160 180 Z" fill="#EC4899" /> <path d="M 280 80 L 300 100 L 320 80 L 320 120 L 280 120 Z" fill="#F472B6" /> <rect x="285" y="125" width="30" height="5" fill="#F472B6" />
-       </svg>
-       <div class="p-6 text-center">
-        <h4 class="text-xl font-bold text-gray-900 mb-2">Consumers</h4>
-        <p class="text-gray-700 text-sm">Browse, connect with designers, and make purchases</p>
-       </div>
-      </div>
-     </div>
+    <div class="border-t border-custom p-6">
+     <div class="flex justify-between items-center mb-4"><span class="text-lg font-semibold text-primary">Total:</span> <span id="cart-total" class="text-2xl font-bold text-primary">$0.00</span>
+     </div><button class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Checkout </button>
     </div>
-   </section>
-  </div><!-- MARKETPLACE PAGE -->
-  <div id="marketplace-page" class="page">
-   <section class="bg-gray-50 pt-32 pb-20 px-4">
-    <div class="max-w-7xl mx-auto">
-     <div class="text-center mb-16">
-      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Marketplace Categories</h3>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Everything you need for fashion production and retail</p>
-     </div>
-     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover">
-       <div class="text-4xl mb-3">
-        🧵
-       </div>
-       <h5 class="font-semibold text-gray-900">Fabrics</h5>
-      </div>
-      <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover">
-       <div class="text-4xl mb-3">
-        💎
-       </div>
-       <h5 class="font-semibold text-gray-900">Accessories</h5>
-      </div>
-      <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover">
-       <div class="text-4xl mb-3">
-        ⚙️
-       </div>
-       <h5 class="font-semibold text-gray-900">Machinery</h5>
-      </div>
-      <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover">
-       <div class="text-4xl mb-3">
-        👗
-       </div>
-       <h5 class="font-semibold text-gray-900">Ready-to-Wear</h5>
-      </div>
-      <div class="bg-white rounded-xl p-6 text-center shadow-md card-hover">
-       <div class="text-4xl mb-3">
-        🪡
-       </div>
-       <h5 class="font-semibold text-gray-900">Services</h5>
-      </div>
-     </div>
+   </div>
+  </div><!-- Cart Overlay -->
+  <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div><!-- Wishlist Sidebar -->
+  <div id="wishlist-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-primary shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+   <div class="flex flex-col h-full">
+    <div class="flex justify-between items-center p-6 border-b border-custom">
+     <h3 class="text-xl font-bold text-primary">Products I Love</h3><button id="close-wishlist" class="text-secondary hover:text-primary">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg></button>
     </div>
-   </section>
-  </div><!-- GET STARTED PAGE -->
-  <div id="get-started-page" class="page">
-   <section class="gradient-bg pt-32 pb-20 px-4">
-    <div class="max-w-7xl mx-auto">
-     <div class="text-center mb-16">
-      <h2 class="text-5xl md:text-6xl font-bold text-white mb-6">Get Started with Fashion Media</h2>
-      <p class="text-xl text-purple-100 max-w-2xl mx-auto">Choose your account type and start growing your fashion business today</p>
-     </div>
-     <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"><!-- Designer Registration -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-2xl card-hover">
-       <svg class="w-full h-64" viewbox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"><defs>
-         <lineargradient id="designerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#E9D5FF;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#C084FC;stop-opacity:1" />
-         </lineargradient>
-        </defs> <rect width="400" height="250" fill="url(#designerGrad)" /> <circle cx="200" cy="100" r="45" fill="#9333EA" /> <path d="M 140 150 Q 200 180 260 150 L 260 250 L 140 250 Z" fill="#9333EA" /> <line x1="160" y1="180" x2="185" y2="230" stroke="#FFF" stroke-width="4" /> <line x1="240" y1="180" x2="215" y2="230" stroke="#FFF" stroke-width="4" /> <path d="M 170 120 L 200 145 L 230 120" stroke="#FFF" stroke-width="4" fill="none" /> <circle cx="320" cy="80" r="25" fill="#FFF" opacity="0.3" /> <path d="M 310 70 L 320 85 L 330 70" stroke="#9333EA" stroke-width="2" fill="none" />
-       </svg>
-       <div class="p-8">
-        <h3 class="text-3xl font-bold text-gray-900 mb-4">Join as Designer</h3>
-        <p class="text-gray-600 mb-6">Showcase your collections, source materials, and connect with suppliers and clients worldwide.</p>
-        <ul class="space-y-3 mb-8">
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Create your portfolio &amp; showcase work</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Source fabrics &amp; materials</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Connect with clients &amp; collaborators</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Request custom production work</span></li>
-        </ul><button class="w-full bg-purple-600 text-white py-4 rounded-full font-semibold text-lg hover:bg-purple-700 transition-colors shadow-lg"> Register as Designer </button>
-       </div>
-      </div><!-- Supplier Registration -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-2xl card-hover">
-       <svg class="w-full h-64" viewbox="0 0 400 250" xmlns="http://www.w3.org/2000/svg"><defs>
-         <lineargradient id="supplierGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#DBEAFE;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
-         </lineargradient>
-        </defs> <rect width="400" height="250" fill="url(#supplierGrad)" /> <rect x="100" y="70" width="200" height="130" fill="#2563EB" rx="8" /> <rect x="130" y="100" width="50" height="50" fill="#FFF" opacity="0.3" rx="4" /> <rect x="225" y="100" width="50" height="50" fill="#FFF" opacity="0.3" rx="4" /> <rect x="130" y="160" width="140" height="10" fill="#FFF" opacity="0.5" rx="2" /> <rect x="130" y="180" width="100" height="10" fill="#FFF" opacity="0.5" rx="2" /> <circle cx="340" cy="100" r="30" fill="#FFF" opacity="0.3" /> <path d="M 330 95 L 340 105 L 350 95" stroke="#2563EB" stroke-width="3" fill="none" />
-       </svg>
-       <div class="p-8">
-        <h3 class="text-3xl font-bold text-gray-900 mb-4">Join as Supplier</h3>
-        <p class="text-gray-600 mb-6">List your products, manage bulk orders, and reach thousands of designers and brands across Africa.</p>
-        <ul class="space-y-3 mb-8">
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">List unlimited products</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Manage bulk orders &amp; quotations</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Secure payment with trade assurance</span></li>
-         <li class="flex items-start">
-          <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span class="text-gray-700">Access to verified buyers</span></li>
-        </ul><button class="w-full bg-blue-600 text-white py-4 rounded-full font-semibold text-lg hover:bg-blue-700 transition-colors shadow-lg"> Register as Supplier </button>
-       </div>
-      </div>
-     </div>
+    <div id="wishlist-items" class="flex-1 overflow-y-auto p-6">
+     <p class="text-secondary text-center py-8">No loved products yet</p>
     </div>
-   </section>
-  </div><!-- CONTACT PAGE -->
-  <div id="contact-page" class="page">
-   <section class="bg-white pt-32 pb-20 px-4">
-    <div class="max-w-4xl mx-auto">
-     <div class="text-center mb-12">
-      <h2 class="text-5xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-      <p class="text-xl text-gray-600">Have questions? We'd love to hear from you.</p>
+   </div>
+  </div><!-- Wishlist Overlay -->
+  <div id="wishlist-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div><!-- Auth Modal -->
+  <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 flex items-center justify-center p-4">
+   <div class="bg-card rounded-2xl max-w-md w-full max-h-[90%] overflow-y-auto"><!-- Sign In Form -->
+    <div id="signin-form" class="p-8">
+     <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-primary mb-2">Welcome Back</h2>
+      <p class="text-secondary">Sign in to your Fashion Media account</p>
      </div>
-     <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 shadow-xl">
-      <div class="grid md:grid-cols-2 gap-8 mb-8">
-       <div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Contact Information</h3>
-        <div class="space-y-4">
-         <div class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          <div>
-           <p class="font-semibold text-gray-900">Email</p>
-           <p class="text-gray-600">info@fashionmedia.com</p>
-          </div>
-         </div>
-         <div class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          <div>
-           <p class="font-semibold text-gray-900">Phone</p>
-           <p class="text-gray-600">+234 XXX XXX XXXX</p>
-          </div>
-         </div>
-         <div class="flex items-start">
-          <svg class="w-6 h-6 text-purple-600 mr-3 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <div>
-           <p class="font-semibold text-gray-900">Location</p>
-           <p class="text-gray-600">Lagos, Nigeria</p>
-          </div>
-         </div>
+     <form id="signin-submit" class="space-y-4">
+      <div><label for="signin-email" class="block text-sm font-semibold text-primary mb-1">Email Address</label> <input type="email" id="signin-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
+      </div>
+      <div><label for="signin-password" class="block text-sm font-semibold text-primary mb-1">Password</label> <input type="password" id="signin-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Enter your password">
+      </div>
+      <div class="flex items-center justify-between"><label class="flex items-center"> <input type="checkbox" class="w-4 h-4 rounded"> <span class="ml-2 text-sm text-secondary">Remember me</span> </label> <a href="#" class="text-sm text-primary hover:opacity-70 font-semibold">Forgot password?</a>
+      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Sign In </button>
+     </form>
+     <div class="mt-6 text-center">
+      <p class="text-secondary">Don't have an account? <button id="show-signup" class="text-primary hover:opacity-70 font-semibold">Sign Up</button></p>
+     </div>
+    </div><!-- Sign Up Form -->
+    <div id="signup-form" class="p-8 hidden">
+     <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-primary mb-2">Create Account</h2>
+      <p class="text-secondary">Join Fashion Media today</p>
+     </div><!-- Account Type Selection -->
+     <div class="mb-6"><label class="block text-sm font-semibold text-primary mb-3">I am a:</label>
+      <div class="grid grid-cols-2 gap-3"><button type="button" class="account-type-btn active border-2 accent-bg text-white rounded-lg p-4 text-center transition-all" data-type="customer">
+        <div class="text-3xl mb-2">
+         👤
         </div>
-       </div>
-       <div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Send us a Message</h3>
-        <form class="space-y-4" id="contact-form">
-         <div><label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Name</label> <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-colors" placeholder="Your name">
-         </div>
-         <div><label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email</label> <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-colors" placeholder="your@email.com">
-         </div>
-         <div><label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message</label> <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-colors" placeholder="Your message..."></textarea>
-         </div><button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"> Send Message </button>
-        </form>
-       </div>
+        <div class="font-semibold">
+         Customer
+        </div>
+        <div class="text-xs mt-1 opacity-80">
+         Browse &amp; Buy
+        </div></button> <button type="button" class="account-type-btn border-2 border-custom bg-card text-primary rounded-lg p-4 text-center transition-all hover:opacity-70" data-type="vendor">
+        <div class="text-3xl mb-2">
+         🏪
+        </div>
+        <div class="font-semibold">
+         Vendor
+        </div>
+        <div class="text-xs text-secondary mt-1">
+         Sell Products
+        </div></button>
       </div>
      </div>
-    </div>
-   </section>
-  </div><!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12 px-4">
-   <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-4 gap-8 mb-8">
-     <div>
-      <h4 class="text-2xl font-bold mb-4 gradient-bg bg-clip-text text-transparent">Fashion Media</h4>
-      <p class="text-gray-400 text-sm">Africa's premier B2B fashion commerce platform connecting designers, suppliers, and brands.</p>
+     <form id="signup-submit" class="space-y-4"><input type="hidden" id="account-type" value="customer">
+      <div class="grid grid-cols-2 gap-3">
+       <div><label for="signup-firstname" class="block text-sm font-semibold text-primary mb-1">First Name</label> <input type="text" id="signup-firstname" required class="w-full px-4 py-3 rounded-lg border" placeholder="John">
+       </div>
+       <div><label for="signup-lastname" class="block text-sm font-semibold text-primary mb-1">Last Name</label> <input type="text" id="signup-lastname" required class="w-full px-4 py-3 rounded-lg border" placeholder="Doe">
+       </div>
+      </div>
+      <div><label for="signup-email" class="block text-sm font-semibold text-primary mb-1">Email Address</label> <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
+      </div><!-- Vendor-specific fields -->
+      <div id="vendor-fields" class="hidden space-y-4">
+       <div><label for="business-name" class="block text-sm font-semibold text-primary mb-1">Business Name</label> <input type="text" id="business-name" class="w-full px-4 py-3 rounded-lg border" placeholder="Your Business Name">
+       </div>
+       <div><label for="business-type" class="block text-sm font-semibold text-primary mb-1">Business Type</label> <select id="business-type" class="w-full px-4 py-3 rounded-lg border"> <option value="">Select business type</option> <option value="fabric-supplier">Fabric Supplier</option> <option value="accessories-supplier">Accessories Supplier</option> <option value="manufacturer">Manufacturer</option> <option value="wholesaler">Wholesaler</option> <option value="designer">Designer/Tailor</option> </select>
+       </div>
+      </div>
+      <div><label for="signup-password" class="block text-sm font-semibold text-primary mb-1">Password</label> <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Create a password">
+      </div>
+      <div><label for="signup-confirm-password" class="block text-sm font-semibold text-primary mb-1">Confirm Password</label> <input type="password" id="signup-confirm-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Confirm your password">
+      </div>
+      <div class="flex items-start"><input type="checkbox" id="terms" required class="w-4 h-4 rounded mt-1"> <label for="terms" class="ml-2 text-sm text-secondary"> I agree to the <a href="#" class="text-primary hover:opacity-70 font-semibold">Terms of Service</a> and <a href="#" class="text-primary hover:opacity-70 font-semibold">Privacy Policy</a> </label>
+      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Create Account </button>
+     </form>
+     <div class="mt-6 text-center">
+      <p class="text-secondary">Already have an account? <button id="show-signin" class="text-primary hover:opacity-70 font-semibold">Sign In</button></p>
      </div>
-     <div>
-      <h5 class="font-semibold mb-4">Platform</h5>
-      <ul class="space-y-2 text-gray-400 text-sm">
-       <li><a href="#" class="hover:text-white transition-colors">Marketplace</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Social Network</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Trade Assurance</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Logistics</a></li>
-      </ul>
-     </div>
-     <div>
-      <h5 class="font-semibold mb-4">Resources</h5>
-      <ul class="space-y-2 text-gray-400 text-sm">
-       <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Fashion Trends</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Business Tips</a></li>
-      </ul>
-     </div>
-     <div>
-      <h5 class="font-semibold mb-4">Company</h5>
-      <ul class="space-y-2 text-gray-400 text-sm">
-       <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-       <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-      </ul>
-     </div>
-    </div>
-    <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-     <p>© 2024 Fashion Media. All rights reserved. Connecting Africa's Fashion Industry.</p>
-    </div>
+    </div><!-- Close Button --> <button id="close-auth-modal" class="absolute top-4 right-4 text-secondary hover:text-primary">
+     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+     </svg></button>
    </div>
-  </footer>
+  </div>
   <script>
-    // Page navigation system
-    function showPage(pageName) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      
-      // Show selected page
-      const targetPage = document.getElementById(pageName + '-page');
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      
-      // Close mobile menu if open
-      mobileMenu.classList.add('hidden');
+    // Config and SDK Setup
+    const defaultConfig = {
+      site_title: "Fashion Media",
+      hero_title: "Discover Premium Fashion Materials",
+      hero_subtitle: "Source quality fabrics, accessories & more from verified suppliers"
+    };
+
+    async function onConfigChange(config) {
+      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
     }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["site_title", config.site_title || defaultConfig.site_title],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle]
+        ])
+      });
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
     
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
     
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+    themeToggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
     });
 
-    // Navigation link handlers
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const pageName = this.getAttribute('data-page');
-        if (pageName) {
-          showPage(pageName);
+    // Product Data with 100+ Unique Real Images
+    const products = [
+      // FABRICS (50 products)
+      {
+        id: 1,
+        name: "Premium Cotton Fabric - Navy Blue",
+        category: "fabrics",
+        price: 45.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/3738382/pexels-photo-3738382.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Cotton Textiles Co.",
+        rating: 4.8,
+        reviews: 156,
+        description: "Premium quality cotton fabric in rich navy blue. Perfect for shirts, dresses, and home textiles. This fabric features a tight weave for durability and a soft hand feel.",
+        details: "Material: 100% Cotton | Width: 45 inches | Weight: 120 GSM | Care: Machine washable"
+      },
+      {
+        id: 2,
+        name: "Silk Chiffon - Elegant Drape",
+        category: "fabrics",
+        price: 65.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/6567607/pexels-photo-6567607.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Luxury Fabrics Ltd.",
+        rating: 4.9,
+        reviews: 203,
+        description: "Luxurious silk chiffon with beautiful flowing drape. Lightweight and semi-sheer, perfect for evening wear and elegant overlays.",
+        details: "Material: 100% Silk | Width: 54 inches | Weight: 60 GSM | Care: Dry clean only"
+      },
+      {
+        id: 3,
+        name: "Velvet Fabric - Rich Emerald",
+        category: "fabrics",
+        price: 55.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/6567343/pexels-photo-6567343.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Velvet Dreams",
+        rating: 4.9,
+        reviews: 267,
+        description: "Rich emerald green velvet with luxurious pile and deep color. Perfect for upholstery and evening wear.",
+        details: "Material: 95% Polyester, 5% Spandex | Width: 58 inches | Weight: 280 GSM"
+      },
+      {
+        id: 4,
+        name: "Denim Fabric - Classic Indigo",
+        category: "fabrics",
+        price: 38.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Denim Direct",
+        rating: 4.7,
+        reviews: 342,
+        description: "Classic indigo denim with authentic look and feel. Perfect for jeans, jackets, and casual wear.",
+        details: "Material: 98% Cotton, 2% Spandex | Width: 58 inches | Weight: 12 oz"
+      },
+      {
+        id: 5,
+        name: "Organza Fabric - Soft Blush Pink",
+        category: "fabrics",
+        price: 32.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/3738383/pexels-photo-3738383.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Sheer Elegance",
+        rating: 4.6,
+        reviews: 112,
+        description: "Delicate blush pink organza with beautiful sheen. Lightweight and crisp, perfect for overlays and evening wear.",
+        details: "Material: 100% Polyester | Width: 60 inches | Weight: 40 GSM"
+      },
+      {
+        id: 6,
+        name: "Wool Blend Suiting - Charcoal Gray",
+        category: "fabrics",
+        price: 68.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/3738384/pexels-photo-3738384.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Tailoring Textiles",
+        rating: 4.9,
+        reviews: 198,
+        description: "Premium wool blend suiting fabric in sophisticated charcoal. Perfect for tailored suits and professional wear.",
+        details: "Material: 70% Wool, 30% Polyester | Width: 60 inches | Weight: 280 GSM"
+      },
+      {
+        id: 7,
+        name: "Linen Fabric - Natural Beige",
+        category: "fabrics",
+        price: 42.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/4792484/pexels-photo-4792484.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Natural Fibers Co.",
+        rating: 4.7,
+        reviews: 189,
+        description: "Pure linen fabric in natural beige. Breathable and perfect for summer clothing and home textiles.",
+        details: "Material: 100% Linen | Width: 54 inches | Weight: 180 GSM"
+      },
+      {
+        id: 8,
+        name: "Satin Fabric - Midnight Black",
+        category: "fabrics",
+        price: 48.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/3738385/pexels-photo-3738385.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Satin Luxe",
+        rating: 4.8,
+        reviews: 276,
+        description: "Luxurious midnight black satin with high sheen. Perfect for evening gowns and formal wear.",
+        details: "Material: 100% Polyester | Width: 58 inches | Weight: 120 GSM"
+      },
+      {
+        id: 9,
+        name: "Tulle Fabric - Bridal White",
+        category: "fabrics",
+        price: 18.00,
+        unit: "yard",
+        moq: "15 yards",
+        image: "https://images.pexels.com/photos/6567344/pexels-photo-6567344.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Bridal Fabrics",
+        rating: 4.8,
+        reviews: 276,
+        description: "Soft white tulle with fine netting. Ideal for wedding veils, tutus, and decorative projects.",
+        details: "Material: 100% Nylon | Width: 54 inches | Weight: 30 GSM"
+      },
+      {
+        id: 10,
+        name: "Sequin Fabric - Glamorous Gold",
+        category: "fabrics",
+        price: 75.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/3738386/pexels-photo-3738386.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Glamour Fabrics",
+        rating: 4.7,
+        reviews: 134,
+        description: "Dazzling gold sequin fabric with full coverage. Creates stunning visual impact for evening wear.",
+        details: "Material: Polyester mesh with sequins | Width: 52 inches | Sequin size: 6mm"
+      },
+      {
+        id: 11,
+        name: "Jersey Knit - Soft Gray",
+        category: "fabrics",
+        price: 28.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/3738387/pexels-photo-3738387.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Knit Essentials",
+        rating: 4.6,
+        reviews: 223,
+        description: "Soft gray jersey knit with excellent stretch. Perfect for t-shirts, dresses, and activewear.",
+        details: "Material: 95% Cotton, 5% Spandex | Width: 60 inches | Weight: 200 GSM"
+      },
+      {
+        id: 12,
+        name: "Tweed Fabric - Classic Herringbone",
+        category: "fabrics",
+        price: 58.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/4792485/pexels-photo-4792485.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Heritage Textiles",
+        rating: 4.8,
+        reviews: 167,
+        description: "Classic herringbone tweed with rich texture. Perfect for blazers, coats, and vintage-inspired pieces.",
+        details: "Material: 60% Wool, 40% Polyester | Width: 58 inches | Weight: 320 GSM"
+      },
+      {
+        id: 13,
+        name: "Crepe Fabric - Elegant Burgundy",
+        category: "fabrics",
+        price: 52.00,
+        unit: "yard",
+        moq: "7 yards",
+        image: "https://images.pexels.com/photos/3738388/pexels-photo-3738388.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Elegant Fabrics",
+        rating: 4.7,
+        reviews: 145,
+        description: "Elegant burgundy crepe with subtle texture. Drapes beautifully for dresses and blouses.",
+        details: "Material: 100% Polyester | Width: 58 inches | Weight: 140 GSM"
+      },
+      {
+        id: 14,
+        name: "Brocade Fabric - Royal Gold Pattern",
+        category: "fabrics",
+        price: 82.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/6567345/pexels-photo-6567345.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Royal Textiles",
+        rating: 4.9,
+        reviews: 98,
+        description: "Luxurious brocade with intricate gold patterns. Perfect for special occasion wear and home decor.",
+        details: "Material: Polyester blend | Width: 54 inches | Weight: 280 GSM"
+      },
+      {
+        id: 15,
+        name: "Fleece Fabric - Cozy Navy",
+        category: "fabrics",
+        price: 24.00,
+        unit: "yard",
+        moq: "15 yards",
+        image: "https://images.pexels.com/photos/3738389/pexels-photo-3738389.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Cozy Textiles",
+        rating: 4.5,
+        reviews: 312,
+        description: "Soft navy fleece fabric perfect for blankets, jackets, and cold-weather apparel.",
+        details: "Material: 100% Polyester | Width: 60 inches | Weight: 280 GSM"
+      },
+      {
+        id: 16,
+        name: "Georgette Fabric - Floral Print",
+        category: "fabrics",
+        price: 38.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/4792486/pexels-photo-4792486.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Print Paradise",
+        rating: 4.6,
+        reviews: 178,
+        description: "Beautiful georgette with vibrant floral print. Lightweight and perfect for flowing dresses.",
+        details: "Material: 100% Polyester | Width: 54 inches | Weight: 80 GSM"
+      },
+      {
+        id: 17,
+        name: "Corduroy Fabric - Camel Brown",
+        category: "fabrics",
+        price: 44.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/3738390/pexels-photo-3738390.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Vintage Fabrics",
+        rating: 4.7,
+        reviews: 201,
+        description: "Classic camel brown corduroy with medium wale. Perfect for pants, jackets, and retro styles.",
+        details: "Material: 98% Cotton, 2% Spandex | Width: 58 inches | Weight: 280 GSM"
+      },
+      {
+        id: 18,
+        name: "Taffeta Fabric - Iridescent Purple",
+        category: "fabrics",
+        price: 46.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/6567346/pexels-photo-6567346.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Shimmer Textiles",
+        rating: 4.8,
+        reviews: 234,
+        description: "Iridescent purple taffeta with crisp hand and beautiful sheen. Perfect for formal wear.",
+        details: "Material: 100% Polyester | Width: 58 inches | Weight: 120 GSM"
+      },
+      {
+        id: 19,
+        name: "Chambray Fabric - Light Blue",
+        category: "fabrics",
+        price: 32.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/4792487/pexels-photo-4792487.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Casual Fabrics Co.",
+        rating: 4.6,
+        reviews: 289,
+        description: "Light blue chambray with soft drape. Perfect for shirts, dresses, and casual wear.",
+        details: "Material: 100% Cotton | Width: 58 inches | Weight: 140 GSM"
+      },
+      {
+        id: 20,
+        name: "Ponte Knit - Classic Black",
+        category: "fabrics",
+        price: 36.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/3738391/pexels-photo-3738391.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Modern Knits",
+        rating: 4.7,
+        reviews: 267,
+        description: "Classic black ponte knit with excellent recovery. Perfect for pants, skirts, and structured garments.",
+        details: "Material: 95% Polyester, 5% Spandex | Width: 60 inches | Weight: 320 GSM"
+      },
+      {
+        id: 21,
+        name: "Jacquard Fabric - Damask Pattern",
+        category: "fabrics",
+        price: 64.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567347/pexels-photo-6567347.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Luxury Weaves",
+        rating: 4.9,
+        reviews: 156,
+        description: "Elegant jacquard with classic damask pattern. Perfect for upholstery and formal wear.",
+        details: "Material: Polyester blend | Width: 58 inches | Weight: 300 GSM"
+      },
+      {
+        id: 22,
+        name: "Mesh Fabric - Athletic Black",
+        category: "fabrics",
+        price: 22.00,
+        unit: "yard",
+        moq: "15 yards",
+        image: "https://images.pexels.com/photos/3738392/pexels-photo-3738392.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Sports Textiles",
+        rating: 4.5,
+        reviews: 198,
+        description: "Breathable athletic mesh in black. Perfect for activewear, sportswear, and lining.",
+        details: "Material: 100% Polyester | Width: 60 inches | Weight: 120 GSM"
+      },
+      {
+        id: 23,
+        name: "Faux Leather - Cognac Brown",
+        category: "fabrics",
+        price: 54.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/4792488/pexels-photo-4792488.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Vegan Leather Co.",
+        rating: 4.7,
+        reviews: 223,
+        description: "High-quality faux leather in rich cognac brown. Perfect for jackets, bags, and upholstery.",
+        details: "Material: PU Leather | Width: 54 inches | Weight: 400 GSM"
+      },
+      {
+        id: 24,
+        name: "Minky Fabric - Baby Pink",
+        category: "fabrics",
+        price: 28.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/3738393/pexels-photo-3738393.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Soft Touch Fabrics",
+        rating: 4.8,
+        reviews: 345,
+        description: "Ultra-soft minky fabric in baby pink. Perfect for blankets, baby items, and plush projects.",
+        details: "Material: 100% Polyester | Width: 60 inches | Weight: 280 GSM"
+      },
+      {
+        id: 25,
+        name: "Rayon Challis - Bohemian Print",
+        category: "fabrics",
+        price: 34.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/6567348/pexels-photo-6567348.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Boho Textiles",
+        rating: 4.6,
+        reviews: 187,
+        description: "Flowing rayon challis with bohemian print. Perfect for dresses, skirts, and scarves.",
+        details: "Material: 100% Rayon | Width: 58 inches | Weight: 120 GSM"
+      },
+      {
+        id: 26,
+        name: "Neoprene Fabric - Structured Black",
+        category: "fabrics",
+        price: 62.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/4792489/pexels-photo-4792489.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Modern Materials",
+        rating: 4.7,
+        reviews: 134,
+        description: "Structured neoprene fabric in black. Perfect for contemporary fashion and structured garments.",
+        details: "Material: Neoprene | Width: 58 inches | Weight: 400 GSM"
+      },
+      {
+        id: 27,
+        name: "Eyelet Fabric - White Cotton",
+        category: "fabrics",
+        price: 40.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/3738394/pexels-photo-3738394.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Summer Fabrics",
+        rating: 4.8,
+        reviews: 298,
+        description: "Beautiful white cotton eyelet with delicate cutwork. Perfect for summer dresses and blouses.",
+        details: "Material: 100% Cotton | Width: 54 inches | Weight: 140 GSM"
+      },
+      {
+        id: 28,
+        name: "Faux Fur - Luxe Cream",
+        category: "fabrics",
+        price: 58.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567349/pexels-photo-6567349.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Plush Textiles",
+        rating: 4.9,
+        reviews: 176,
+        description: "Luxurious cream faux fur with long pile. Perfect for coats, collars, and home decor.",
+        details: "Material: 100% Polyester | Width: 60 inches | Pile: 2 inches"
+      },
+      {
+        id: 29,
+        name: "Poplin Fabric - Crisp White",
+        category: "fabrics",
+        price: 26.00,
+        unit: "yard",
+        moq: "15 yards",
+        image: "https://images.pexels.com/photos/4792490/pexels-photo-4792490.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Classic Textiles",
+        rating: 4.6,
+        reviews: 412,
+        description: "Crisp white poplin with smooth finish. Perfect for shirts, dresses, and professional wear.",
+        details: "Material: 100% Cotton | Width: 58 inches | Weight: 120 GSM"
+      },
+      {
+        id: 30,
+        name: "Metallic Knit - Silver Shimmer",
+        category: "fabrics",
+        price: 48.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/3738395/pexels-photo-3738395.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Sparkle Fabrics",
+        rating: 4.7,
+        reviews: 167,
+        description: "Metallic knit with silver shimmer. Perfect for party wear and statement pieces.",
+        details: "Material: 95% Polyester, 5% Metallic | Width: 60 inches | Weight: 200 GSM"
+      },
+      {
+        id: 31,
+        name: "Batik Cotton - Traditional Print",
+        category: "fabrics",
+        price: 35.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Artisan Textiles",
+        rating: 4.6,
+        reviews: 178,
+        description: "Authentic batik cotton with traditional patterns. Perfect for cultural wear and unique fashion pieces.",
+        details: "Material: 100% Cotton | Width: 44 inches | Weight: 140 GSM"
+      },
+      {
+        id: 32,
+        name: "Stretch Denim - Dark Wash",
+        category: "fabrics",
+        price: 42.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Denim Masters",
+        rating: 4.8,
+        reviews: 456,
+        description: "Premium stretch denim in dark wash. Comfortable with excellent recovery for modern jeans.",
+        details: "Material: 92% Cotton, 6% Polyester, 2% Spandex | Width: 58 inches | Weight: 11 oz"
+      },
+      {
+        id: 33,
+        name: "Silk Dupioni - Jewel Tones",
+        category: "fabrics",
+        price: 72.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Silk Emporium",
+        rating: 4.9,
+        reviews: 134,
+        description: "Luxurious silk dupioni with natural slubs and rich jewel tones. Perfect for formal wear.",
+        details: "Material: 100% Silk | Width: 54 inches | Weight: 90 GSM"
+      },
+      {
+        id: 34,
+        name: "French Terry - Heather Gray",
+        category: "fabrics",
+        price: 30.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/5709662/pexels-photo-5709662.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Comfort Knits",
+        rating: 4.7,
+        reviews: 289,
+        description: "Soft French terry in heather gray. Perfect for sweatshirts, loungewear, and casual wear.",
+        details: "Material: 95% Cotton, 5% Spandex | Width: 60 inches | Weight: 280 GSM"
+      },
+      {
+        id: 35,
+        name: "Embroidered Tulle - Floral Lace",
+        category: "fabrics",
+        price: 58.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567609/pexels-photo-6567609.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Bridal Elegance",
+        rating: 4.8,
+        reviews: 167,
+        description: "Delicate embroidered tulle with floral lace patterns. Perfect for bridal wear and overlays.",
+        details: "Material: Nylon tulle with embroidery | Width: 54 inches | Weight: 50 GSM"
+      },
+      {
+        id: 36,
+        name: "Wool Coating - Camel Tan",
+        category: "fabrics",
+        price: 78.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/5709663/pexels-photo-5709663.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Winter Textiles",
+        rating: 4.9,
+        reviews: 145,
+        description: "Luxurious wool coating in classic camel tan. Perfect for coats and winter outerwear.",
+        details: "Material: 80% Wool, 20% Nylon | Width: 60 inches | Weight: 450 GSM"
+      },
+      {
+        id: 37,
+        name: "Bamboo Jersey - Eco Friendly",
+        category: "fabrics",
+        price: 38.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/5709664/pexels-photo-5709664.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Green Fabrics",
+        rating: 4.7,
+        reviews: 234,
+        description: "Sustainable bamboo jersey with silky feel. Perfect for eco-conscious fashion and activewear.",
+        details: "Material: 95% Bamboo, 5% Spandex | Width: 60 inches | Weight: 200 GSM"
+      },
+      {
+        id: 38,
+        name: "Sequin Mesh - Rose Gold",
+        category: "fabrics",
+        price: 68.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/6567610/pexels-photo-6567610.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Glamour Textiles",
+        rating: 4.8,
+        reviews: 198,
+        description: "Stunning rose gold sequin mesh. Perfect for evening wear and special occasion garments.",
+        details: "Material: Polyester mesh with sequins | Width: 52 inches | Sequin size: 5mm"
+      },
+      {
+        id: 39,
+        name: "Linen Blend - Striped Pattern",
+        category: "fabrics",
+        price: 44.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/5709665/pexels-photo-5709665.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Summer Linens",
+        rating: 4.6,
+        reviews: 212,
+        description: "Breathable linen blend with classic stripes. Perfect for summer shirts and casual wear.",
+        details: "Material: 70% Linen, 30% Cotton | Width: 54 inches | Weight: 160 GSM"
+      },
+      {
+        id: 40,
+        name: "Scuba Knit - Deep Navy",
+        category: "fabrics",
+        price: 46.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/5709666/pexels-photo-5709666.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Modern Knits Pro",
+        rating: 4.8,
+        reviews: 345,
+        description: "Structured scuba knit in deep navy. Perfect for dresses, skirts, and structured garments.",
+        details: "Material: 95% Polyester, 5% Spandex | Width: 60 inches | Weight: 320 GSM"
+      },
+      {
+        id: 41,
+        name: "Chiffon Print - Watercolor Floral",
+        category: "fabrics",
+        price: 36.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Print Studio",
+        rating: 4.7,
+        reviews: 189,
+        description: "Flowing chiffon with watercolor floral print. Perfect for romantic dresses and scarves.",
+        details: "Material: 100% Polyester | Width: 58 inches | Weight: 70 GSM"
+      },
+      {
+        id: 42,
+        name: "Wool Flannel - Plaid Pattern",
+        category: "fabrics",
+        price: 52.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Heritage Wool",
+        rating: 4.7,
+        reviews: 223,
+        description: "Classic wool flannel with traditional plaid. Perfect for shirts, skirts, and winter wear.",
+        details: "Material: 100% Wool | Width: 58 inches | Weight: 240 GSM"
+      },
+      {
+        id: 43,
+        name: "Stretch Satin - Champagne",
+        category: "fabrics",
+        price: 54.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567612/pexels-photo-6567612.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Luxury Satins",
+        rating: 4.9,
+        reviews: 267,
+        description: "Elegant stretch satin in champagne. Perfect for evening gowns and formal wear.",
+        details: "Material: 95% Polyester, 5% Spandex | Width: 58 inches | Weight: 140 GSM"
+      },
+      {
+        id: 44,
+        name: "Cotton Voile - Soft Pastels",
+        category: "fabrics",
+        price: 28.00,
+        unit: "yard",
+        moq: "12 yards",
+        image: "https://images.pexels.com/photos/5709668/pexels-photo-5709668.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Soft Textiles",
+        rating: 4.6,
+        reviews: 198,
+        description: "Lightweight cotton voile in soft pastels. Perfect for summer dresses and blouses.",
+        details: "Material: 100% Cotton | Width: 54 inches | Weight: 80 GSM"
+      },
+      {
+        id: 45,
+        name: "Boucle Fabric - Textured Cream",
+        category: "fabrics",
+        price: 64.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567613/pexels-photo-6567613.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Texture House",
+        rating: 4.8,
+        reviews: 156,
+        description: "Luxurious boucle with rich texture in cream. Perfect for jackets and statement pieces.",
+        details: "Material: Polyester blend | Width: 58 inches | Weight: 340 GSM"
+      },
+      {
+        id: 46,
+        name: "Modal Jersey - Soft Black",
+        category: "fabrics",
+        price: 34.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/5709669/pexels-photo-5709669.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Premium Knits",
+        rating: 4.7,
+        reviews: 289,
+        description: "Silky modal jersey in soft black. Perfect for dresses, tops, and comfortable wear.",
+        details: "Material: 95% Modal, 5% Spandex | Width: 60 inches | Weight: 200 GSM"
+      },
+      {
+        id: 47,
+        name: "Organza Silk - Iridescent",
+        category: "fabrics",
+        price: 68.00,
+        unit: "yard",
+        moq: "5 yards",
+        image: "https://images.pexels.com/photos/6567614/pexels-photo-6567614.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Silk Luxe",
+        rating: 4.9,
+        reviews: 134,
+        description: "Luxurious silk organza with iridescent finish. Perfect for special occasion wear.",
+        details: "Material: 100% Silk | Width: 54 inches | Weight: 50 GSM"
+      },
+      {
+        id: 48,
+        name: "Ponte Roma - Wine Red",
+        category: "fabrics",
+        price: 40.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/5709670/pexels-photo-5709670.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Knit Specialists",
+        rating: 4.8,
+        reviews: 312,
+        description: "Rich wine red ponte roma with excellent drape. Perfect for dresses and structured wear.",
+        details: "Material: 95% Polyester, 5% Spandex | Width: 60 inches | Weight: 320 GSM"
+      },
+      {
+        id: 49,
+        name: "Lace Fabric - Vintage Ivory",
+        category: "fabrics",
+        price: 56.00,
+        unit: "yard",
+        moq: "6 yards",
+        image: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Lace Atelier",
+        rating: 4.9,
+        reviews: 198,
+        description: "Exquisite vintage ivory lace with intricate patterns. Perfect for bridal and evening wear.",
+        details: "Material: Nylon/Cotton blend | Width: 54 inches | Weight: 120 GSM"
+      },
+      {
+        id: 50,
+        name: "Tencel Twill - Sage Green",
+        category: "fabrics",
+        price: 48.00,
+        unit: "yard",
+        moq: "8 yards",
+        image: "https://images.pexels.com/photos/5709671/pexels-photo-5709671.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Eco Textiles",
+        rating: 4.7,
+        reviews: 167,
+        description: "Sustainable Tencel twill in sage green. Perfect for eco-friendly fashion and pants.",
+        details: "Material: 100% Tencel | Width: 58 inches | Weight: 180 GSM"
+      },
+
+      // ACCESSORIES (50 products)
+      {
+        id: 51,
+        name: "Delicate Lace Trim - Ivory",
+        category: "lace",
+        price: 12.00,
+        unit: "meter",
+        moq: "20 meters",
+        image: "https://images.pexels.com/photos/6567350/pexels-photo-6567350.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Lace & Trim Supplies",
+        rating: 4.6,
+        reviews: 89,
+        description: "Exquisite ivory lace trim with intricate floral patterns. Perfect for wedding dresses and lingerie.",
+        details: "Material: 100% Cotton | Width: 3 inches | Pattern: Floral"
+      },
+      {
+        id: 52,
+        name: "Gold Metal Buttons - Premium Set",
+        category: "buttons",
+        price: 8.50,
+        unit: "set of 50",
+        moq: "5 sets",
+        image: "https://images.pexels.com/photos/3738396/pexels-photo-3738396.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Button Masters Inc.",
+        rating: 4.7,
+        reviews: 312,
+        description: "Premium gold-plated metal buttons with elegant design. Perfect for blazers and high-end garments.",
+        details: "Material: Brass with gold plating | Size: 20mm diameter | Holes: 4-hole shank"
+      },
+      {
+        id: 53,
+        name: "Crystal Rhinestone Applique",
+        category: "accessories",
+        price: 18.00,
+        unit: "piece",
+        moq: "10 pieces",
+        image: "https://images.pexels.com/photos/6567351/pexels-photo-6567351.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Sparkle Accessories",
+        rating: 4.8,
+        reviews: 145,
+        description: "Stunning crystal rhinestone applique with brilliant sparkle. Perfect for wedding dresses and evening gowns.",
+        details: "Material: Glass rhinestones on mesh | Size: 6x4 inches | Application: Heat-set"
+      },
+      {
+        id: 54,
+        name: "Pearl Beads - Lustrous White",
+        category: "accessories",
+        price: 22.00,
+        unit: "strand",
+        moq: "5 strands",
+        image: "https://images.pexels.com/photos/3738397/pexels-photo-3738397.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Bead Boutique",
+        rating: 4.8,
+        reviews: 221,
+        description: "Elegant white pearl beads with lustrous finish. Perfect for jewelry making and embellishments.",
+        details: "Material: Glass pearl | Size: 8mm diameter | Quantity: 50 beads per strand"
+      },
+      {
+        id: 55,
+        name: "Embroidered Lace - Sophisticated Black",
+        category: "accessories",
+        price: 28.00,
+        unit: "meter",
+        moq: "15 meters",
+        image: "https://images.pexels.com/photos/6567352/pexels-photo-6567352.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Lace Elegance",
+        rating: 4.9,
+        reviews: 289,
+        description: "Sophisticated black embroidered lace with intricate detailing. Ideal for evening wear and lingerie.",
+        details: "Material: Nylon/Polyester blend | Width: 5 inches | Pattern: Floral scroll"
+      },
+      {
+        id: 56,
+        name: "Satin Ribbon - Deep Burgundy",
+        category: "accessories",
+        price: 6.50,
+        unit: "roll of 25 yards",
+        moq: "10 rolls",
+        image: "https://images.pexels.com/photos/3738398/pexels-photo-3738398.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Ribbon World",
+        rating: 4.5,
+        reviews: 167,
+        description: "Luxurious double-faced satin ribbon in rich burgundy. Perfect for gift wrapping and embellishments.",
+        details: "Material: 100% Polyester | Width: 1.5 inches | Length: 25 yards"
+      },
+      {
+        id: 57,
+        name: "Leather Patches - Artisan Collection",
+        category: "accessories",
+        price: 14.00,
+        unit: "pack of 12",
+        moq: "5 packs",
+        image: "https://images.pexels.com/photos/6567353/pexels-photo-6567353.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Leather Craft Co.",
+        rating: 4.7,
+        reviews: 203,
+        description: "Genuine leather patches in assorted colors and sizes. Perfect for jeans, jackets, and bags.",
+        details: "Material: Genuine leather | Sizes: Various (2-4 inches) | Colors: Brown, tan, black"
+      },
+      {
+        id: 58,
+        name: "Invisible Zippers - Professional Grade",
+        category: "accessories",
+        price: 15.00,
+        unit: "pack of 20",
+        moq: "3 packs",
+        image: "https://images.pexels.com/photos/3738399/pexels-photo-3738399.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Zipper Pro",
+        rating: 4.6,
+        reviews: 198,
+        description: "High-quality invisible zippers in assorted colors. Smooth operation with durable nylon coil teeth.",
+        details: "Material: Nylon coil | Length: 20cm (8 inches) | Colors: 10 assorted"
+      },
+      {
+        id: 59,
+        name: "Snap Fasteners - Professional Silver",
+        category: "accessories",
+        price: 9.00,
+        unit: "pack of 100",
+        moq: "4 packs",
+        image: "https://images.pexels.com/photos/6567354/pexels-photo-6567354.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Fastener Solutions",
+        rating: 4.4,
+        reviews: 189,
+        description: "Durable silver snap fasteners for garments and accessories. Easy to install with snap pliers.",
+        details: "Material: Brass with nickel plating | Size: 10mm | Type: Prong snap"
+      },
+      {
+        id: 60,
+        name: "Metallic Fringe Trim - Gold",
+        category: "accessories",
+        price: 16.00,
+        unit: "meter",
+        moq: "10 meters",
+        image: "https://images.pexels.com/photos/3738400/pexels-photo-3738400.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Trim & Tassel",
+        rating: 4.6,
+        reviews: 143,
+        description: "Glamorous gold fringe trim for adding movement and drama. Perfect for costumes and fashion accessories.",
+        details: "Material: Rayon | Length: Sold by meter | Fringe drop: 4 inches"
+      },
+      {
+        id: 61,
+        name: "Elastic Band - Professional Black",
+        category: "accessories",
+        price: 11.00,
+        unit: "roll of 50 yards",
+        moq: "6 rolls",
+        image: "https://images.pexels.com/photos/6567355/pexels-photo-6567355.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Elastic Essentials",
+        rating: 4.5,
+        reviews: 234,
+        description: "High-quality black elastic band with excellent stretch and recovery. Perfect for waistbands and cuffs.",
+        details: "Material: Rubber core with polyester cover | Width: 1 inch | Length: 50 yards"
+      },
+      {
+        id: 62,
+        name: "Sequin Trim - Silver Sparkle",
+        category: "accessories",
+        price: 14.00,
+        unit: "meter",
+        moq: "15 meters",
+        image: "https://images.pexels.com/photos/3738401/pexels-photo-3738401.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Sparkle Trims",
+        rating: 4.7,
+        reviews: 156,
+        description: "Dazzling silver sequin trim for adding glamour to any project. Perfect for evening wear and costumes.",
+        details: "Material: Sequins on ribbon | Width: 2 inches | Sequin size: 6mm"
+      },
+      {
+        id: 63,
+        name: "Wooden Buttons - Natural Collection",
+        category: "accessories",
+        price: 7.00,
+        unit: "set of 40",
+        moq: "8 sets",
+        image: "https://images.pexels.com/photos/6567356/pexels-photo-6567356.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Eco Buttons",
+        rating: 4.6,
+        reviews: 178,
+        description: "Natural wooden buttons in assorted sizes. Perfect for eco-friendly projects and rustic designs.",
+        details: "Material: Natural wood | Sizes: 15mm-25mm | Holes: 2-hole | Finish: Natural"
+      },
+      {
+        id: 64,
+        name: "Velvet Ribbon - Rich Purple",
+        category: "accessories",
+        price: 8.50,
+        unit: "roll of 20 yards",
+        moq: "10 rolls",
+        image: "https://images.pexels.com/photos/3738402/pexels-photo-3738402.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Velvet Trims",
+        rating: 4.8,
+        reviews: 192,
+        description: "Luxurious velvet ribbon in rich purple. Perfect for gift wrapping and elegant embellishments.",
+        details: "Material: Rayon velvet | Width: 1 inch | Length: 20 yards"
+      },
+      {
+        id: 65,
+        name: "Tassel Trim - Bohemian Style",
+        category: "accessories",
+        price: 13.00,
+        unit: "meter",
+        moq: "12 meters",
+        image: "https://images.pexels.com/photos/6567357/pexels-photo-6567357.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Boho Trims",
+        rating: 4.7,
+        reviews: 167,
+        description: "Bohemian-style tassel trim with colorful threads. Perfect for home decor and fashion accessories.",
+        details: "Material: Cotton/Rayon blend | Tassel length: 2 inches | Colors: Multi"
+      },
+      {
+        id: 66,
+        name: "Hook and Eye Closures - Silver",
+        category: "accessories",
+        price: 5.50,
+        unit: "pack of 50",
+        moq: "10 packs",
+        image: "https://images.pexels.com/photos/3738403/pexels-photo-3738403.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Closure Supplies",
+        rating: 4.5,
+        reviews: 245,
+        description: "Reliable silver hook and eye closures for garments. Easy to sew and provides secure fastening.",
+        details: "Material: Steel with nickel plating | Size: Small | Quantity: 50 sets"
+      },
+      {
+        id: 67,
+        name: "Pom Pom Trim - Playful Multi-Color",
+        category: "accessories",
+        price: 10.00,
+        unit: "meter",
+        moq: "15 meters",
+        image: "https://images.pexels.com/photos/6567358/pexels-photo-6567358.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Fun Trims",
+        rating: 4.8,
+        reviews: 298,
+        description: "Playful multi-color pom pom trim. Perfect for children's wear, home decor, and craft projects.",
+        details: "Material: Polyester | Pom pom size: 1 inch | Colors: Rainbow assortment"
+      },
+      {
+        id: 68,
+        name: "Bias Tape - Cotton Solid Colors",
+        category: "accessories",
+        price: 6.00,
+        unit: "pack of 5 rolls",
+        moq: "8 packs",
+        image: "https://images.pexels.com/photos/3738404/pexels-photo-3738404.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Binding Basics",
+        rating: 4.6,
+        reviews: 213,
+        description: "Cotton bias tape in solid colors. Perfect for binding edges and creating clean finishes.",
+        details: "Material: 100% Cotton | Width: 1/2 inch | Length: 3 yards per roll"
+      },
+      {
+        id: 69,
+        name: "Decorative Buckles - Antique Brass",
+        category: "accessories",
+        price: 12.00,
+        unit: "set of 10",
+        moq: "6 sets",
+        image: "https://images.pexels.com/photos/6567359/pexels-photo-6567359.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Buckle Boutique",
+        rating: 4.7,
+        reviews: 134,
+        description: "Decorative antique brass buckles with vintage appeal. Perfect for belts, bags, and accessories.",
+        details: "Material: Zinc alloy | Size: 2 inches | Finish: Antique brass"
+      },
+      {
+        id: 70,
+        name: "Grosgrain Ribbon - Classic Navy",
+        category: "accessories",
+        price: 7.50,
+        unit: "roll of 25 yards",
+        moq: "10 rolls",
+        image: "https://images.pexels.com/photos/3738405/pexels-photo-3738405.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Classic Ribbons",
+        rating: 4.6,
+        reviews: 267,
+        description: "Classic navy grosgrain ribbon with ribbed texture. Perfect for hair accessories and crafts.",
+        details: "Material: 100% Polyester | Width: 7/8 inch | Length: 25 yards"
+      },
+      {
+        id: 71,
+        name: "Beaded Trim - Elegant Crystal",
+        category: "accessories",
+        price: 24.00,
+        unit: "meter",
+        moq: "8 meters",
+        image: "https://images.pexels.com/photos/6567360/pexels-photo-6567360.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Crystal Trims",
+        rating: 4.9,
+        reviews: 178,
+        description: "Elegant crystal beaded trim with brilliant sparkle. Perfect for bridal wear and evening gowns.",
+        details: "Material: Glass beads on ribbon | Width: 1.5 inches | Bead size: 4mm"
+      },
+      {
+        id: 72,
+        name: "Cord Piping - Luxe Gold",
+        category: "accessories",
+        price: 9.50,
+        unit: "meter",
+        moq: "20 meters",
+        image: "https://images.pexels.com/photos/3738406/pexels-photo-3738406.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Piping Plus",
+        rating: 4.5,
+        reviews: 156,
+        description: "Luxurious gold cord piping for upholstery and home decor. Adds elegant definition to seams.",
+        details: "Material: Rayon cord | Diameter: 1/4 inch | Color: Metallic gold"
+      },
+      {
+        id: 73,
+        name: "Magnetic Snaps - Heavy Duty",
+        category: "accessories",
+        price: 10.00,
+        unit: "pack of 20",
+        moq: "5 packs",
+        image: "https://images.pexels.com/photos/6567361/pexels-photo-6567361.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Snap Solutions",
+        rating: 4.7,
+        reviews: 289,
+        description: "Heavy-duty magnetic snaps for bags and purses. Strong hold with easy installation.",
+        details: "Material: Nickel-plated steel | Size: 18mm | Strength: Heavy duty"
+      },
+      {
+        id: 74,
+        name: "Feather Trim - Ostrich Plume",
+        category: "accessories",
+        price: 32.00,
+        unit: "meter",
+        moq: "5 meters",
+        image: "https://images.pexels.com/photos/3738407/pexels-photo-3738407.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Feather Luxe",
+        rating: 4.8,
+        reviews: 98,
+        description: "Luxurious ostrich plume feather trim. Perfect for costumes, evening wear, and special occasions.",
+        details: "Material: Ostrich feathers | Plume length: 4-6 inches | Color: Natural white"
+      },
+      {
+        id: 75,
+        name: "D-Rings - Metal Hardware",
+        category: "accessories",
+        price: 8.00,
+        unit: "pack of 50",
+        moq: "8 packs",
+        image: "https://images.pexels.com/photos/6567362/pexels-photo-6567362.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Hardware Hub",
+        rating: 4.6,
+        reviews: 234,
+        description: "Sturdy metal D-rings for bags, belts, and straps. Durable construction with smooth finish.",
+        details: "Material: Steel | Size: 1 inch | Finish: Nickel-plated"
+      },
+      {
+        id: 76,
+        name: "Rickrack Trim - Vintage Style",
+        category: "accessories",
+        price: 5.50,
+        unit: "roll of 30 yards",
+        moq: "12 rolls",
+        image: "https://images.pexels.com/photos/3738408/pexels-photo-3738408.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Retro Trims",
+        rating: 4.7,
+        reviews: 201,
+        description: "Vintage-style rickrack trim in assorted colors. Perfect for retro projects and children's wear.",
+        details: "Material: 100% Polyester | Width: 1/2 inch | Length: 30 yards"
+      },
+      {
+        id: 77,
+        name: "Chain Trim - Decorative Gold",
+        category: "accessories",
+        price: 18.00,
+        unit: "meter",
+        moq: "10 meters",
+        image: "https://images.pexels.com/photos/6567363/pexels-photo-6567363.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Chain Couture",
+        rating: 4.8,
+        reviews: 167,
+        description: "Decorative gold chain trim for fashion and accessories. Adds luxury detail to any project.",
+        details: "Material: Aluminum alloy | Link size: 8mm | Finish: Gold-plated"
+      },
+      {
+        id: 78,
+        name: "Twill Tape - Natural Cotton",
+        category: "accessories",
+        price: 6.50,
+        unit: "roll of 50 yards",
+        moq: "10 rolls",
+        image: "https://images.pexels.com/photos/3738409/pexels-photo-3738409.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Tape Essentials",
+        rating: 4.5,
+        reviews: 278,
+        description: "Natural cotton twill tape for labels and reinforcement. Durable and versatile for many uses.",
+        details: "Material: 100% Cotton | Width: 3/4 inch | Length: 50 yards"
+      },
+      {
+        id: 79,
+        name: "Rhinestone Chain - Crystal AB",
+        category: "accessories",
+        price: 20.00,
+        unit: "meter",
+        moq: "8 meters",
+        image: "https://images.pexels.com/photos/6567364/pexels-photo-6567364.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Bling Supplies",
+        rating: 4.9,
+        reviews: 312,
+        description: "Brilliant crystal AB rhinestone chain. Perfect for adding sparkle to garments and accessories.",
+        details: "Material: Glass rhinestones | Stone size: SS12 (3mm) | Setting: Silver"
+      },
+      {
+        id: 80,
+        name: "Paracord - Utility Collection",
+        category: "accessories",
+        price: 12.00,
+        unit: "bundle of 100 feet",
+        moq: "6 bundles",
+        image: "https://images.pexels.com/photos/3738410/pexels-photo-3738410.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Cord Crafts",
+        rating: 4.6,
+        reviews: 189,
+        description: "Durable paracord in assorted colors. Perfect for bracelets, lanyards, and outdoor gear.",
+        details: "Material: Nylon | Diameter: 4mm | Strength: 550 lbs | Colors: 10 assorted"
+      },
+      {
+        id: 81,
+        name: "Applique Patches - Floral Design",
+        category: "accessories",
+        price: 9.50,
+        unit: "pack of 10",
+        moq: "8 packs",
+        image: "https://images.pexels.com/photos/6567365/pexels-photo-6567365.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Patch Paradise",
+        rating: 4.7,
+        reviews: 156,
+        description: "Beautiful floral applique patches with embroidered details. Perfect for customizing garments.",
+        details: "Material: Embroidered polyester | Size: 2-3 inches | Application: Iron-on or sew-on"
+      },
+      {
+        id: 82,
+        name: "Shoulder Pads - Professional",
+        category: "accessories",
+        price: 11.00,
+        unit: "pair",
+        moq: "10 pairs",
+        image: "https://images.pexels.com/photos/6567366/pexels-photo-6567366.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Tailoring Supplies",
+        rating: 4.5,
+        reviews: 134,
+        description: "Professional shoulder pads for blazers and jackets. Provides structure and shape.",
+        details: "Material: Foam with fabric cover | Size: Medium | Thickness: 1/2 inch"
+      },
+      {
+        id: 83,
+        name: "Bra Hooks and Eyes - Multi-Pack",
+        category: "accessories",
+        price: 7.50,
+        unit: "pack of 30",
+        moq: "10 packs",
+        image: "https://images.pexels.com/photos/6567367/pexels-photo-6567367.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Lingerie Supplies",
+        rating: 4.6,
+        reviews: 198,
+        description: "Quality bra hooks and eyes in assorted colors. Essential for lingerie and swimwear.",
+        details: "Material: Nickel-free metal | Sizes: 2-hook and 3-hook | Colors: Black, white, nude"
+      },
+      {
+        id: 84,
+        name: "Interfacing - Fusible Medium Weight",
+        category: "accessories",
+        price: 8.00,
+        unit: "yard",
+        moq: "20 yards",
+        image: "https://images.pexels.com/photos/6567368/pexels-photo-6567368.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Interfacing Pro",
+        rating: 4.7,
+        reviews: 289,
+        description: "Medium weight fusible interfacing for collars, cuffs, and waistbands. Easy to apply.",
+        details: "Material: Non-woven polyester | Width: 20 inches | Weight: Medium"
+      },
+      {
+        id: 85,
+        name: "Drawstring Cord - Athletic",
+        category: "accessories",
+        price: 5.00,
+        unit: "roll of 50 yards",
+        moq: "12 rolls",
+        image: "https://images.pexels.com/photos/6567369/pexels-photo-6567369.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Cord Supplies",
+        rating: 4.5,
+        reviews: 223,
+        description: "Durable athletic drawstring cord. Perfect for hoodies, sweatpants, and bags.",
+        details: "Material: Polyester | Diameter: 5mm | Colors: Black, white, gray"
+      },
+      {
+        id: 86,
+        name: "Eyelets and Grommets - Brass",
+        category: "accessories",
+        price: 10.50,
+        unit: "pack of 100",
+        moq: "6 packs",
+        image: "https://images.pexels.com/photos/6567370/pexels-photo-6567370.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Trending",
+        badgeColor: "bg-red-500 text-white",
+        vendor: "Hardware Supplies",
+        rating: 4.6,
+        reviews: 167,
+        description: "Brass eyelets and grommets for reinforcing holes. Perfect for bags, belts, and garments.",
+        details: "Material: Brass | Size: 10mm inner diameter | Finish: Antique brass"
+      },
+      {
+        id: 87,
+        name: "Boning - Plastic Flexible",
+        category: "accessories",
+        price: 9.00,
+        unit: "pack of 10 yards",
+        moq: "8 packs",
+        image: "https://images.pexels.com/photos/6567371/pexels-photo-6567371.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Corset Supplies",
+        rating: 4.7,
+        reviews: 145,
+        description: "Flexible plastic boning for corsets and structured garments. Easy to cut and sew.",
+        details: "Material: Plastic | Width: 1/4 inch | Length: 10 yards | Flexibility: Medium"
+      },
+      {
+        id: 88,
+        name: "Fabric Glue - Professional",
+        category: "accessories",
+        price: 6.50,
+        unit: "bottle",
+        moq: "12 bottles",
+        image: "https://images.pexels.com/photos/6567372/pexels-photo-6567372.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Adhesive Solutions",
+        rating: 4.8,
+        reviews: 312,
+        description: "Professional fabric glue for no-sew projects. Washable and flexible when dry.",
+        details: "Type: Permanent fabric adhesive | Size: 4 oz | Drying time: 24 hours | Washable: Yes"
+      },
+      {
+        id: 89,
+        name: "Hem Tape - Iron-On",
+        category: "accessories",
+        price: 4.50,
+        unit: "roll of 10 yards",
+        moq: "15 rolls",
+        image: "https://images.pexels.com/photos/6567373/pexels-photo-6567373.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Quick Fix Supplies",
+        rating: 4.5,
+        reviews: 234,
+        description: "Iron-on hem tape for quick alterations. No sewing required for perfect hems.",
+        details: "Material: Fusible web | Width: 3/4 inch | Length: 10 yards | Application: Iron-on"
+      },
+      {
+        id: 90,
+        name: "Toggles - Wooden Natural",
+        category: "accessories",
+        price: 8.50,
+        unit: "pack of 20",
+        moq: "8 packs",
+        image: "https://images.pexels.com/photos/6567374/pexels-photo-6567374.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Natural Notions",
+        rating: 4.7,
+        reviews: 178,
+        description: "Natural wooden toggles for coats and jackets. Eco-friendly and stylish.",
+        details: "Material: Natural wood | Size: 1.5 inches | Finish: Natural | Holes: 2-hole"
+      },
+      {
+        id: 91,
+        name: "Seam Ripper - Professional",
+        category: "accessories",
+        price: 3.50,
+        unit: "piece",
+        moq: "20 pieces",
+        image: "https://images.pexels.com/photos/6567375/pexels-photo-6567375.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Tool Masters",
+        rating: 4.6,
+        reviews: 267,
+        description: "Sharp professional seam ripper with ergonomic handle. Essential sewing tool.",
+        details: "Material: Stainless steel blade | Handle: Plastic | Safety cap: Included"
+      },
+      {
+        id: 92,
+        name: "Fabric Markers - Washable Set",
+        category: "accessories",
+        price: 12.00,
+        unit: "set of 6",
+        moq: "10 sets",
+        image: "https://images.pexels.com/photos/6567376/pexels-photo-6567376.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Marking Tools",
+        rating: 4.7,
+        reviews: 189,
+        description: "Washable fabric markers in assorted colors. Perfect for pattern marking and design.",
+        details: "Type: Water-soluble | Colors: 6 assorted | Tip: Fine point | Washable: Yes"
+      },
+      {
+        id: 93,
+        name: "Bead Caps - Antique Silver",
+        category: "accessories",
+        price: 7.00,
+        unit: "pack of 100",
+        moq: "10 packs",
+        image: "https://images.pexels.com/photos/6567377/pexels-photo-6567377.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Jewelry Findings",
+        rating: 4.6,
+        reviews: 156,
+        description: "Decorative bead caps in antique silver. Perfect for jewelry making and embellishments.",
+        details: "Material: Zinc alloy | Size: 8mm | Finish: Antique silver | Quantity: 100 pieces"
+      },
+      {
+        id: 94,
+        name: "Cord Ends - Metal Caps",
+        category: "accessories",
+        price: 6.00,
+        unit: "pack of 50",
+        moq: "12 packs",
+        image: "https://images.pexels.com/photos/6567378/pexels-photo-6567378.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Cord Accessories",
+        rating: 4.5,
+        reviews: 198,
+        description: "Metal cord ends for finishing drawstrings and cords. Professional appearance.",
+        details: "Material: Metal | Size: Fits 5mm cord | Finish: Silver | Quantity: 50 pieces"
+      },
+      {
+        id: 95,
+        name: "Tailor's Chalk - Triangle Set",
+        category: "accessories",
+        price: 4.00,
+        unit: "set of 3",
+        moq: "15 sets",
+        image: "https://images.pexels.com/photos/6567379/pexels-photo-6567379.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Best Seller",
+        badgeColor: "bg-yellow-600 text-white",
+        vendor: "Marking Essentials",
+        rating: 4.7,
+        reviews: 345,
+        description: "Traditional tailor's chalk triangles. Easy to use and remove from fabric.",
+        details: "Type: Wax-based chalk | Colors: White, yellow, blue | Shape: Triangle"
+      },
+      {
+        id: 96,
+        name: "Lobster Clasps - Gold Plated",
+        category: "accessories",
+        price: 8.00,
+        unit: "pack of 50",
+        moq: "10 packs",
+        image: "https://images.pexels.com/photos/6567380/pexels-photo-6567380.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Clasp Supplies",
+        rating: 4.6,
+        reviews: 223,
+        description: "Gold-plated lobster clasps for jewelry and accessories. Secure and stylish.",
+        details: "Material: Brass with gold plating | Size: 12mm | Quantity: 50 pieces"
+      },
+      {
+        id: 97,
+        name: "Batting - Quilting Cotton",
+        category: "accessories",
+        price: 15.00,
+        unit: "yard",
+        moq: "10 yards",
+        image: "https://images.pexels.com/photos/6567381/pexels-photo-6567381.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Quilting Supplies",
+        rating: 4.8,
+        reviews: 267,
+        description: "Premium cotton batting for quilts and crafts. Soft and durable.",
+        details: "Material: 100% Cotton | Width: 90 inches | Loft: Medium | Washable: Yes"
+      },
+      {
+        id: 98,
+        name: "Needle Threader - Automatic",
+        category: "accessories",
+        price: 5.50,
+        unit: "piece",
+        moq: "20 pieces",
+        image: "https://images.pexels.com/photos/6567382/pexels-photo-6567382.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "New",
+        badgeColor: "bg-green-600 text-white",
+        vendor: "Sewing Tools",
+        rating: 4.7,
+        reviews: 189,
+        description: "Automatic needle threader for easy threading. Works with most needle sizes.",
+        details: "Type: Automatic | Material: Plastic and metal | Compatible: Most needle sizes"
+      },
+      {
+        id: 99,
+        name: "Fabric Weights - Set of 4",
+        category: "accessories",
+        price: 10.00,
+        unit: "set",
+        moq: "8 sets",
+        image: "https://images.pexels.com/photos/6567383/pexels-photo-6567383.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: null,
+        badgeColor: "",
+        vendor: "Pattern Tools",
+        rating: 4.6,
+        reviews: 156,
+        description: "Heavy fabric weights for pattern cutting. No pins needed.",
+        details: "Material: Metal | Weight: 4 oz each | Quantity: 4 pieces | Finish: Chrome"
+      },
+      {
+        id: 100,
+        name: "Thread Organizer - Wooden Box",
+        category: "accessories",
+        price: 18.00,
+        unit: "piece",
+        moq: "6 pieces",
+        image: "https://images.pexels.com/photos/6567384/pexels-photo-6567384.jpeg?auto=compress&cs=tinysrgb&w=800",
+        badge: "Premium",
+        badgeColor: "bg-amber-600 text-white",
+        vendor: "Storage Solutions",
+        rating: 4.8,
+        reviews: 198,
+        description: "Beautiful wooden thread organizer box. Holds up to 30 spools.",
+        details: "Material: Natural wood | Capacity: 30 spools | Dimensions: 12x8x4 inches"
+      }
+    ];
+
+    let cart = [];
+    let wishlist = [];
+    let currentCategory = 'all';
+    let currentUser = null;
+
+    // Category subcategories mapping
+    const categorySubcategories = {
+      fabrics: [
+        { name: 'Cotton Fabrics', filter: 'cotton' },
+        { name: 'Silk Fabrics', filter: 'silk' },
+        { name: 'Wool Fabrics', filter: 'wool' },
+        { name: 'Synthetic Fabrics', filter: 'synthetic' },
+        { name: 'Specialty Fabrics', filter: 'specialty' }
+      ],
+      accessories: [
+        { name: 'Jewelry Findings', filter: 'jewelry' },
+        { name: 'Bag Hardware', filter: 'hardware' },
+        { name: 'Decorative Items', filter: 'decorative' },
+        { name: 'Functional Items', filter: 'functional' }
+      ],
+      buttons: [
+        { name: 'Metal Buttons', filter: 'metal' },
+        { name: 'Plastic Buttons', filter: 'plastic' },
+        { name: 'Wooden Buttons', filter: 'wood' },
+        { name: 'Zippers', filter: 'zipper' },
+        { name: 'Snaps & Fasteners', filter: 'fastener' }
+      ],
+      threads: [
+        { name: 'Cotton Thread', filter: 'cotton-thread' },
+        { name: 'Polyester Thread', filter: 'poly-thread' },
+        { name: 'Specialty Thread', filter: 'specialty-thread' },
+        { name: 'Embroidery Thread', filter: 'embroidery' }
+      ],
+      lace: [
+        { name: 'Cotton Lace', filter: 'cotton-lace' },
+        { name: 'Synthetic Lace', filter: 'synthetic-lace' },
+        { name: 'Decorative Trims', filter: 'decorative-trim' },
+        { name: 'Functional Trims', filter: 'functional-trim' }
+      ],
+      tools: [
+        { name: 'Cutting Tools', filter: 'cutting' },
+        { name: 'Measuring Tools', filter: 'measuring' },
+        { name: 'Marking Tools', filter: 'marking' },
+        { name: 'Sewing Notions', filter: 'notions' }
+      ]
+    };
+
+    // Render star rating
+    function renderStars(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      let starsHTML = '';
+      
+      for (let i = 0; i < 5; i++) {
+        if (i < fullStars) {
+          starsHTML += '<span class="star-filled">★</span>';
+        } else if (i === fullStars && hasHalfStar) {
+          starsHTML += '<span class="star-filled">★</span>';
+        } else {
+          starsHTML += '<span class="star-empty">★</span>';
+        }
+      }
+      
+      return starsHTML;
+    }
+
+    // Show product detail modal
+    function showProductDetail(productId) {
+      const product = products.find(p => p.id === productId);
+      const modal = document.getElementById('product-modal');
+      const content = document.getElementById('product-detail-content');
+      
+      content.innerHTML = `
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Product Image -->
+          <div>
+            <div class="relative bg-secondary rounded-xl overflow-hidden" style="padding-bottom: 100%;">
+              <img src="${product.image}" alt="${product.name}" class="absolute inset-0 w-full h-full object-cover">
+              ${product.badge ? `<span class="badge ${product.badgeColor}">${product.badge}</span>` : ''}
+            </div>
+          </div>
+          
+          <!-- Product Info -->
+          <div>
+            <h2 class="text-3xl font-bold text-primary mb-3">${product.name}</h2>
+            
+            <!-- Rating -->
+            <div class="flex items-center mb-4">
+              <div class="flex text-xl mr-2">
+                ${renderStars(product.rating)}
+              </div>
+              <span class="text-primary font-semibold">${product.rating}</span>
+              <span class="text-secondary ml-2">(${product.reviews} reviews)</span>
+            </div>
+            
+            <!-- Vendor -->
+            <div class="bg-secondary border border-custom rounded-lg p-3 mb-4 inline-block">
+              <div class="flex items-center">
+                <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <div>
+                  <p class="text-xs text-secondary">Sold by</p>
+                  <p class="font-semibold text-primary">${product.vendor}</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Price -->
+            <div class="mb-6">
+              <div class="flex items-baseline">
+                <span class="text-4xl font-bold text-primary">$${product.price.toFixed(2)}</span>
+                <span class="text-xl text-secondary ml-2">/ ${product.unit}</span>
+              </div>
+              <p class="text-sm text-secondary mt-1">Minimum Order: ${product.moq}</p>
+            </div>
+            
+            <!-- Description -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-primary mb-2">Product Description</h3>
+              <p class="text-secondary leading-relaxed">${product.description}</p>
+            </div>
+            
+            <!-- Details -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-primary mb-2">Product Details</h3>
+              <p class="text-secondary text-sm leading-relaxed">${product.details}</p>
+            </div>
+            
+            <!-- Add to Cart Button -->
+            <button 
+              onclick="addToCart(${product.id}); document.getElementById('product-modal').classList.add('hidden');" 
+              class="w-full accent-bg text-white py-4 rounded-lg font-semibold text-lg transition-all"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+    }
+
+    // Close product modal
+    document.getElementById('close-product-modal').addEventListener('click', () => {
+      document.getElementById('product-modal').classList.add('hidden');
+    });
+
+    document.getElementById('product-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'product-modal') {
+        document.getElementById('product-modal').classList.add('hidden');
+      }
+    });
+
+    // Render Products
+    function renderProducts(category = 'all') {
+      const grid = document.getElementById('products-grid');
+      const filteredProducts = category === 'all' 
+        ? products 
+        : products.filter(p => p.category === category);
+      
+      grid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card rounded-xl overflow-hidden shadow-md relative" onclick="showProductDetail(${product.id})">
+          ${product.badge ? `<span class="badge ${product.badgeColor}">${product.badge}</span>` : ''}
+          <button 
+            onclick="event.stopPropagation(); toggleWishlist(${product.id})" 
+            class="absolute top-3 left-3 z-10 w-8 h-8 rounded-full bg-white bg-opacity-90 flex items-center justify-center hover:bg-opacity-100 transition-all wishlist-heart"
+            data-product-id="${product.id}"
+          >
+            <svg class="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </button>
+          <div class="relative h-48 bg-secondary">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-primary mb-1 line-clamp-2">${product.name}</h4>
+            <div class="flex items-center mb-2">
+              <div class="flex text-sm mr-1">
+                ${renderStars(product.rating)}
+              </div>
+              <span class="text-xs text-secondary">(${product.reviews})</span>
+            </div>
+            <p class="text-xs text-secondary mb-2">MOQ: ${product.moq}</p>
+            <div class="flex justify-between items-center mb-3">
+              <div>
+                <span class="text-xl font-bold text-primary">$${product.price.toFixed(2)}</span>
+                <span class="text-xs text-secondary">/${product.unit}</span>
+              </div>
+            </div>
+            <button 
+              onclick="event.stopPropagation(); addToCart(${product.id})" 
+              class="w-full accent-bg text-white py-2 rounded-lg font-semibold transition-all"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Add to Cart
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      
+      updateCart();
+      showCartNotification();
+    }
+
+    // Update Cart
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-secondary text-center py-8">Your cart is empty</p>';
+        cartCount.classList.add('hidden');
+      } else {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        cartCount.textContent = totalItems;
+        cartCount.classList.remove('hidden');
+        cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+        
+        cartItems.innerHTML = cart.map(item => `
+          <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-custom">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+            <div class="flex-1">
+              <h4 class="font-semibold text-sm text-primary">${item.name}</h4>
+              <p class="text-sm text-secondary">$${item.price.toFixed(2)} × ${item.quantity}</p>
+            </div>
+            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+              </svg>
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Remove from Cart
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCart();
+    }
+
+    // Show Cart Notification
+    function showCartNotification() {
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      notification.textContent = 'Added to cart!';
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    }
+
+    // Toggle Wishlist
+    function toggleWishlist(productId) {
+      const product = products.find(p => p.id === productId);
+      const existingIndex = wishlist.findIndex(item => item.id === productId);
+      const heartBtn = document.querySelector(`[data-product-id="${productId}"]`);
+      const heartIcon = heartBtn.querySelector('svg');
+      
+      if (existingIndex > -1) {
+        wishlist.splice(existingIndex, 1);
+        heartIcon.classList.remove('text-red-500');
+        heartIcon.classList.add('text-gray-400');
+        heartIcon.setAttribute('fill', 'none');
+        showWishlistNotification('Removed from wishlist');
+      } else {
+        wishlist.push(product);
+        heartIcon.classList.remove('text-gray-400');
+        heartIcon.classList.add('text-red-500');
+        heartIcon.setAttribute('fill', 'currentColor');
+        showWishlistNotification('Added to wishlist ❤️');
+      }
+      
+      updateWishlist();
+    }
+
+    // Update Wishlist
+    function updateWishlist() {
+      const wishlistItems = document.getElementById('wishlist-items');
+      const wishlistCount = document.getElementById('wishlist-count');
+      
+      if (wishlist.length === 0) {
+        wishlistItems.innerHTML = '<p class="text-secondary text-center py-8">No loved products yet</p>';
+        wishlistCount.classList.add('hidden');
+      } else {
+        wishlistCount.textContent = wishlist.length;
+        wishlistCount.classList.remove('hidden');
+        
+        wishlistItems.innerHTML = wishlist.map(item => `
+          <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-custom">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="showProductDetail(${item.id})">
+            <div class="flex-1 cursor-pointer" onclick="showProductDetail(${item.id})">
+              <h4 class="font-semibold text-sm text-primary">${item.name}</h4>
+              <p class="text-sm text-secondary">$${item.price.toFixed(2)} / ${item.unit}</p>
+              <p class="text-xs text-secondary">${item.vendor}</p>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <button onclick="addToCart(${item.id})" class="text-xs accent-bg text-white px-3 py-1 rounded">
+                Add to Cart
+              </button>
+              <button onclick="toggleWishlist(${item.id})" class="text-red-500 hover:text-red-700">
+                <svg class="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Show Wishlist Notification
+    function showWishlistNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-20 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    }
+
+    // Show Category Sidebar
+    function showCategorySidebar(category) {
+      const sidebar = document.getElementById('category-sidebar');
+      const sidebarTitle = document.getElementById('sidebar-title');
+      const sidebarContent = document.getElementById('sidebar-content');
+      
+      if (category === 'all') {
+        sidebar.classList.add('hidden');
+        return;
+      }
+      
+      const subcategories = categorySubcategories[category];
+      if (subcategories) {
+        sidebarTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        sidebarContent.innerHTML = subcategories.map(sub => `
+          <button class="w-full text-left px-3 py-2 rounded-lg text-sm text-secondary hover:bg-secondary hover:text-primary transition-colors" onclick="filterBySubcategory('${sub.filter}')">
+            ${sub.name}
+          </button>
+        `).join('');
+        sidebar.classList.remove('hidden');
+      }
+    }
+
+    // Filter by Subcategory
+    function filterBySubcategory(filter) {
+      // This is a placeholder - you can implement specific filtering logic
+      console.log('Filtering by:', filter);
+    }
+
+    // Category Filter
+    document.querySelectorAll('.category-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        currentCategory = this.dataset.category;
+        
+        // Update products title
+        const productsTitle = document.getElementById('products-title');
+        if (currentCategory === 'all') {
+          productsTitle.textContent = 'Featured Products';
+        } else {
+          productsTitle.textContent = this.textContent.trim();
+        }
+        
+        // Show/hide sidebar and render products
+        showCategorySidebar(currentCategory);
+        renderProducts(currentCategory);
+      });
+    });
+
+    // Wishlist Sidebar Controls
+    const wishlistBtn = document.getElementById('wishlist-btn');
+    const wishlistSidebar = document.getElementById('wishlist-sidebar');
+    const wishlistOverlay = document.getElementById('wishlist-overlay');
+    const closeWishlist = document.getElementById('close-wishlist');
+
+    wishlistBtn.addEventListener('click', () => {
+      wishlistSidebar.classList.remove('translate-x-full');
+      wishlistOverlay.classList.remove('hidden');
+    });
+
+    closeWishlist.addEventListener('click', () => {
+      wishlistSidebar.classList.add('translate-x-full');
+      wishlistOverlay.classList.add('hidden');
+    });
+
+    wishlistOverlay.addEventListener('click', () => {
+      wishlistSidebar.classList.add('translate-x-full');
+      wishlistOverlay.classList.add('hidden');
+    });
+
+    // Cart Sidebar
+    const cartBtn = document.getElementById('cart-btn');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const closeCart = document.getElementById('close-cart');
+
+    cartBtn.addEventListener('click', () => {
+      cartSidebar.classList.remove('translate-x-full');
+      cartOverlay.classList.remove('hidden');
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartSidebar.classList.add('translate-x-full');
+      cartOverlay.classList.add('hidden');
+    });
+
+    cartOverlay.addEventListener('click', () => {
+      cartSidebar.classList.add('translate-x-full');
+      cartOverlay.classList.add('hidden');
+    });
+
+    // Search Functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const filtered = products.filter(p => 
+        p.name.toLowerCase().includes(searchTerm) ||
+        p.category.toLowerCase().includes(searchTerm) ||
+        p.vendor.toLowerCase().includes(searchTerm)
+      );
+      
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = filtered.map(product => `
+        <div class="product-card rounded-xl overflow-hidden shadow-md relative" onclick="showProductDetail(${product.id})">
+          ${product.badge ? `<span class="badge ${product.badgeColor}">${product.badge}</span>` : ''}
+          <button 
+            onclick="event.stopPropagation(); toggleWishlist(${product.id})" 
+            class="absolute top-3 left-3 z-10 w-8 h-8 rounded-full bg-white bg-opacity-90 flex items-center justify-center hover:bg-opacity-100 transition-all wishlist-heart"
+            data-product-id="${product.id}"
+          >
+            <svg class="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </button>
+          <div class="relative h-48 bg-secondary">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-primary mb-1 line-clamp-2">${product.name}</h4>
+            <div class="flex items-center mb-2">
+              <div class="flex text-sm mr-1">
+                ${renderStars(product.rating)}
+              </div>
+              <span class="text-xs text-secondary">(${product.reviews})</span>
+            </div>
+            <p class="text-xs text-secondary mb-2">MOQ: ${product.moq}</p>
+            <div class="flex justify-between items-center mb-3">
+              <div>
+                <span class="text-xl font-bold text-primary">$${product.price.toFixed(2)}</span>
+                <span class="text-xs text-secondary">/${product.unit}</span>
+              </div>
+            </div>
+            <button 
+              onclick="event.stopPropagation(); addToCart(${product.id})" 
+              class="w-full accent-bg text-white py-2 rounded-lg font-semibold transition-all"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `).join('');
+    });
+
+    // Auth Modal Controls
+    const authModal = document.getElementById('auth-modal');
+    const signinBtn = document.getElementById('signin-btn');
+    const closeAuthModal = document.getElementById('close-auth-modal');
+    const signinForm = document.getElementById('signin-form');
+    const signupForm = document.getElementById('signup-form');
+    const showSignup = document.getElementById('show-signup');
+    const showSignin = document.getElementById('show-signin');
+
+    signinBtn.addEventListener('click', () => {
+      authModal.classList.remove('hidden');
+      signinForm.classList.remove('hidden');
+      signupForm.classList.add('hidden');
+    });
+
+    closeAuthModal.addEventListener('click', () => {
+      authModal.classList.add('hidden');
+    });
+
+    authModal.addEventListener('click', (e) => {
+      if (e.target === authModal) {
+        authModal.classList.add('hidden');
+      }
+    });
+
+    showSignup.addEventListener('click', () => {
+      signinForm.classList.add('hidden');
+      signupForm.classList.remove('hidden');
+    });
+
+    showSignin.addEventListener('click', () => {
+      signupForm.classList.add('hidden');
+      signinForm.classList.remove('hidden');
+    });
+
+    // Account Type Selection
+    document.querySelectorAll('.account-type-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.account-type-btn').forEach(b => {
+          b.classList.remove('active', 'accent-bg', 'text-white');
+          b.classList.add('border-custom', 'bg-card', 'text-primary');
+        });
+        
+        this.classList.add('active', 'accent-bg', 'text-white');
+        this.classList.remove('border-custom', 'bg-card');
+        
+        const accountType = this.dataset.type;
+        document.getElementById('account-type').value = accountType;
+        
+        const vendorFields = document.getElementById('vendor-fields');
+        const businessName = document.getElementById('business-name');
+        const businessType = document.getElementById('business-type');
+        
+        if (accountType === 'vendor') {
+          vendorFields.classList.remove('hidden');
+          businessName.required = true;
+          businessType.required = true;
+        } else {
+          vendorFields.classList.add('hidden');
+          businessName.required = false;
+          businessType.required = false;
         }
       });
     });
 
-    // Contact form handler
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Create success message
-        const successMsg = document.createElement('div');
-        successMsg.className = 'mt-4 p-4 bg-green-100 text-green-700 rounded-lg text-center font-semibold';
-        successMsg.textContent = 'Thank you! Your message has been sent successfully.';
-        
-        // Show success message
-        this.appendChild(successMsg);
-        
-        // Reset form
-        this.reset();
-        
-        // Remove success message after 5 seconds
-        setTimeout(() => {
-          successMsg.remove();
-        }, 5000);
-      });
-    }
-
-    // Add scroll effect to navigation
-    let lastScroll = 0;
-    const nav = document.querySelector('nav');
-    
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
+    // Sign In Form Submission
+    document.getElementById('signin-submit').addEventListener('submit', (e) => {
+      e.preventDefault();
       
-      if (currentScroll > 100) {
-        nav.classList.add('shadow-lg');
-      } else {
-        nav.classList.remove('shadow-lg');
+      const email = document.getElementById('signin-email').value;
+      
+      currentUser = {
+        email: email,
+        type: 'customer',
+        name: email.split('@')[0]
+      };
+      
+      updateAuthUI();
+      showNotification('Welcome back! You are now signed in.', 'success');
+      authModal.classList.add('hidden');
+      e.target.reset();
+    });
+
+    // Sign Up Form Submission
+    document.getElementById('signup-submit').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const firstname = document.getElementById('signup-firstname').value;
+      const lastname = document.getElementById('signup-lastname').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      const accountType = document.getElementById('account-type').value;
+      
+      if (password !== confirmPassword) {
+        showNotification('Passwords do not match!', 'error');
+        return;
       }
       
-      lastScroll = currentScroll;
+      if (password.length < 6) {
+        showNotification('Password must be at least 6 characters long!', 'error');
+        return;
+      }
+      
+      let userData = {
+        firstname,
+        lastname,
+        email,
+        type: accountType,
+        name: `${firstname} ${lastname}`
+      };
+      
+      if (accountType === 'vendor') {
+        const businessName = document.getElementById('business-name').value;
+        const businessType = document.getElementById('business-type').value;
+        
+        if (!businessName || !businessType) {
+          showNotification('Please fill in all business information!', 'error');
+          return;
+        }
+        
+        userData.businessName = businessName;
+        userData.businessType = businessType;
+      }
+      
+      currentUser = userData;
+      updateAuthUI();
+      
+      const welcomeMsg = accountType === 'vendor' 
+        ? `Welcome ${firstname}! Your vendor account has been created.`
+        : `Welcome ${firstname}! Your account has been created.`;
+      showNotification(welcomeMsg, 'success');
+      
+      authModal.classList.add('hidden');
+      e.target.reset();
+      document.getElementById('account-type').value = 'customer';
+      document.getElementById('vendor-fields').classList.add('hidden');
+      
+      document.querySelectorAll('.account-type-btn').forEach(b => {
+        b.classList.remove('active', 'accent-bg', 'text-white');
+        b.classList.add('border-custom', 'bg-card', 'text-primary');
+      });
+      document.querySelector('.account-type-btn[data-type="customer"]').classList.add('active', 'accent-bg', 'text-white');
+      document.querySelector('.account-type-btn[data-type="customer"]').classList.remove('border-custom', 'bg-card');
     });
+
+    // Update UI based on auth state
+    function updateAuthUI() {
+      if (currentUser) {
+        signinBtn.textContent = currentUser.name;
+        signinBtn.classList.add('relative');
+        
+        if (!document.getElementById('user-dropdown')) {
+          const dropdown = document.createElement('div');
+          dropdown.id = 'user-dropdown';
+          dropdown.className = 'absolute top-full right-0 mt-2 w-48 bg-card rounded-lg shadow-xl border border-custom hidden';
+          dropdown.innerHTML = `
+            <div class="p-3 border-b border-custom">
+              <p class="font-semibold text-primary">${currentUser.name}</p>
+              <p class="text-xs text-secondary">${currentUser.email}</p>
+              <p class="text-xs text-primary mt-1">${currentUser.type === 'vendor' ? '🏪 Vendor Account' : '👤 Customer Account'}</p>
+            </div>
+            <div class="py-2">
+              ${currentUser.type === 'vendor' ? '<a href="#" class="block px-4 py-2 text-sm text-primary hover:bg-secondary">My Products</a>' : ''}
+              <a href="#" class="block px-4 py-2 text-sm text-primary hover:bg-secondary">My Orders</a>
+              <a href="#" class="block px-4 py-2 text-sm text-primary hover:bg-secondary">Profile Settings</a>
+              <button id="signout-btn" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-secondary">Sign Out</button>
+            </div>
+          `;
+          signinBtn.parentElement.style.position = 'relative';
+          signinBtn.parentElement.appendChild(dropdown);
+          
+          signinBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('hidden');
+          });
+          
+          document.addEventListener('click', () => {
+            dropdown.classList.add('hidden');
+          });
+          
+          document.getElementById('signout-btn').addEventListener('click', () => {
+            currentUser = null;
+            signinBtn.textContent = 'Sign In';
+            dropdown.remove();
+            showNotification('You have been signed out.', 'success');
+          });
+        }
+      }
+    }
+
+    // Notification System
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+      notification.className = `fixed top-20 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-sm`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 4000);
+    }
+
+    // Initial Render
+    renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d62a8564d73e9a',t:'MTc2Mjk1MTk0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d99df2539b9538',t:'MTc2Mjk4ODEyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
