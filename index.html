@@ -226,8 +226,8 @@
    </div>
   </section><!-- Main Content Area -->
   <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 lg:py-8">
-   <div class="flex gap-4 lg:gap-8"><!-- Sidebar Categories (Hidden by default, shown when category selected) -->
-    <aside id="category-sidebar" class="w-56 lg:w-64 hidden">
+   <div class="flex gap-4 lg:gap-8"><!-- Sidebar Categories (Hidden on mobile/tablet, shown on desktop when category selected) -->
+    <aside id="category-sidebar" class="w-56 lg:w-64 hidden xl:block">
      <div class="bg-card rounded-xl border border-custom p-4 lg:p-6 sticky top-28 sm:top-32">
       <h3 id="sidebar-title" class="text-base lg:text-lg font-bold text-primary mb-3 lg:mb-4">Categories</h3>
       <div id="sidebar-content" class="space-y-2"><!-- Dynamic subcategories will be inserted here -->
@@ -2535,7 +2535,7 @@
       }, 2000);
     }
 
-    // Show Category Sidebar
+    // Show Category Sidebar (Only on desktop XL screens)
     function showCategorySidebar(category) {
       const sidebar = document.getElementById('category-sidebar');
       const sidebarTitle = document.getElementById('sidebar-title');
@@ -2554,7 +2554,9 @@
             ${sub.name}
           </button>
         `).join('');
+        // Only show sidebar on XL screens and above
         sidebar.classList.remove('hidden');
+        sidebar.classList.add('xl:block');
       }
     }
 
@@ -3162,5 +3164,5 @@
     // Initial Render
     renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d9bff09651ef3c',t:'MTc2Mjk4OTUxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d9c9c9d1f5db2e',t:'MTc2Mjk4OTkyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
