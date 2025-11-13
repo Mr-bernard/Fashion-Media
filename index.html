@@ -1814,6 +1814,70 @@
         { name: "Yemi Adesanya", rating: 5, comment: "Exceeded all expectations. The craftsmanship is outstanding.", date: "2 months ago", service: "Traditional Outfit" }
       ];
       
+      // Generate sample previous works
+      const sampleWorks = [
+        {
+          id: 1,
+          image: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Evening Gown",
+          description: "Custom beaded evening gown for red carpet event",
+          projectTitle: "Lagos Fashion Week 2023",
+          date: "March 2023",
+          availableForPurchase: true,
+          productId: 1
+        },
+        {
+          id: 2,
+          image: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Wedding Dress",
+          description: "Traditional Yoruba wedding dress with modern touches",
+          projectTitle: "Adunni & Kemi Wedding",
+          date: "February 2023",
+          availableForPurchase: false,
+          productId: null
+        },
+        {
+          id: 3,
+          image: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Corporate Wear",
+          description: "Professional blazer set for executive client",
+          projectTitle: "Executive Collection",
+          date: "January 2023",
+          availableForPurchase: true,
+          productId: 2
+        },
+        {
+          id: 4,
+          image: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Cocktail Dress",
+          description: "Elegant cocktail dress for charity gala",
+          projectTitle: "Charity Gala Collection",
+          date: "December 2022",
+          availableForPurchase: true,
+          productId: 3
+        },
+        {
+          id: 5,
+          image: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Men's Suit",
+          description: "Bespoke three-piece suit with Ankara accents",
+          projectTitle: "Cultural Fusion Series",
+          date: "November 2022",
+          availableForPurchase: false,
+          productId: null
+        },
+        {
+          id: 6,
+          image: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Traditional Wear",
+          description: "Hand-embroidered Agbada for cultural ceremony",
+          projectTitle: "Heritage Collection",
+          date: "October 2022",
+          availableForPurchase: true,
+          productId: 4
+        }
+      ];
+      
       content.innerHTML = `
         <div class="grid md:grid-cols-2 gap-8">
           <!-- Designer Image & Info -->
@@ -1910,9 +1974,12 @@
         
         <!-- Service Details Tabs -->
         <div class="mt-8 border-t border-custom pt-8">
-          <div class="flex space-x-8 mb-6">
+          <div class="flex flex-wrap gap-4 sm:gap-8 mb-6">
             <button class="tab-btn active text-primary font-semibold border-b-2 border-primary pb-2" data-tab="portfolio">
               Portfolio & Experience
+            </button>
+            <button class="tab-btn text-secondary font-semibold pb-2" data-tab="previous-works">
+              Previous Works
             </button>
             <button class="tab-btn text-secondary font-semibold pb-2" data-tab="services">
               Services Offered
@@ -1938,6 +2005,57 @@
                   <ul class="text-secondary space-y-2">
                     ${designer.certifications.map(cert => `<li>• ${cert}</li>`).join('')}
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Previous Works Tab -->
+          <div id="previous-works-tab" class="tab-content hidden">
+            <div class="space-y-6">
+              <div class="bg-secondary rounded-lg p-6">
+                <h4 class="font-semibold text-primary mb-4">Recent Completed Projects</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  ${sampleWorks.map(work => `
+                    <div class="bg-card border border-custom rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                      <div class="flex flex-col sm:flex-row">
+                        <!-- Work Image -->
+                        <div class="relative w-full sm:w-32 h-32 bg-secondary flex-shrink-0">
+                          <img src="${work.image}" alt="${work.serviceType}" class="w-full h-full object-cover">
+                          <div class="absolute top-2 left-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">${work.serviceType}</span>
+                          </div>
+                        </div>
+                        
+                        <!-- Work Details -->
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                          <div>
+                            <h5 class="font-semibold text-primary mb-1 text-sm">${work.projectTitle}</h5>
+                            <p class="text-secondary text-xs mb-2">${work.description}</p>
+                            <p class="text-secondary text-xs mb-3">${work.date}</p>
+                          </div>
+                          
+                          <!-- Action Button -->
+                          <div class="flex justify-end">
+                            ${work.availableForPurchase 
+                              ? `<button 
+                                  onclick="viewSampleProduct(${work.productId})" 
+                                  class="text-xs accent-bg text-white px-3 py-1.5 rounded-lg font-semibold transition-all hover:opacity-90"
+                                >
+                                  View Product
+                                </button>`
+                              : `<button 
+                                  onclick="requestSimilarService(${designer.id}, '${work.serviceType}')" 
+                                  class="text-xs border border-custom text-primary px-3 py-1.5 rounded-lg font-semibold transition-all hover:bg-secondary"
+                                >
+                                  Request Similar
+                                </button>`
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `).join('')}
                 </div>
               </div>
             </div>
@@ -2010,6 +2128,28 @@
       const designer = designers.find(d => d.id === designerId);
       if (designer) {
         showNotification(`Service request sent to ${designer.name}! They will contact you soon.`, 'success');
+      }
+    }
+
+    function viewSampleProduct(productId) {
+      // Close the service modal first
+      document.getElementById('product-modal').classList.add('hidden');
+      
+      // Switch to products section
+      switchToSection('products');
+      
+      // Open the product modal
+      setTimeout(() => {
+        openProductModal(productId);
+      }, 300);
+      
+      showNotification('Viewing related product from designer portfolio', 'success');
+    }
+
+    function requestSimilarService(designerId, serviceType) {
+      const designer = designers.find(d => d.id === designerId);
+      if (designer) {
+        showNotification(`Request sent to ${designer.name} for similar ${serviceType} service!`, 'success');
       }
     }
 
@@ -2298,5 +2438,5 @@
     populateMobileCategories('products');
     renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99daffa904269538',t:'MTc2MzAwMjYxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99dd2fc8d48106e3',t:'MTc2MzAyNTU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
