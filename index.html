@@ -106,6 +106,56 @@
       border-color: var(--accent-primary);
     }
     
+    .main-nav-btn {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+    
+    .main-nav-btn:hover {
+      transform: scale(1.02);
+      border-color: var(--accent-primary);
+    }
+    
+    .main-nav-btn.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
+    .mobile-main-nav-btn {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+    
+    .mobile-main-nav-btn:hover {
+      border-color: var(--accent-primary);
+    }
+    
+    .mobile-main-nav-btn.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
+    .service-chip {
+      transition: all 0.3s ease;
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    
+    .service-chip:hover {
+      transform: scale(1.05);
+    }
+    
+    .service-chip.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
     .badge {
       position: absolute;
       top: 12px;
@@ -211,10 +261,14 @@
     <h2 id="hero-title" class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 sm:mb-3">Discover Premium Fashion Materials</h2>
     <p id="hero-subtitle" class="text-sm sm:text-base lg:text-lg opacity-90">Source quality fabrics, accessories &amp; more from verified suppliers</p>
    </div>
-  </section><!-- Category Filter -->
+  </section><!-- Main Navigation -->
   <section class="bg-primary border-b border-custom sticky top-14 sm:top-16 z-40">
-   <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4"><!-- Desktop Category Chips -->
-    <div class="hidden md:flex items-center space-x-3 overflow-x-auto pb-2"><button class="category-chip active px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="all"> 🏪 All Products </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="fabrics"> 🧵 Fabrics </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="accessories"> 💎 Accessories </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="threads"> 🧶 Threads </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="tools"> ✂️ Tools &amp; Notions </button>
+   <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4"><!-- Desktop Main Navigation -->
+    <div class="hidden md:flex items-center space-x-4 mb-4"><button class="main-nav-btn active px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all" data-section="products"> 🛍️ Products </button> <button class="main-nav-btn px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all" data-section="services"> 👗 Services </button>
+    </div><!-- Desktop Category Chips -->
+    <div id="desktop-category-chips" class="hidden md:flex items-center space-x-3 overflow-x-auto pb-2"><button class="category-chip active px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="all"> 🏪 All Products </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="fabrics"> 🧵 Fabrics </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="accessories"> 💎 Accessories </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="threads"> 🧶 Threads </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="tools"> ✂️ Tools &amp; Notions </button>
+    </div><!-- Desktop Service Categories -->
+    <div id="desktop-service-chips" class="hidden md:flex items-center space-x-3 overflow-x-auto pb-2"><button class="service-chip active px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="all"> 👗 All Services </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="evening-wear"> 🌟 Evening Wear </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="bridal"> 👰 Bridal </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="mens-tailoring"> 🤵 Men's Tailoring </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="contemporary"> 🎨 Contemporary </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="cultural"> 🌍 Cultural </button> <button class="service-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-service="haute-couture"> ✨ Haute Couture </button>
     </div><!-- Desktop Subcategory Dropdown -->
     <div id="desktop-subcategory-dropdown" class="hidden md:block mt-3 hidden"><button id="desktop-subcategory-btn" class="flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary min-w-48"> <span id="desktop-subcategory-text">Select Subcategory</span>
       <svg class="w-5 h-5 transform transition-transform ml-2" id="desktop-subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -222,11 +276,21 @@
      <div id="desktop-subcategory-menu" class="absolute mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-40 min-w-48"><!-- Dynamic subcategories will be inserted here -->
      </div>
     </div>
-   </div><!-- Mobile Category Dropdown -->
-   <div class="md:hidden"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text">🏪 All Products</span>
-     <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-     </svg></button> <!-- Mobile Category Dropdown Menu -->
-    <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
+   </div><!-- Mobile Navigation -->
+   <div class="md:hidden space-y-3"><!-- Mobile Main Section Toggle -->
+    <div class="flex space-x-2"><button class="mobile-main-nav-btn active flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all" data-section="products"> 🛍️ Products </button> <button class="mobile-main-nav-btn flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all" data-section="services"> 👗 Services </button>
+    </div><!-- Mobile Category Dropdown (Products) -->
+    <div id="mobile-products-nav"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text">🏪 All Products</span>
+      <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg></button> <!-- Mobile Category Dropdown Menu -->
+     <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
+     </div>
+    </div><!-- Mobile Service Dropdown (Services) -->
+    <div id="mobile-services-nav" class="hidden"><button id="mobile-service-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-service-text">👗 All Services</span>
+      <svg class="w-5 h-5 transform transition-transform" id="mobile-service-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg></button> <!-- Mobile Service Dropdown Menu -->
+     <div id="mobile-service-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="all"> 👗 All Services </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="evening-wear"> 🌟 Evening Wear </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="bridal"> 👰 Bridal </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="mens-tailoring"> 🤵 Men's Tailoring </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="contemporary"> 🎨 Contemporary </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="cultural"> 🌍 Cultural </button> <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-service="haute-couture"> ✨ Haute Couture </button>
+     </div>
     </div><!-- Subcategory Dropdown (Shows on all screen sizes when category selected) -->
     <div id="subcategory-dropdown" class="mt-3 hidden"><button id="subcategory-btn" class="w-full flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary"> <span id="subcategory-text">Select Subcategory</span>
       <svg class="w-5 h-5 transform transition-transform" id="subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -260,6 +324,56 @@
       <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
      <div id="product-detail-content" class="p-8"><!-- Product details will be inserted here -->
+     </div>
+    </div>
+   </div>
+  </div><!-- Designer Profile Modal -->
+  <div id="designer-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 overflow-y-auto">
+   <div class="min-h-full flex items-center justify-center p-4">
+    <div class="bg-card rounded-2xl max-w-6xl w-full max-h-[90%] overflow-y-auto relative"><button id="close-designer-modal" class="absolute top-4 right-4 z-10 bg-card rounded-full p-2 shadow-lg hover:opacity-70">
+      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg></button>
+     <div id="designer-detail-content" class="p-8"><!-- Designer details will be inserted here -->
+     </div>
+    </div>
+   </div>
+  </div><!-- Service Request Modal -->
+  <div id="service-request-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 overflow-y-auto">
+   <div class="min-h-full flex items-center justify-center p-4">
+    <div class="bg-card rounded-2xl max-w-2xl w-full max-h-[90%] overflow-y-auto relative"><button id="close-service-request-modal" class="absolute top-4 right-4 z-10 bg-card rounded-full p-2 shadow-lg hover:opacity-70">
+      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg></button>
+     <div class="p-8">
+      <h2 class="text-3xl font-bold text-primary mb-6">Request Custom Service</h2>
+      <form id="service-request-form" class="space-y-6"><input type="hidden" id="selected-designer-id"> <input type="hidden" id="selected-design-id">
+       <div><label for="service-type" class="block text-sm font-semibold text-primary mb-2">Service Type</label> <select id="service-type" required class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none"> <option value="">Select service type</option> <option value="custom-design">Custom Design from Scratch</option> <option value="recreate-design">Recreate This Design</option> <option value="modify-design">Modify This Design</option> <option value="consultation">Design Consultation</option> </select>
+       </div>
+       <div class="grid grid-cols-2 gap-4">
+        <div><label for="request-name" class="block text-sm font-semibold text-primary mb-2">Your Name</label> <input type="text" id="request-name" required class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none" placeholder="John Doe">
+        </div>
+        <div><label for="request-email" class="block text-sm font-semibold text-primary mb-2">Email Address</label> <input type="email" id="request-email" required class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none" placeholder="john@example.com">
+        </div>
+       </div>
+       <div class="grid grid-cols-2 gap-4">
+        <div><label for="request-phone" class="block text-sm font-semibold text-primary mb-2">Phone Number</label> <input type="tel" id="request-phone" class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none" placeholder="+1 (555) 123-4567">
+        </div>
+        <div><label for="request-budget" class="block text-sm font-semibold text-primary mb-2">Budget Range</label> <select id="request-budget" class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none"> <option value="">Select budget range</option> <option value="under-200">Under $200</option> <option value="200-500">$200 - $500</option> <option value="500-1000">$500 - $1,000</option> <option value="1000-2000">$1,000 - $2,000</option> <option value="over-2000">Over $2,000</option> </select>
+        </div>
+       </div>
+       <div><label for="request-timeline" class="block text-sm font-semibold text-primary mb-2">Preferred Timeline</label> <select id="request-timeline" class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none"> <option value="">Select timeline</option> <option value="rush">Rush (1-2 weeks)</option> <option value="standard">Standard (3-4 weeks)</option> <option value="extended">Extended (5-8 weeks)</option> <option value="flexible">Flexible</option> </select>
+       </div>
+       <div><label for="request-description" class="block text-sm font-semibold text-primary mb-2">Project Description</label> <textarea id="request-description" required rows="4" class="w-full px-4 py-3 rounded-lg border border-custom focus:outline-none resize-none" placeholder="Please describe your project requirements, preferred style, measurements, special requests, etc."></textarea>
+       </div>
+       <div class="bg-secondary border border-custom rounded-lg p-4">
+        <h4 class="font-semibold text-primary mb-2">What happens next?</h4>
+        <ul class="text-sm text-secondary space-y-1">
+         <li>• The designer will review your request within 24-48 hours</li>
+         <li>• You'll receive a detailed quote and timeline</li>
+         <li>• Once approved, the designer will begin your custom project</li>
+         <li>• Regular updates will be provided throughout the process</li>
+        </ul>
+       </div><button type="submit" class="w-full accent-bg text-white py-4 rounded-lg font-semibold text-lg transition-all"> Send Service Request </button>
+      </form>
      </div>
     </div>
    </div>
@@ -417,6 +531,292 @@
       localStorage.setItem('theme', theme);
       themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
     });
+
+    // Designer/Service Provider Data
+    const designers = [
+      {
+        id: 1,
+        name: "Elena Rodriguez",
+        title: "Luxury Evening Wear Designer",
+        location: "New York, NY",
+        experience: "8 years",
+        rating: 4.9,
+        reviews: 127,
+        avatar: "https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Evening Gowns", "Cocktail Dresses", "Bridal Wear", "Red Carpet"],
+        priceRange: "$800 - $3,500",
+        turnaround: "4-6 weeks",
+        description: "Specializing in luxury evening wear with intricate beadwork and couture techniques. Each piece is meticulously crafted to enhance your natural beauty and make you feel confident.",
+        portfolio: [
+          {
+            id: 101,
+            title: "Midnight Blue Sequin Gown",
+            image: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$2,200",
+            category: "Evening Gown",
+            description: "Stunning floor-length gown with hand-sewn sequins and dramatic train."
+          },
+          {
+            id: 102,
+            title: "Rose Gold Cocktail Dress",
+            image: "https://images.pexels.com/photos/6567620/pexels-photo-6567620.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,400",
+            category: "Cocktail Dress",
+            description: "Elegant knee-length dress with metallic threading and silk lining."
+          },
+          {
+            id: 103,
+            title: "Classic Black Evening Dress",
+            image: "https://images.pexels.com/photos/6567612/pexels-photo-6567612.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,800",
+            category: "Evening Wear",
+            description: "Timeless black dress with modern silhouette and luxury fabric."
+          }
+        ],
+        services: [
+          { name: "Custom Evening Gown", price: "$1,500 - $3,500", duration: "6-8 weeks" },
+          { name: "Cocktail Dress Design", price: "$800 - $1,800", duration: "4-5 weeks" },
+          { name: "Bridal Consultation", price: "$150/hour", duration: "1-2 hours" },
+          { name: "Alterations & Fitting", price: "$200 - $500", duration: "1-2 weeks" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Marcus Chen",
+        title: "Contemporary Fashion Designer",
+        location: "Los Angeles, CA",
+        experience: "6 years",
+        rating: 4.8,
+        reviews: 89,
+        avatar: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Streetwear", "Business Casual", "Sustainable Fashion", "Unisex Designs"],
+        priceRange: "$300 - $1,200",
+        turnaround: "3-4 weeks",
+        description: "Creating modern, sustainable fashion pieces that blend comfort with style. I focus on versatile designs that work for both professional and casual settings.",
+        portfolio: [
+          {
+            id: 201,
+            title: "Eco-Friendly Business Suit",
+            image: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$850",
+            category: "Business Wear",
+            description: "Sustainable wool blend suit with modern tailoring and eco-friendly lining."
+          },
+          {
+            id: 202,
+            title: "Urban Streetwear Collection",
+            image: "https://images.pexels.com/photos/5709662/pexels-photo-5709662.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$400",
+            category: "Streetwear",
+            description: "Contemporary streetwear pieces with bold patterns and comfortable fit."
+          },
+          {
+            id: 203,
+            title: "Minimalist Casual Wear",
+            image: "https://images.pexels.com/photos/5709663/pexels-photo-5709663.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$320",
+            category: "Casual Wear",
+            description: "Clean, minimalist designs perfect for everyday wear."
+          }
+        ],
+        services: [
+          { name: "Custom Business Suit", price: "$600 - $1,200", duration: "4-5 weeks" },
+          { name: "Streetwear Design", price: "$300 - $600", duration: "3-4 weeks" },
+          { name: "Sustainable Fashion Consultation", price: "$100/hour", duration: "1 hour" },
+          { name: "Pattern Making", price: "$200 - $400", duration: "1-2 weeks" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Amara Okafor",
+        title: "African-Inspired Fashion Designer",
+        location: "Atlanta, GA",
+        experience: "10 years",
+        rating: 4.9,
+        reviews: 156,
+        avatar: "https://images.pexels.com/photos/3785078/pexels-photo-3785078.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["African Prints", "Cultural Fusion", "Traditional Wear", "Modern Ankara"],
+        priceRange: "$400 - $2,000",
+        turnaround: "3-5 weeks",
+        description: "Blending traditional African aesthetics with contemporary fashion. I create pieces that celebrate cultural heritage while embracing modern style and comfort.",
+        portfolio: [
+          {
+            id: 301,
+            title: "Modern Ankara Dress",
+            image: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$650",
+            category: "Cultural Fusion",
+            description: "Beautiful Ankara print dress with modern silhouette and traditional patterns."
+          },
+          {
+            id: 302,
+            title: "Kente Inspired Evening Wear",
+            image: "https://images.pexels.com/photos/6567614/pexels-photo-6567614.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,200",
+            category: "Evening Wear",
+            description: "Elegant evening gown inspired by traditional Kente patterns."
+          },
+          {
+            id: 303,
+            title: "Contemporary Dashiki",
+            image: "https://images.pexels.com/photos/6567613/pexels-photo-6567613.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$480",
+            category: "Traditional Wear",
+            description: "Modern take on traditional Dashiki with premium fabrics."
+          }
+        ],
+        services: [
+          { name: "Custom Ankara Design", price: "$400 - $800", duration: "3-4 weeks" },
+          { name: "Traditional Wedding Attire", price: "$800 - $2,000", duration: "5-6 weeks" },
+          { name: "Cultural Fashion Consultation", price: "$120/hour", duration: "1-2 hours" },
+          { name: "Pattern Adaptation", price: "$250 - $500", duration: "2-3 weeks" }
+        ]
+      },
+      {
+        id: 4,
+        name: "Isabella Rossi",
+        title: "Bridal & Special Occasion Designer",
+        location: "Miami, FL",
+        experience: "12 years",
+        rating: 5.0,
+        reviews: 203,
+        avatar: "https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Wedding Dresses", "Bridesmaid Dresses", "Mother of Bride", "Quinceañera"],
+        priceRange: "$1,200 - $5,000",
+        turnaround: "8-12 weeks",
+        description: "Creating dream wedding dresses and special occasion wear for over a decade. Every bride deserves to feel like a princess on her special day.",
+        portfolio: [
+          {
+            id: 401,
+            title: "Romantic Lace Wedding Gown",
+            image: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$3,200",
+            category: "Wedding Dress",
+            description: "Romantic A-line gown with intricate lace details and cathedral train."
+          },
+          {
+            id: 402,
+            title: "Vintage Inspired Bridal Dress",
+            image: "https://images.pexels.com/photos/6567610/pexels-photo-6567610.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$2,800",
+            category: "Wedding Dress",
+            description: "Vintage-inspired gown with beaded bodice and flowing skirt."
+          },
+          {
+            id: 403,
+            title: "Quinceañera Ball Gown",
+            image: "https://images.pexels.com/photos/6567609/pexels-photo-6567609.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,800",
+            category: "Special Occasion",
+            description: "Stunning ball gown perfect for quinceañera celebrations."
+          }
+        ],
+        services: [
+          { name: "Custom Wedding Dress", price: "$2,000 - $5,000", duration: "10-12 weeks" },
+          { name: "Bridesmaid Dress Design", price: "$400 - $800", duration: "6-8 weeks" },
+          { name: "Bridal Consultation", price: "$200/session", duration: "2 hours" },
+          { name: "Dress Alterations", price: "$300 - $800", duration: "2-4 weeks" }
+        ]
+      },
+      {
+        id: 5,
+        name: "James Thompson",
+        title: "Men's Formal Wear Specialist",
+        location: "Chicago, IL",
+        experience: "15 years",
+        rating: 4.8,
+        reviews: 178,
+        avatar: "https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Custom Suits", "Tuxedos", "Business Wear", "Formal Alterations"],
+        priceRange: "$800 - $3,000",
+        turnaround: "4-6 weeks",
+        description: "Master tailor specializing in men's formal wear. From business suits to wedding tuxedos, I create perfectly fitted garments that enhance your professional image.",
+        portfolio: [
+          {
+            id: 501,
+            title: "Classic Navy Business Suit",
+            image: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,400",
+            category: "Business Suit",
+            description: "Perfectly tailored navy suit with premium wool fabric."
+          },
+          {
+            id: 502,
+            title: "Black Tie Tuxedo",
+            image: "https://images.pexels.com/photos/5709668/pexels-photo-5709668.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$2,200",
+            category: "Formal Wear",
+            description: "Elegant black tie tuxedo with satin lapels and perfect fit."
+          },
+          {
+            id: 503,
+            title: "Three-Piece Wedding Suit",
+            image: "https://images.pexels.com/photos/5709669/pexels-photo-5709669.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$1,800",
+            category: "Wedding Suit",
+            description: "Sophisticated three-piece suit perfect for weddings."
+          }
+        ],
+        services: [
+          { name: "Custom Business Suit", price: "$1,000 - $2,000", duration: "5-6 weeks" },
+          { name: "Wedding Tuxedo", price: "$1,500 - $3,000", duration: "6-8 weeks" },
+          { name: "Suit Alterations", price: "$200 - $600", duration: "1-2 weeks" },
+          { name: "Fitting Consultation", price: "$100/session", duration: "1 hour" }
+        ]
+      },
+      {
+        id: 6,
+        name: "Sophie Laurent",
+        title: "Haute Couture Designer",
+        location: "San Francisco, CA",
+        experience: "9 years",
+        rating: 4.9,
+        reviews: 94,
+        avatar: "https://images.pexels.com/photos/3785082/pexels-photo-3785082.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Haute Couture", "Art-to-Wear", "Avant-Garde", "Fashion Shows"],
+        priceRange: "$2,000 - $8,000",
+        turnaround: "8-16 weeks",
+        description: "Creating wearable art pieces that push the boundaries of fashion. Each garment is a unique masterpiece combining traditional couture techniques with innovative design.",
+        portfolio: [
+          {
+            id: 601,
+            title: "Sculptural Evening Gown",
+            image: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$4,500",
+            category: "Haute Couture",
+            description: "Architectural evening gown with hand-draped silk and metallic accents."
+          },
+          {
+            id: 602,
+            title: "Avant-Garde Cocktail Dress",
+            image: "https://images.pexels.com/photos/6567607/pexels-photo-6567607.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$3,200",
+            category: "Art-to-Wear",
+            description: "Innovative cocktail dress featuring geometric patterns and unique construction."
+          },
+          {
+            id: 603,
+            title: "Couture Ball Gown",
+            image: "https://images.pexels.com/photos/6567606/pexels-photo-6567606.jpeg?auto=compress&cs=tinysrgb&w=800",
+            price: "$6,800",
+            category: "Haute Couture",
+            description: "Exquisite ball gown with hand-embroidered details and luxury fabrics."
+          }
+        ],
+        services: [
+          { name: "Haute Couture Creation", price: "$3,000 - $8,000", duration: "12-16 weeks" },
+          { name: "Art-to-Wear Piece", price: "$2,000 - $4,000", duration: "8-10 weeks" },
+          { name: "Fashion Show Consultation", price: "$300/hour", duration: "Variable" },
+          { name: "Design Development", price: "$500 - $1,500", duration: "2-4 weeks" }
+        ]
+      }
+    ];
 
     // Product Data with 100+ Unique Real Images
     const products = [
@@ -2205,7 +2605,9 @@
 
     let cart = [];
     let wishlist = [];
+    let currentSection = 'products'; // 'products' or 'services'
     let currentCategory = 'all';
+    let currentService = 'all';
     let currentUser = null;
 
     // Category subcategories mapping
@@ -2247,6 +2649,14 @@
         { name: 'Measuring Tools', filter: 'measuring' },
         { name: 'Marking Tools', filter: 'marking' },
         { name: 'Sewing Notions', filter: 'notions' }
+      ],
+      services: [
+        { name: 'Evening Wear Designers', filter: 'evening-wear' },
+        { name: 'Bridal Designers', filter: 'bridal' },
+        { name: 'Men\'s Tailoring', filter: 'mens-tailoring' },
+        { name: 'Contemporary Fashion', filter: 'contemporary' },
+        { name: 'Cultural & Traditional', filter: 'cultural' },
+        { name: 'Haute Couture', filter: 'haute-couture' }
       ]
     };
 
@@ -2346,6 +2756,167 @@
       modal.classList.remove('hidden');
     }
 
+    // Show Designer Profile
+    function showDesignerProfile(designerId) {
+      const designer = designers.find(d => d.id === designerId);
+      const modal = document.getElementById('designer-modal');
+      const content = document.getElementById('designer-detail-content');
+      
+      content.innerHTML = `
+        <!-- Designer Header -->
+        <div class="relative mb-8">
+          <div class="h-48 bg-secondary rounded-xl overflow-hidden">
+            <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          </div>
+          <div class="absolute bottom-4 left-6 right-6">
+            <div class="flex items-end space-x-4">
+              <img src="${designer.avatar}" alt="${designer.name}" class="w-20 h-20 rounded-full border-4 border-white">
+              <div class="flex-1">
+                <h2 class="text-3xl font-bold text-white mb-1">${designer.name}</h2>
+                <p class="text-white/90 text-lg">${designer.title}</p>
+                <div class="flex items-center space-x-4 mt-2">
+                  <span class="text-white/80 text-sm">📍 ${designer.location}</span>
+                  <span class="text-white/80 text-sm">⏱️ ${designer.experience} experience</span>
+                </div>
+              </div>
+              <button 
+                onclick="showServiceRequest(${designer.id})" 
+                class="accent-bg text-white px-6 py-3 rounded-lg font-semibold transition-all"
+              >
+                Request Service
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Left Column - Info -->
+          <div class="lg:col-span-1 space-y-6">
+            <!-- Rating & Reviews -->
+            <div class="bg-secondary border border-custom rounded-xl p-6">
+              <div class="flex items-center mb-4">
+                <div class="flex text-2xl mr-3">
+                  ${renderStars(designer.rating)}
+                </div>
+                <div>
+                  <span class="text-2xl font-bold text-primary">${designer.rating}</span>
+                  <p class="text-sm text-secondary">${designer.reviews} reviews</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specialties -->
+            <div class="bg-secondary border border-custom rounded-xl p-6">
+              <h3 class="text-lg font-semibold text-primary mb-4">Specialties</h3>
+              <div class="flex flex-wrap gap-2">
+                ${designer.specialties.map(specialty => 
+                  `<span class="bg-primary text-white px-3 py-1 rounded-full text-sm">${specialty}</span>`
+                ).join('')}
+              </div>
+            </div>
+
+            <!-- Pricing & Timeline -->
+            <div class="bg-secondary border border-custom rounded-xl p-6">
+              <h3 class="text-lg font-semibold text-primary mb-4">Pricing & Timeline</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-secondary">Price Range:</span>
+                  <span class="font-semibold text-primary">${designer.priceRange}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-secondary">Typical Turnaround:</span>
+                  <span class="font-semibold text-primary">${designer.turnaround}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Services Offered -->
+            <div class="bg-secondary border border-custom rounded-xl p-6">
+              <h3 class="text-lg font-semibold text-primary mb-4">Services Offered</h3>
+              <div class="space-y-3">
+                ${designer.services.map(service => `
+                  <div class="border-b border-custom pb-3 last:border-b-0 last:pb-0">
+                    <div class="flex justify-between items-start mb-1">
+                      <h4 class="font-medium text-primary">${service.name}</h4>
+                      <span class="text-sm font-semibold text-primary">${service.price}</span>
+                    </div>
+                    <p class="text-xs text-secondary">Duration: ${service.duration}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column - Portfolio -->
+          <div class="lg:col-span-2">
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold text-primary mb-2">About</h3>
+              <p class="text-secondary leading-relaxed">${designer.description}</p>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-primary mb-6">Portfolio</h3>
+              <div class="grid md:grid-cols-2 gap-6">
+                ${designer.portfolio.map(item => `
+                  <div class="bg-secondary border border-custom rounded-xl overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="showPortfolioItem(${designer.id}, ${item.id})">
+                    <div class="relative h-64">
+                      <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                      <div class="absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded text-sm">
+                        ${item.price}
+                      </div>
+                    </div>
+                    <div class="p-4">
+                      <h4 class="font-semibold text-primary mb-1">${item.title}</h4>
+                      <p class="text-xs text-secondary mb-2">${item.category}</p>
+                      <p class="text-sm text-secondary">${item.description}</p>
+                      <button 
+                        onclick="event.stopPropagation(); showServiceRequest(${designer.id}, ${item.id})" 
+                        class="mt-3 w-full bg-primary text-white py-2 rounded-lg text-sm font-medium transition-all hover:opacity-90"
+                      >
+                        Request This Design
+                      </button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+    }
+
+    // Show Service Request Modal
+    function showServiceRequest(designerId, designId = null) {
+      const designer = designers.find(d => d.id === designerId);
+      const modal = document.getElementById('service-request-modal');
+      
+      // Pre-fill designer info
+      document.getElementById('selected-designer-id').value = designerId;
+      if (designId) {
+        document.getElementById('selected-design-id').value = designId;
+      }
+      
+      // Pre-fill user info if logged in
+      if (currentUser) {
+        document.getElementById('request-name').value = currentUser.name || '';
+        document.getElementById('request-email').value = currentUser.email || '';
+      }
+      
+      modal.classList.remove('hidden');
+    }
+
+    // Show Portfolio Item (could expand to full view)
+    function showPortfolioItem(designerId, itemId) {
+      const designer = designers.find(d => d.id === designerId);
+      const item = designer.portfolio.find(p => p.id === itemId);
+      
+      // For now, just show service request - could expand to detailed view
+      showServiceRequest(designerId, itemId);
+    }
+
     // Close product modal
     document.getElementById('close-product-modal').addEventListener('click', () => {
       document.getElementById('product-modal').classList.add('hidden');
@@ -2357,9 +2928,144 @@
       }
     });
 
+    // Close designer modal
+    document.getElementById('close-designer-modal').addEventListener('click', () => {
+      document.getElementById('designer-modal').classList.add('hidden');
+    });
+
+    document.getElementById('designer-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'designer-modal') {
+        document.getElementById('designer-modal').classList.add('hidden');
+      }
+    });
+
+    // Close service request modal
+    document.getElementById('close-service-request-modal').addEventListener('click', () => {
+      document.getElementById('service-request-modal').classList.add('hidden');
+    });
+
+    document.getElementById('service-request-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'service-request-modal') {
+        document.getElementById('service-request-modal').classList.add('hidden');
+      }
+    });
+
+    // Service Request Form Submission
+    document.getElementById('service-request-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const designerId = document.getElementById('selected-designer-id').value;
+      const designer = designers.find(d => d.id == designerId);
+      const serviceType = document.getElementById('service-type').value;
+      const name = document.getElementById('request-name').value;
+      const email = document.getElementById('request-email').value;
+      const description = document.getElementById('request-description').value;
+      
+      // Simulate sending request
+      showNotification(`Service request sent to ${designer.name}! They will contact you within 24-48 hours.`, 'success');
+      
+      // Close modal and reset form
+      document.getElementById('service-request-modal').classList.add('hidden');
+      e.target.reset();
+    });
+
+    // Render Services (Designers)
+    function renderServices(serviceFilter = 'all') {
+      const grid = document.getElementById('products-grid');
+      
+      let filteredDesigners = designers;
+      
+      // Filter designers based on service type
+      if (serviceFilter !== 'all') {
+        switch(serviceFilter) {
+          case 'evening-wear':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('evening') || s.toLowerCase().includes('gown') || s.toLowerCase().includes('cocktail'))
+            );
+            break;
+          case 'bridal':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('bridal') || s.toLowerCase().includes('wedding'))
+            );
+            break;
+          case 'mens-tailoring':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('suit') || s.toLowerCase().includes('tuxedo') || s.toLowerCase().includes('business') || s.toLowerCase().includes('formal'))
+            );
+            break;
+          case 'contemporary':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('streetwear') || s.toLowerCase().includes('casual') || s.toLowerCase().includes('contemporary') || s.toLowerCase().includes('sustainable'))
+            );
+            break;
+          case 'cultural':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('african') || s.toLowerCase().includes('traditional') || s.toLowerCase().includes('cultural'))
+            );
+            break;
+          case 'haute-couture':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('couture') || s.toLowerCase().includes('art') || s.toLowerCase().includes('avant'))
+            );
+            break;
+        }
+      }
+      
+      if (filteredDesigners.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-secondary text-lg">No designers found in this category.</p></div>';
+        return;
+      }
+      
+      grid.innerHTML = filteredDesigners.map(designer => `
+        <div class="product-card rounded-xl overflow-hidden shadow-md relative cursor-pointer" onclick="showDesignerProfile(${designer.id})">
+          <div class="relative h-48 bg-secondary">
+            <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 right-3">
+              <div class="flex items-center space-x-3">
+                <img src="${designer.avatar}" alt="${designer.name}" class="w-12 h-12 rounded-full border-2 border-white">
+                <div>
+                  <h4 class="font-semibold text-white text-sm">${designer.name}</h4>
+                  <p class="text-white/80 text-xs">${designer.location}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-primary mb-1">${designer.title}</h4>
+            <div class="flex items-center mb-2">
+              <div class="flex text-sm mr-1">
+                ${renderStars(designer.rating)}
+              </div>
+              <span class="text-xs text-secondary">(${designer.reviews} reviews)</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mb-3">
+              ${designer.specialties.slice(0, 2).map(specialty => 
+                `<span class="text-xs bg-secondary text-primary px-2 py-1 rounded">${specialty}</span>`
+              ).join('')}
+              ${designer.specialties.length > 2 ? `<span class="text-xs text-secondary">+${designer.specialties.length - 2} more</span>` : ''}
+            </div>
+            <div class="flex justify-between items-center mb-3">
+              <div>
+                <span class="text-sm font-bold text-primary">${designer.priceRange}</span>
+                <p class="text-xs text-secondary">${designer.turnaround}</p>
+              </div>
+            </div>
+            <button 
+              onclick="event.stopPropagation(); showServiceRequest(${designer.id})" 
+              class="w-full accent-bg text-white py-2 rounded-lg font-semibold transition-all"
+            >
+              Request Service
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
     // Render Products
     function renderProducts(category = 'all') {
       const grid = document.getElementById('products-grid');
+      
       let filteredProducts = category === 'all' 
         ? products 
         : products.filter(p => p.category === category);
@@ -2572,12 +3278,113 @@
 
     // Filter by Subcategory
     function filterBySubcategory(filter) {
+      const grid = document.getElementById('products-grid');
+      const productsTitle = document.getElementById('products-title');
+      
+      // Handle services filtering
+      if (currentCategory === 'services') {
+        let filteredDesigners = designers;
+        
+        // Filter designers based on specialties
+        switch(filter) {
+          case 'evening-wear':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('evening') || s.toLowerCase().includes('gown') || s.toLowerCase().includes('cocktail'))
+            );
+            break;
+          case 'bridal':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('bridal') || s.toLowerCase().includes('wedding'))
+            );
+            break;
+          case 'mens-tailoring':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('suit') || s.toLowerCase().includes('tuxedo') || s.toLowerCase().includes('business'))
+            );
+            break;
+          case 'contemporary':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('streetwear') || s.toLowerCase().includes('casual') || s.toLowerCase().includes('contemporary'))
+            );
+            break;
+          case 'cultural':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('african') || s.toLowerCase().includes('traditional') || s.toLowerCase().includes('cultural'))
+            );
+            break;
+          case 'haute-couture':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('couture') || s.toLowerCase().includes('art') || s.toLowerCase().includes('avant'))
+            );
+            break;
+        }
+        
+        const filterNames = {
+          'evening-wear': 'Evening Wear Designers',
+          'bridal': 'Bridal Designers',
+          'mens-tailoring': 'Men\'s Tailoring Specialists',
+          'contemporary': 'Contemporary Fashion Designers',
+          'cultural': 'Cultural & Traditional Designers',
+          'haute-couture': 'Haute Couture Designers'
+        };
+        
+        productsTitle.textContent = filterNames[filter] || 'Design Services';
+        
+        grid.innerHTML = filteredDesigners.map(designer => `
+          <div class="product-card rounded-xl overflow-hidden shadow-md relative cursor-pointer" onclick="showDesignerProfile(${designer.id})">
+            <div class="relative h-48 bg-secondary">
+              <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <div class="flex items-center space-x-3">
+                  <img src="${designer.avatar}" alt="${designer.name}" class="w-12 h-12 rounded-full border-2 border-white">
+                  <div>
+                    <h4 class="font-semibold text-white text-sm">${designer.name}</h4>
+                    <p class="text-white/80 text-xs">${designer.location}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <h4 class="font-semibold text-primary mb-1">${designer.title}</h4>
+              <div class="flex items-center mb-2">
+                <div class="flex text-sm mr-1">
+                  ${renderStars(designer.rating)}
+                </div>
+                <span class="text-xs text-secondary">(${designer.reviews} reviews)</span>
+              </div>
+              <div class="flex flex-wrap gap-1 mb-3">
+                ${designer.specialties.slice(0, 2).map(specialty => 
+                  `<span class="text-xs bg-secondary text-primary px-2 py-1 rounded">${specialty}</span>`
+                ).join('')}
+                ${designer.specialties.length > 2 ? `<span class="text-xs text-secondary">+${designer.specialties.length - 2} more</span>` : ''}
+              </div>
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-sm font-bold text-primary">${designer.priceRange}</span>
+                  <p class="text-xs text-secondary">${designer.turnaround}</p>
+                </div>
+              </div>
+              <button 
+                onclick="event.stopPropagation(); showServiceRequest(${designer.id})" 
+                class="w-full accent-bg text-white py-2 rounded-lg font-semibold transition-all"
+              >
+                Request Service
+              </button>
+            </div>
+          </div>
+        `).join('');
+        
+        if (filteredDesigners.length === 0) {
+          grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-secondary text-lg">No designers found in this category.</p></div>';
+        }
+        return;
+      }
+      
+      // Handle product filtering
       const filteredProducts = products.filter(p => 
         p.category === currentCategory && p.subcategory === filter
       );
-      
-      const grid = document.getElementById('products-grid');
-      const productsTitle = document.getElementById('products-title');
       
       // Update title based on filter
       const filterNames = {
@@ -2656,7 +3463,79 @@
       }
     }
 
-    // Category Filter
+    // Main Navigation (Products/Services)
+    document.querySelectorAll('.main-nav-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const section = this.dataset.section;
+        switchToSection(section);
+      });
+    });
+
+    document.querySelectorAll('.mobile-main-nav-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const section = this.dataset.section;
+        switchToSection(section);
+      });
+    });
+
+    function switchToSection(section) {
+      currentSection = section;
+      
+      // Update desktop main nav buttons
+      document.querySelectorAll('.main-nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.main-nav-btn[data-section="${section}"]`).classList.add('active');
+      
+      // Update mobile main nav buttons
+      document.querySelectorAll('.mobile-main-nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.mobile-main-nav-btn[data-section="${section}"]`).classList.add('active');
+      
+      // Show/hide appropriate navigation sections
+      const desktopCategoryChips = document.getElementById('desktop-category-chips');
+      const desktopServiceChips = document.getElementById('desktop-service-chips');
+      const mobileProductsNav = document.getElementById('mobile-products-nav');
+      const mobileServicesNav = document.getElementById('mobile-services-nav');
+      
+      if (section === 'products') {
+        // Show products navigation
+        desktopCategoryChips.classList.remove('hidden');
+        desktopServiceChips.classList.add('hidden');
+        mobileProductsNav.classList.remove('hidden');
+        mobileServicesNav.classList.add('hidden');
+        
+        // Reset to all products
+        currentCategory = 'all';
+        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+        document.querySelector('.category-chip[data-category="all"]').classList.add('active');
+        document.getElementById('mobile-category-text').textContent = '🏪 All Products';
+        
+        // Update title and render
+        document.getElementById('products-title').textContent = 'Featured Products';
+        renderProducts('all');
+        
+      } else if (section === 'services') {
+        // Show services navigation
+        desktopCategoryChips.classList.add('hidden');
+        desktopServiceChips.classList.remove('hidden');
+        mobileProductsNav.classList.add('hidden');
+        mobileServicesNav.classList.remove('hidden');
+        
+        // Reset to all services
+        currentService = 'all';
+        document.querySelectorAll('.service-chip').forEach(c => c.classList.remove('active'));
+        document.querySelector('.service-chip[data-service="all"]').classList.add('active');
+        document.getElementById('mobile-service-text').textContent = '👗 All Services';
+        
+        // Update title and render
+        document.getElementById('products-title').textContent = 'Design Services';
+        renderServices('all');
+      }
+      
+      // Hide subcategory dropdowns
+      document.getElementById('subcategory-dropdown').classList.add('hidden');
+      document.getElementById('desktop-subcategory-dropdown').classList.add('hidden');
+    }
+
+    // Category Filter (Products)
     document.querySelectorAll('.category-chip').forEach(chip => {
       chip.addEventListener('click', function() {
         document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
@@ -2692,6 +3571,26 @@
         // Show/hide sidebar and render products
         showCategorySidebar(currentCategory);
         renderProducts(currentCategory);
+      });
+    });
+
+    // Service Filter (Services)
+    document.querySelectorAll('.service-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.service-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        currentService = this.dataset.service;
+        
+        // Update services title
+        const productsTitle = document.getElementById('products-title');
+        if (currentService === 'all') {
+          productsTitle.textContent = 'Design Services';
+        } else {
+          productsTitle.textContent = this.textContent.trim();
+        }
+        
+        // Render filtered services
+        renderServices(currentService);
       });
     });
 
@@ -3198,6 +4097,55 @@
       });
     });
 
+    // Mobile Service Navigation
+    const mobileServiceBtn = document.getElementById('mobile-service-btn');
+    const mobileServiceMenu = document.getElementById('mobile-service-menu');
+    const mobileServiceText = document.getElementById('mobile-service-text');
+    const mobileServiceArrow = document.getElementById('mobile-service-arrow');
+
+    // Mobile Service Dropdown
+    mobileServiceBtn.addEventListener('click', () => {
+      mobileServiceMenu.classList.toggle('hidden');
+      mobileServiceArrow.classList.toggle('rotate-180');
+    });
+
+    // Close mobile service menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileServiceBtn.contains(e.target) && !mobileServiceMenu.contains(e.target)) {
+        mobileServiceMenu.classList.add('hidden');
+        mobileServiceArrow.classList.remove('rotate-180');
+      }
+    });
+
+    // Mobile Service Options
+    document.querySelectorAll('.mobile-service-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const service = this.dataset.service;
+        const text = this.textContent.trim();
+        
+        // Update button text
+        mobileServiceText.textContent = text;
+        
+        // Close dropdown
+        mobileServiceMenu.classList.add('hidden');
+        mobileServiceArrow.classList.remove('rotate-180');
+        
+        // Update current service
+        currentService = service;
+        
+        // Update services title
+        const productsTitle = document.getElementById('products-title');
+        if (currentService === 'all') {
+          productsTitle.textContent = 'Design Services';
+        } else {
+          productsTitle.textContent = text;
+        }
+        
+        // Render filtered services
+        renderServices(currentService);
+      });
+    });
+
     // Subcategory Functionality (Works for all screen sizes)
     const subcategoryBtn = document.getElementById('subcategory-btn');
     const subcategoryMenu = document.getElementById('subcategory-menu');
@@ -3305,22 +4253,8 @@
     // Home Button Functionality
     const homeBtn = document.getElementById('home-btn');
     homeBtn.addEventListener('click', () => {
-      // Reset to initial state
-      currentCategory = 'all';
-      
-      // Reset category chips
-      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-      document.querySelector('.category-chip[data-category="all"]').classList.add('active');
-      
-      // Reset mobile category dropdown
-      document.getElementById('mobile-category-text').textContent = '🏪 All Products';
-      
-      // Hide subcategory dropdowns
-      document.getElementById('subcategory-dropdown').classList.add('hidden');
-      document.getElementById('desktop-subcategory-dropdown').classList.add('hidden');
-      
-      // Reset products title
-      document.getElementById('products-title').textContent = 'Featured Products';
+      // Reset to products section
+      switchToSection('products');
       
       // Clear search inputs
       document.getElementById('search-input').value = '';
@@ -3333,9 +4267,6 @@
       document.getElementById('sort-select').value = 'featured';
       currentSort = 'featured';
       
-      // Render all products
-      renderProducts('all');
-      
       // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -3343,5 +4274,5 @@
     // Initial Render
     renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99da50eb26659b16',t:'MTc2Mjk5NTQ1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99da873055369538',t:'MTc2Mjk5NzY4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
