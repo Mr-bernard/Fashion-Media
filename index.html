@@ -21,6 +21,8 @@
       --accent-primary: #1E3A8A;
       --accent-secondary: #D97706;
       --accent-hover: #1E40AF;
+      --gold-accent: #F59E0B;
+      --loyal-blue: #1E3A8A;
     }
     
     [data-theme="dark"] {
@@ -33,6 +35,8 @@
       --accent-primary: #3B82F6;
       --accent-secondary: #F59E0B;
       --accent-hover: #2563EB;
+      --gold-accent: #FBBF24;
+      --loyal-blue: #3B82F6;
     }
     
     body {
@@ -41,14 +45,37 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
     
-    .bg-primary { background-color: var(--bg-primary); }
-    .bg-secondary { background-color: var(--bg-secondary); }
-    .bg-card { background-color: var(--bg-card); }
-    .text-primary { color: var(--text-primary); }
-    .text-secondary { color: var(--text-secondary); }
-    .border-custom { border-color: var(--border-color); }
-    .accent-bg { background-color: var(--accent-primary); }
-    .accent-bg:hover { background-color: var(--accent-hover); }
+    .bg-primary {
+      background-color: var(--bg-primary);
+    }
+    
+    .bg-secondary {
+      background-color: var(--bg-secondary);
+    }
+    
+    .bg-card {
+      background-color: var(--bg-card);
+    }
+    
+    .text-primary {
+      color: var(--text-primary);
+    }
+    
+    .text-secondary {
+      color: var(--text-secondary);
+    }
+    
+    .border-custom {
+      border-color: var(--border-color);
+    }
+    
+    .accent-bg {
+      background-color: var(--accent-primary);
+    }
+    
+    .accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
     
     .product-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -74,6 +101,22 @@
     }
     
     .main-nav-btn.active {
+      background-color: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
+    .mobile-main-nav-btn {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+    
+    .mobile-main-nav-btn:hover {
+      border-color: var(--accent-primary);
+    }
+    
+    .mobile-main-nav-btn.active {
       background-color: var(--accent-primary);
       color: white;
       border-color: var(--accent-primary);
@@ -105,8 +148,13 @@
       font-weight: bold;
     }
     
-    .star-filled { color: #FFC107; }
-    .star-empty { color: #6C757D; }
+    .star-filled {
+      color: #FFC107;
+    }
+    
+    .star-empty {
+      color: #6C757D;
+    }
     
     .theme-toggle-btn {
       border-radius: 50%;
@@ -124,7 +172,9 @@
       border-color: var(--accent-primary);
     }
     
-    .modal-overlay { backdrop-filter: blur(4px); }
+    .modal-overlay {
+      backdrop-filter: blur(4px);
+    }
     
     input, select, textarea {
       background-color: var(--bg-card);
@@ -138,48 +188,18 @@
       box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
     }
     
-    .view-toggle-btn { color: var(--text-secondary); }
-    .view-toggle-btn.active { background-color: var(--accent-primary); color: white; }
-    .view-toggle-btn:hover:not(.active) { color: var(--text-primary); }
-
-    /* Language Switcher Styles */
-    .language-option.active {
+    .view-toggle-btn {
+      color: var(--text-secondary);
+    }
+    
+    .view-toggle-btn.active {
       background-color: var(--accent-primary);
       color: white;
     }
-
-    .language-loading {
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    /* RTL Support for Arabic */
-    [dir="rtl"] { text-align: right; }
-    [dir="rtl"] .flex { flex-direction: row-reverse; }
-    [dir="rtl"] .space-x-2 > * + * { margin-left: 0; margin-right: 0.5rem; }
-    [dir="rtl"] .space-x-4 > * + * { margin-left: 0; margin-right: 1rem; }
-
-    /* Translation Animation */
-    .translate-fade { transition: opacity 0.2s ease-in-out; }
-    .translate-fade.translating { opacity: 0.7; }
-
-    /* Notification Styles */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      color: white;
-      font-weight: 500;
-      z-index: 1000;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-    }
     
-    .notification.show { transform: translateX(0); }
-    .notification.success { background-color: #10B981; }
-    .notification.error { background-color: #EF4444; }
+    .view-toggle-btn:hover:not(.active) {
+      color: var(--text-primary);
+    }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -191,30 +211,24 @@
       <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" /> <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
        </svg>
-      </div><h1 id="site-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary" data-translate="site_title">Fashion Media</h1></button> <!-- Desktop Search Bar -->
+      </div><h1 id="site-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary">Fashion Media</h1></button> <!-- Desktop Search Bar -->
      <div class="hidden lg:flex flex-1 max-w-2xl mx-8">
-      <div class="relative w-full"><input type="text" id="search-input" placeholder="Search fabrics, accessories, materials..." data-translate-placeholder="search_placeholder" class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
+      <div class="relative w-full"><input type="text" id="search-input" placeholder="Search fabrics, accessories, materials..." class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
        <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
        </svg>
       </div>
      </div><!-- Actions -->
      <div class="flex items-center space-x-2 sm:space-x-4"><!-- Search Button (Mobile/Tablet) --> <button id="mobile-search-btn" class="lg:hidden text-primary p-1">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-       </svg></button> <!-- Language Switcher -->
-      <div class="relative"><button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="language-toggle" title="Change language"> <span id="language-icon" class="text-sm sm:text-base">🌍</span> </button> <!-- Language Dropdown -->
-       <div id="language-dropdown" class="absolute top-full right-0 mt-2 w-48 bg-card border border-custom rounded-lg shadow-xl hidden z-50">
-        <div class="py-2"><button class="language-option active w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="en"> <span class="flag">🇺🇸</span> <span>English</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="fr"> <span class="flag">🇫🇷</span> <span>Français</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="ha"> <span class="flag">🇳🇬</span> <span>Hausa</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="yo"> <span class="flag">🇳🇬</span> <span>Yorùbá</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="ig"> <span class="flag">🇳🇬</span> <span>Igbo</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="sw"> <span class="flag">🇰🇪</span> <span>Kiswahili</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="ar"> <span class="flag">🇸🇦</span> <span>العربية</span> </button> <button class="language-option w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center space-x-2" data-lang="pt"> <span class="flag">🇧🇷</span> <span>Português</span> </button>
-        </div>
-       </div>
-      </div><!-- Theme Toggle Button --> <button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="theme-toggle" title="Toggle theme"> <span id="theme-icon" class="text-sm sm:text-base">☀️</span> </button> <!-- Wishlist Button --> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative">
+       </svg></button> <!-- Theme Toggle Button --> <button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="theme-toggle" title="Toggle theme"> <span id="theme-icon" class="text-sm sm:text-base">☀️</span> </button> <!-- Wishlist Button --> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
        </svg><span id="wishlist-count" class="cart-badge hidden">0</span> </button> <!-- Cart Button --> <button id="cart-btn" class="text-primary hover:opacity-70 transition-opacity relative">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-       </svg><span id="cart-count" class="cart-badge hidden">0</span> </button> <!-- Sign In Button --> <button id="signin-btn" class="accent-bg text-white px-2 py-1 sm:px-4 sm:py-2 lg:px-6 lg:py-2 rounded-lg font-semibold transition-all text-xs sm:text-base" data-translate="sign_in"> Sign In </button>
+       </svg><span id="cart-count" class="cart-badge hidden">0</span> </button> <!-- Sign In Button --> <button id="signin-btn" class="accent-bg text-white px-2 py-1 sm:px-4 sm:py-2 lg:px-6 lg:py-2 rounded-lg font-semibold transition-all text-xs sm:text-base"> Sign In </button>
      </div>
     </div><!-- Mobile Search Bar -->
     <div id="mobile-search-bar" class="lg:hidden pb-3 hidden">
-     <div class="relative"><input type="text" id="mobile-search-input" placeholder="Search products..." data-translate-placeholder="search_placeholder" class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
+     <div class="relative"><input type="text" id="mobile-search-input" placeholder="Search products..." class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
       <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
      </div>
@@ -223,33 +237,43 @@
   </header><!-- Hero Banner -->
   <section class="accent-bg text-white py-6 sm:py-8 lg:py-12 px-3 sm:px-4">
    <div class="max-w-7xl mx-auto text-center">
-    <h2 id="hero-title" class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 sm:mb-3" data-translate="hero_title">Discover Premium Fashion Materials</h2>
-    <p id="hero-subtitle" class="text-sm sm:text-base lg:text-lg opacity-90" data-translate="hero_subtitle">Source quality fabrics, accessories &amp; more from verified suppliers</p>
+    <h2 id="hero-title" class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-2 sm:mb-3">Discover Premium Fashion Materials</h2>
+    <p id="hero-subtitle" class="text-sm sm:text-base lg:text-lg opacity-90">Source quality fabrics, accessories &amp; more from verified suppliers</p>
    </div>
   </section><!-- Main Navigation -->
   <section class="bg-primary border-b border-custom sticky top-14 sm:top-16 z-40">
    <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4"><!-- Desktop Navigation -->
     <div class="hidden md:flex justify-center items-center space-x-8 relative"><!-- Products Dropdown -->
-     <div class="relative"><button id="products-nav-btn" class="main-nav-btn active px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all flex items-center space-x-2"> <span data-translate="products">🛍️ Products</span>
+     <div class="relative"><button id="products-nav-btn" class="main-nav-btn active px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all flex items-center space-x-2"> <span>🛍️ Products</span>
        <svg class="w-4 h-4 transform transition-transform" id="products-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
        </svg></button> <!-- Products Dropdown Menu -->
-      <div id="products-dropdown" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-card border border-custom rounded-lg shadow-xl hidden z-50"><button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> <span data-translate="all_products">🏪 All Products</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> <span data-translate="fabrics">🧵 Fabrics</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> <span data-translate="accessories">💎 Accessories</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> <span data-translate="buttons_zippers">🔘 Buttons &amp; Zippers</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> <span data-translate="threads">🧶 Threads</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> <span data-translate="lace_trims">🎀 Lace &amp; Trims</span> </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> <span data-translate="tools_notions">✂️ Tools &amp; Notions</span> </button>
+      <div id="products-dropdown" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-card border border-custom rounded-lg shadow-xl hidden z-50"><button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
       </div>
      </div><!-- Services Dropdown -->
-     <div class="relative"><button id="services-nav-btn" class="main-nav-btn px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all flex items-center space-x-2"> <span data-translate="services">👗 Services</span>
+     <div class="relative"><button id="services-nav-btn" class="main-nav-btn px-6 lg:px-8 py-3 rounded-lg font-semibold text-sm lg:text-base transition-all flex items-center space-x-2"> <span>👗 Services</span>
        <svg class="w-4 h-4 transform transition-transform" id="services-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
        </svg></button> <!-- Services Dropdown Menu -->
-      <div id="services-dropdown" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-card border border-custom rounded-lg shadow-xl hidden z-50"><button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="all"> <span data-translate="all_services">👗 All Services</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="evening-wear"> <span data-translate="evening_wear">🌟 Evening Wear</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="bridal"> <span data-translate="bridal">👰 Bridal</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="mens-tailoring"> <span data-translate="mens_tailoring">🤵 Men's Tailoring</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="contemporary"> <span data-translate="contemporary">🎨 Contemporary</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="cultural"> <span data-translate="cultural">🌍 Cultural</span> </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-service="haute-couture"> <span data-translate="haute_couture">✨ Haute Couture</span> </button>
+      <div id="services-dropdown" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-card border border-custom rounded-lg shadow-xl hidden z-50"><button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="all"> 👗 All Services </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="evening-wear"> 🌟 Evening Wear </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="bridal"> 👰 Bridal </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="mens-tailoring"> 🤵 Men's Tailoring </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="contemporary"> 🎨 Contemporary </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="cultural"> 🌍 Cultural </button> <button class="service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-service="haute-couture"> ✨ Haute Couture </button>
       </div>
      </div>
     </div><!-- Mobile Navigation -->
     <div class="md:hidden">
-     <div class="flex space-x-2 mb-3"><button id="mobile-products-btn" class="main-nav-btn active flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all"> <span data-translate="products">🛍️ Products</span> </button> <button id="mobile-services-btn" class="main-nav-btn flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all"> <span data-translate="services">👗 Services</span> </button>
+     <div class="flex space-x-2 mb-3"><button id="mobile-products-btn" class="mobile-main-nav-btn active flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all"> 🛍️ Products </button> <button id="mobile-services-btn" class="mobile-main-nav-btn flex-1 px-4 py-2 rounded-lg font-semibold text-sm transition-all"> 👗 Services </button>
      </div><!-- Mobile Category Selection -->
-     <div id="mobile-category-section"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text" data-translate="all_products">🏪 All Products</span>
+     <div id="mobile-category-section"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text">🏪 All Products</span>
        <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
        </svg></button> <!-- Mobile Category Dropdown Menu -->
       <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50 max-h-80 overflow-y-auto"><!-- Dynamic content will be inserted here -->
+      </div>
+     </div>
+    </div><!-- Subcategory Dropdown -->
+    <div id="subcategory-section" class="hidden mt-3">
+     <div class="flex justify-center">
+      <div class="relative"><button id="subcategory-btn" class="px-4 py-2 bg-secondary border border-custom rounded-lg text-primary text-sm flex items-center space-x-2"> <span id="subcategory-text">Select Subcategory</span>
+        <svg class="w-4 h-4 transform transition-transform" id="subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7" />
+        </svg></button> <!-- Subcategory Menu -->
+       <div id="subcategory-menu" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-card border border-custom rounded-lg shadow-lg hidden z-40 max-h-60 overflow-y-auto"><!-- Dynamic subcategories will be inserted here -->
+       </div>
       </div>
      </div>
     </div>
@@ -259,14 +283,14 @@
    <div class="flex gap-4 lg:gap-8"><!-- Products Area -->
     <div class="flex-1">
      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
-      <h3 id="products-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary" data-translate="featured_products">Featured Products</h3>
+      <h3 id="products-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary">Featured Products</h3>
       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center"><!-- View Toggle -->
        <div class="flex bg-secondary rounded-lg p-1"><button id="grid-view-btn" class="view-toggle-btn active flex items-center justify-center px-3 py-2 rounded-md transition-all">
          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
          </svg></button> <button id="list-view-btn" class="view-toggle-btn flex items-center justify-center px-3 py-2 rounded-md transition-all">
          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
          </svg></button>
-       </div><!-- Sort Select --> <select id="sort-select" class="px-3 py-2 rounded-lg border border-custom focus:outline-none text-sm sm:text-base w-full sm:w-auto"> <option value="featured" data-translate="sort_featured">Sort by: Featured</option> <option value="price-low" data-translate="sort_price_low">Price: Low to High</option> <option value="price-high" data-translate="sort_price_high">Price: High to Low</option> <option value="newest" data-translate="sort_newest">Newest First</option> <option value="rating" data-translate="sort_rating">Highest Rated</option> <option value="popular" data-translate="sort_popular">Most Popular</option> </select>
+       </div><!-- Sort Select --> <select id="sort-select" class="px-3 py-2 rounded-lg border border-custom focus:outline-none text-sm sm:text-base w-full sm:w-auto"> <option value="featured">Sort by: Featured</option> <option value="price-low">Price: Low to High</option> <option value="price-high">Price: High to Low</option> <option value="newest">Newest First</option> <option value="rating">Highest Rated</option> <option value="popular">Most Popular</option> </select>
       </div>
      </div>
      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"><!-- Products will be dynamically inserted here -->
@@ -277,16 +301,16 @@
   <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-primary shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
    <div class="flex flex-col h-full">
     <div class="flex justify-between items-center p-6 border-b border-custom">
-     <h3 class="text-xl font-bold text-primary" data-translate="shopping_cart">Shopping Cart</h3><button id="close-cart" class="text-secondary hover:text-primary">
+     <h3 class="text-xl font-bold text-primary">Shopping Cart</h3><button id="close-cart" class="text-secondary hover:text-primary">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
     </div>
     <div id="cart-items" class="flex-1 overflow-y-auto p-6">
-     <p class="text-secondary text-center py-8" data-translate="cart_empty">Your cart is empty</p>
+     <p class="text-secondary text-center py-8">Your cart is empty</p>
     </div>
     <div class="border-t border-custom p-6">
-     <div class="flex justify-between items-center mb-4"><span class="text-lg font-semibold text-primary" data-translate="total">Total:</span> <span id="cart-total" class="text-2xl font-bold text-primary">₦0</span>
-     </div><button class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all" data-translate="checkout"> Checkout </button>
+     <div class="flex justify-between items-center mb-4"><span class="text-lg font-semibold text-primary">Total:</span> <span id="cart-total" class="text-2xl font-bold text-primary">₦0</span>
+     </div><button class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Checkout </button>
     </div>
    </div>
   </div><!-- Cart Overlay -->
@@ -294,18 +318,18 @@
   <div id="wishlist-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-primary shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
    <div class="flex flex-col h-full">
     <div class="flex justify-between items-center p-6 border-b border-custom">
-     <h3 class="text-xl font-bold text-primary" data-translate="wishlist_title">Products I Love</h3><button id="close-wishlist" class="text-secondary hover:text-primary">
+     <h3 class="text-xl font-bold text-primary">Products I Love</h3><button id="close-wishlist" class="text-secondary hover:text-primary">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
     </div>
     <div id="wishlist-items" class="flex-1 overflow-y-auto p-6">
-     <p class="text-secondary text-center py-8" data-translate="wishlist_empty">No loved products yet</p>
+     <p class="text-secondary text-center py-8">No loved products yet</p>
     </div>
    </div>
   </div><!-- Wishlist Overlay -->
   <div id="wishlist-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div><!-- Product Detail Modal -->
   <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 flex items-center justify-center p-4">
-   <div class="bg-card rounded-2xl max-w-4xl w-full max-h-[90%] overflow-y-auto relative">
+   <div class="bg-card rounded-2xl max-w-4xl w-full max-h-[90%] overflow-y-auto">
     <div id="product-modal-content" class="p-6"><!-- Product details will be dynamically inserted here -->
     </div><!-- Close Button --> <button id="close-product-modal" class="absolute top-4 right-4 text-secondary hover:text-primary bg-primary rounded-full p-2">
      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -313,75 +337,75 @@
    </div>
   </div><!-- Auth Modal -->
   <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 flex items-center justify-center p-4">
-   <div class="bg-card rounded-2xl max-w-md w-full max-h-[90%] overflow-y-auto relative"><!-- Sign In Form -->
+   <div class="bg-card rounded-2xl max-w-md w-full max-h-[90%] overflow-y-auto"><!-- Sign In Form -->
     <div id="signin-form" class="p-8">
      <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold text-primary mb-2" data-translate="welcome_back">Welcome Back</h2>
-      <p class="text-secondary" data-translate="signin_subtitle">Sign in to your Fashion Media account</p>
+      <h2 class="text-3xl font-bold text-primary mb-2">Welcome Back</h2>
+      <p class="text-secondary">Sign in to your Fashion Media account</p>
      </div>
      <form id="signin-submit" class="space-y-4">
-      <div><label for="signin-email" class="block text-sm font-semibold text-primary mb-1" data-translate="email_address">Email Address</label> <input type="email" id="signin-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
+      <div><label for="signin-email" class="block text-sm font-semibold text-primary mb-1">Email Address</label> <input type="email" id="signin-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
       </div>
-      <div><label for="signin-password" class="block text-sm font-semibold text-primary mb-1" data-translate="password">Password</label> <input type="password" id="signin-password" required class="w-full px-4 py-3 rounded-lg border" data-translate-placeholder="enter_password" placeholder="Enter your password">
+      <div><label for="signin-password" class="block text-sm font-semibold text-primary mb-1">Password</label> <input type="password" id="signin-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Enter your password">
       </div>
-      <div class="flex items-center justify-between"><label class="flex items-center"> <input type="checkbox" class="w-4 h-4 rounded"> <span class="ml-2 text-sm text-secondary" data-translate="remember_me">Remember me</span> </label> <a href="#" class="text-sm text-primary hover:opacity-70 font-semibold" data-translate="forgot_password">Forgot password?</a>
-      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all" data-translate="sign_in"> Sign In </button>
+      <div class="flex items-center justify-between"><label class="flex items-center"> <input type="checkbox" class="w-4 h-4 rounded"> <span class="ml-2 text-sm text-secondary">Remember me</span> </label> <a href="#" class="text-sm text-primary hover:opacity-70 font-semibold">Forgot password?</a>
+      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Sign In </button>
      </form>
      <div class="mt-6 text-center">
-      <p class="text-secondary"><span data-translate="no_account">Don't have an account?</span> <button id="show-signup" class="text-primary hover:opacity-70 font-semibold" data-translate="sign_up">Sign Up</button></p>
+      <p class="text-secondary">Don't have an account? <button id="show-signup" class="text-primary hover:opacity-70 font-semibold">Sign Up</button></p>
      </div>
     </div><!-- Sign Up Form -->
     <div id="signup-form" class="p-8 hidden">
      <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold text-primary mb-2" data-translate="create_account">Create Account</h2>
-      <p class="text-secondary" data-translate="join_today">Join Fashion Media today</p>
+      <h2 class="text-3xl font-bold text-primary mb-2">Create Account</h2>
+      <p class="text-secondary">Join Fashion Media today</p>
      </div><!-- Account Type Selection -->
-     <div class="mb-6"><label class="block text-sm font-semibold text-primary mb-3" data-translate="i_am_a">I am a:</label>
+     <div class="mb-6"><label class="block text-sm font-semibold text-primary mb-3">I am a:</label>
       <div class="grid grid-cols-2 gap-3"><button type="button" class="account-type-btn active border-2 accent-bg text-white rounded-lg p-4 text-center transition-all" data-type="customer">
         <div class="text-3xl mb-2">
          👤
         </div>
-        <div class="font-semibold" data-translate="customer">
+        <div class="font-semibold">
          Customer
         </div>
-        <div class="text-xs mt-1 opacity-80" data-translate="browse_buy">
+        <div class="text-xs mt-1 opacity-80">
          Browse &amp; Buy
         </div></button> <button type="button" class="account-type-btn border-2 border-custom bg-card text-primary rounded-lg p-4 text-center transition-all hover:opacity-70" data-type="vendor">
         <div class="text-3xl mb-2">
          🏪
         </div>
-        <div class="font-semibold" data-translate="vendor">
+        <div class="font-semibold">
          Vendor
         </div>
-        <div class="text-xs text-secondary mt-1" data-translate="sell_products">
+        <div class="text-xs text-secondary mt-1">
          Sell Products
         </div></button>
       </div>
      </div>
      <form id="signup-submit" class="space-y-4"><input type="hidden" id="account-type" value="customer">
       <div class="grid grid-cols-2 gap-3">
-       <div><label for="signup-firstname" class="block text-sm font-semibold text-primary mb-1" data-translate="first_name">First Name</label> <input type="text" id="signup-firstname" required class="w-full px-4 py-3 rounded-lg border" placeholder="John">
+       <div><label for="signup-firstname" class="block text-sm font-semibold text-primary mb-1">First Name</label> <input type="text" id="signup-firstname" required class="w-full px-4 py-3 rounded-lg border" placeholder="John">
        </div>
-       <div><label for="signup-lastname" class="block text-sm font-semibold text-primary mb-1" data-translate="last_name">Last Name</label> <input type="text" id="signup-lastname" required class="w-full px-4 py-3 rounded-lg border" placeholder="Doe">
+       <div><label for="signup-lastname" class="block text-sm font-semibold text-primary mb-1">Last Name</label> <input type="text" id="signup-lastname" required class="w-full px-4 py-3 rounded-lg border" placeholder="Doe">
        </div>
       </div>
-      <div><label for="signup-email" class="block text-sm font-semibold text-primary mb-1" data-translate="email_address">Email Address</label> <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
+      <div><label for="signup-email" class="block text-sm font-semibold text-primary mb-1">Email Address</label> <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-lg border" placeholder="your@email.com">
       </div><!-- Vendor-specific fields -->
       <div id="vendor-fields" class="hidden space-y-4">
-       <div><label for="business-name" class="block text-sm font-semibold text-primary mb-1" data-translate="business_name">Business Name</label> <input type="text" id="business-name" class="w-full px-4 py-3 rounded-lg border" data-translate-placeholder="business_name_placeholder" placeholder="Your Business Name">
+       <div><label for="business-name" class="block text-sm font-semibold text-primary mb-1">Business Name</label> <input type="text" id="business-name" class="w-full px-4 py-3 rounded-lg border" placeholder="Your Business Name">
        </div>
-       <div><label for="business-type" class="block text-sm font-semibold text-primary mb-1" data-translate="business_type">Business Type</label> <select id="business-type" class="w-full px-4 py-3 rounded-lg border"> <option value="" data-translate="select_business_type">Select business type</option> <option value="fabric-supplier" data-translate="fabric_supplier">Fabric Supplier</option> <option value="accessories-supplier" data-translate="accessories_supplier">Accessories Supplier</option> <option value="manufacturer" data-translate="manufacturer">Manufacturer</option> <option value="wholesaler" data-translate="wholesaler">Wholesaler</option> <option value="designer" data-translate="designer_tailor">Designer/Tailor</option> </select>
+       <div><label for="business-type" class="block text-sm font-semibold text-primary mb-1">Business Type</label> <select id="business-type" class="w-full px-4 py-3 rounded-lg border"> <option value="">Select business type</option> <option value="fabric-supplier">Fabric Supplier</option> <option value="accessories-supplier">Accessories Supplier</option> <option value="manufacturer">Manufacturer</option> <option value="wholesaler">Wholesaler</option> <option value="designer">Designer/Tailor</option> </select>
        </div>
       </div>
-      <div><label for="signup-password" class="block text-sm font-semibold text-primary mb-1" data-translate="password">Password</label> <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-lg border" data-translate-placeholder="create_password" placeholder="Create a password">
+      <div><label for="signup-password" class="block text-sm font-semibold text-primary mb-1">Password</label> <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Create a password">
       </div>
-      <div><label for="signup-confirm-password" class="block text-sm font-semibold text-primary mb-1" data-translate="confirm_password">Confirm Password</label> <input type="password" id="signup-confirm-password" required class="w-full px-4 py-3 rounded-lg border" data-translate-placeholder="confirm_password_placeholder" placeholder="Confirm your password">
+      <div><label for="signup-confirm-password" class="block text-sm font-semibold text-primary mb-1">Confirm Password</label> <input type="password" id="signup-confirm-password" required class="w-full px-4 py-3 rounded-lg border" placeholder="Confirm your password">
       </div>
-      <div class="flex items-start"><input type="checkbox" id="terms" required class="w-4 h-4 rounded mt-1"> <label for="terms" class="ml-2 text-sm text-secondary"> <span data-translate="agree_to">I agree to the</span> <a href="#" class="text-primary hover:opacity-70 font-semibold" data-translate="terms_service">Terms of Service</a> <span data-translate="and">and</span> <a href="#" class="text-primary hover:opacity-70 font-semibold" data-translate="privacy_policy">Privacy Policy</a> </label>
-      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all" data-translate="create_account"> Create Account </button>
+      <div class="flex items-start"><input type="checkbox" id="terms" required class="w-4 h-4 rounded mt-1"> <label for="terms" class="ml-2 text-sm text-secondary"> I agree to the <a href="#" class="text-primary hover:opacity-70 font-semibold">Terms of Service</a> and <a href="#" class="text-primary hover:opacity-70 font-semibold">Privacy Policy</a> </label>
+      </div><button type="submit" class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"> Create Account </button>
      </form>
      <div class="mt-6 text-center">
-      <p class="text-secondary"><span data-translate="have_account">Already have an account?</span> <button id="show-signin" class="text-primary hover:opacity-70 font-semibold" data-translate="sign_in">Sign In</button></p>
+      <p class="text-secondary">Already have an account? <button id="show-signin" class="text-primary hover:opacity-70 font-semibold">Sign In</button></p>
      </div>
     </div><!-- Close Button --> <button id="close-auth-modal" class="absolute top-4 right-4 text-secondary hover:text-primary">
      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -389,679 +413,308 @@
    </div>
   </div>
   <script>
-    // Translation System
-    const translations = {
-      en: {
-        site_title: "Fashion Media",
-        hero_title: "Discover Premium Fashion Materials",
-        hero_subtitle: "Source quality fabrics, accessories & more from verified suppliers",
-        search_placeholder: "Search fabrics, accessories, materials...",
-        products: "🛍️ Products",
-        services: "👗 Services",
-        all_products: "🏪 All Products",
-        fabrics: "🧵 Fabrics",
-        accessories: "💎 Accessories",
-        buttons_zippers: "🔘 Buttons & Zippers",
-        threads: "🧶 Threads",
-        lace_trims: "🎀 Lace & Trims",
-        tools_notions: "✂️ Tools & Notions",
-        all_services: "👗 All Services",
-        evening_wear: "🌟 Evening Wear",
-        bridal: "👰 Bridal",
-        mens_tailoring: "🤵 Men's Tailoring",
-        contemporary: "🎨 Contemporary",
-        cultural: "🌍 Cultural",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Featured Products",
-        sort_featured: "Sort by: Featured",
-        sort_price_low: "Price: Low to High",
-        sort_price_high: "Price: High to Low",
-        sort_newest: "Newest First",
-        sort_rating: "Highest Rated",
-        sort_popular: "Most Popular",
-        shopping_cart: "Shopping Cart",
-        cart_empty: "Your cart is empty",
-        total: "Total:",
-        checkout: "Checkout",
-        wishlist_title: "Products I Love",
-        wishlist_empty: "No loved products yet",
-        sign_in: "Sign In",
-        welcome_back: "Welcome Back",
-        signin_subtitle: "Sign in to your Fashion Media account",
-        email_address: "Email Address",
-        password: "Password",
-        enter_password: "Enter your password",
-        remember_me: "Remember me",
-        forgot_password: "Forgot password?",
-        no_account: "Don't have an account?",
-        sign_up: "Sign Up",
-        create_account: "Create Account",
-        join_today: "Join Fashion Media today",
-        i_am_a: "I am a:",
-        customer: "Customer",
-        browse_buy: "Browse & Buy",
-        vendor: "Vendor",
-        sell_products: "Sell Products",
-        first_name: "First Name",
-        last_name: "Last Name",
-        business_name: "Business Name",
-        business_name_placeholder: "Your Business Name",
-        business_type: "Business Type",
-        select_business_type: "Select business type",
-        fabric_supplier: "Fabric Supplier",
-        accessories_supplier: "Accessories Supplier",
-        manufacturer: "Manufacturer",
-        wholesaler: "Wholesaler",
-        designer_tailor: "Designer/Tailor",
-        create_password: "Create a password",
-        confirm_password: "Confirm Password",
-        confirm_password_placeholder: "Confirm your password",
-        agree_to: "I agree to the",
-        terms_service: "Terms of Service",
-        and: "and",
-        privacy_policy: "Privacy Policy",
-        have_account: "Already have an account?"
-      },
-      fr: {
-        site_title: "Fashion Media",
-        hero_title: "Découvrez des Matériaux de Mode Premium",
-        hero_subtitle: "Sourcez des tissus de qualité, accessoires et plus auprès de fournisseurs vérifiés",
-        search_placeholder: "Rechercher tissus, accessoires, matériaux...",
-        products: "🛍️ Produits",
-        services: "👗 Services",
-        all_products: "🏪 Tous les Produits",
-        fabrics: "🧵 Tissus",
-        accessories: "💎 Accessoires",
-        buttons_zippers: "🔘 Boutons et Fermetures",
-        threads: "🧶 Fils",
-        lace_trims: "🎀 Dentelles et Garnitures",
-        tools_notions: "✂️ Outils et Notions",
-        all_services: "👗 Tous les Services",
-        evening_wear: "🌟 Tenue de Soirée",
-        bridal: "👰 Mariée",
-        mens_tailoring: "🤵 Tailleur Homme",
-        contemporary: "🎨 Contemporain",
-        cultural: "🌍 Culturel",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Produits en Vedette",
-        sort_featured: "Trier par: En Vedette",
-        sort_price_low: "Prix: Bas à Élevé",
-        sort_price_high: "Prix: Élevé à Bas",
-        sort_newest: "Plus Récent",
-        sort_rating: "Mieux Noté",
-        sort_popular: "Plus Populaire",
-        shopping_cart: "Panier d'Achat",
-        cart_empty: "Votre panier est vide",
-        total: "Total:",
-        checkout: "Commander",
-        wishlist_title: "Produits que J'Aime",
-        wishlist_empty: "Aucun produit aimé pour le moment",
-        sign_in: "Se Connecter",
-        welcome_back: "Bon Retour",
-        signin_subtitle: "Connectez-vous à votre compte Fashion Media",
-        email_address: "Adresse Email",
-        password: "Mot de Passe",
-        enter_password: "Entrez votre mot de passe",
-        remember_me: "Se souvenir de moi",
-        forgot_password: "Mot de passe oublié?",
-        no_account: "Vous n'avez pas de compte?",
-        sign_up: "S'Inscrire",
-        create_account: "Créer un Compte",
-        join_today: "Rejoignez Fashion Media aujourd'hui",
-        i_am_a: "Je suis un:",
-        customer: "Client",
-        browse_buy: "Parcourir et Acheter",
-        vendor: "Vendeur",
-        sell_products: "Vendre des Produits",
-        first_name: "Prénom",
-        last_name: "Nom de Famille",
-        business_name: "Nom de l'Entreprise",
-        business_name_placeholder: "Nom de Votre Entreprise",
-        business_type: "Type d'Entreprise",
-        select_business_type: "Sélectionner le type d'entreprise",
-        fabric_supplier: "Fournisseur de Tissus",
-        accessories_supplier: "Fournisseur d'Accessoires",
-        manufacturer: "Fabricant",
-        wholesaler: "Grossiste",
-        designer_tailor: "Designer/Tailleur",
-        create_password: "Créer un mot de passe",
-        confirm_password: "Confirmer le Mot de Passe",
-        confirm_password_placeholder: "Confirmez votre mot de passe",
-        agree_to: "J'accepte les",
-        terms_service: "Conditions de Service",
-        and: "et",
-        privacy_policy: "Politique de Confidentialité",
-        have_account: "Vous avez déjà un compte?"
-      },
-      ha: {
-        site_title: "Fashion Media",
-        hero_title: "Gano Kayan Sana'ar Tufafi na Matsayi",
-        hero_subtitle: "Samo kyawawan masana'anta, kayan ado da sauransu daga masu sayarwa masu tabbas",
-        search_placeholder: "Nemo masana'anta, kayan ado, kayayyaki...",
-        products: "🛍️ Kayayyaki",
-        services: "👗 Ayyuka",
-        all_products: "🏪 Duk Kayayyaki",
-        fabrics: "🧵 Masana'anta",
-        accessories: "💎 Kayan Ado",
-        buttons_zippers: "🔘 Maballin da Zippers",
-        threads: "🧶 Zaren Dinki",
-        lace_trims: "🎀 Lace da Trims",
-        tools_notions: "✂️ Kayan Aiki",
-        all_services: "👗 Duk Ayyuka",
-        evening_wear: "🌟 Tufafin Maraice",
-        bridal: "👰 Amarya",
-        mens_tailoring: "🤵 Dinkin Maza",
-        contemporary: "🎨 Na Zamani",
-        cultural: "🌍 Al'ada",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Kayayyaki Masu Shahara",
-        sort_featured: "Jera ta: Masu Shahara",
-        sort_price_low: "Farashi: Daga Kasa zuwa Sama",
-        sort_price_high: "Farashi: Daga Sama zuwa Kasa",
-        sort_newest: "Sababbi Da Farko",
-        sort_rating: "Mafi Daraja",
-        sort_popular: "Mafi Shahara",
-        shopping_cart: "Kwandon Sayayya",
-        cart_empty: "Kwandon ku babu komai",
-        total: "Jimla:",
-        checkout: "Biya",
-        wishlist_title: "Kayayyakin da Na So",
-        wishlist_empty: "Babu kayayyakin da aka so tukuna",
-        sign_in: "Shiga",
-        welcome_back: "Maraba da Dawowa",
-        signin_subtitle: "Shiga cikin asusun ku na Fashion Media",
-        email_address: "Adireshin Email",
-        password: "Kalmar Sirri",
-        enter_password: "Shigar da kalmar sirrin ku",
-        remember_me: "Ka tuna da ni",
-        forgot_password: "Ka manta da kalmar sirri?",
-        no_account: "Ba ku da asusu?",
-        sign_up: "Yi Rajista",
-        create_account: "Kirkiro Asusu",
-        join_today: "Shiga Fashion Media yau",
-        i_am_a: "Ni:",
-        customer: "Abokin Ciniki",
-        browse_buy: "Duba da Saya",
-        vendor: "Mai Sayarwa",
-        sell_products: "Sayar da Kayayyaki",
-        first_name: "Suna na Farko",
-        last_name: "Sunan Iyali",
-        business_name: "Sunan Kasuwanci",
-        business_name_placeholder: "Sunan Kasuwancin ku",
-        business_type: "Nau'in Kasuwanci",
-        select_business_type: "Zaɓi nau'in kasuwanci",
-        fabric_supplier: "Mai Samar da Masana'anta",
-        accessories_supplier: "Mai Samar da Kayan Ado",
-        manufacturer: "Masana'anta",
-        wholesaler: "Mai Sayar da Yawa",
-        designer_tailor: "Mai Zane/Dinki",
-        create_password: "Kirkiro kalmar sirri",
-        confirm_password: "Tabbatar da Kalmar Sirri",
-        confirm_password_placeholder: "Tabbatar da kalmar sirrin ku",
-        agree_to: "Na yarda da",
-        terms_service: "Sharuddan Sabis",
-        and: "da",
-        privacy_policy: "Manufar Sirri",
-        have_account: "Kuna da asusu?"
-      },
-      yo: {
-        site_title: "Fashion Media",
-        hero_title: "Ṣawari Awọn Ohun Elo Aṣọ Ti O Ga Julọ",
-        hero_subtitle: "Gba awọn aṣọ didara, ohun ọṣọ ati awọn miiran lati ọdọ awọn olupese ti a ti rii daju",
-        search_placeholder: "Wa awọn aṣọ, ohun ọṣọ, awọn ohun elo...",
-        products: "🛍️ Awọn Ọja",
-        services: "👗 Awọn Iṣẹ",
-        all_products: "🏪 Gbogbo Awọn Ọja",
-        fabrics: "🧵 Awọn Aṣọ",
-        accessories: "💎 Awọn Ohun Ọṣọ",
-        buttons_zippers: "🔘 Awọn Bọtini ati Zippers",
-        threads: "🧶 Awọn Okun",
-        lace_trims: "🎀 Lace ati Trims",
-        tools_notions: "✂️ Awọn Irinṣẹ",
-        all_services: "👗 Gbogbo Awọn Iṣẹ",
-        evening_wear: "🌟 Aṣọ Alẹ",
-        bridal: "👰 Iyawo",
-        mens_tailoring: "🤵 Ṣiṣe Aṣọ Ọkunrin",
-        contemporary: "🎨 Ti Ode Oni",
-        cultural: "🌍 Aṣa",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Awọn Ọja Pataki",
-        sort_featured: "To lẹsẹsẹ nipasẹ: Pataki",
-        sort_price_low: "Owo: Kekere si Nla",
-        sort_price_high: "Owo: Nla si Kekere",
-        sort_newest: "Titun Ni Akọkọ",
-        sort_rating: "Ti O Ga Julọ",
-        sort_popular: "Ti O Gbajumọ Julọ",
-        shopping_cart: "Agbọn Rira",
-        cart_empty: "Agbọn rẹ ṣofo",
-        total: "Lapapọ:",
-        checkout: "Sanwo",
-        wishlist_title: "Awọn Ọja Ti Mo Fẹran",
-        wishlist_empty: "Ko si awọn ọja ti a fẹran sibẹsibẹ",
-        sign_in: "Wọle",
-        welcome_back: "Kaabo Pada",
-        signin_subtitle: "Wọle si akọọlẹ Fashion Media rẹ",
-        email_address: "Adirẹsi Email",
-        password: "Ọrọ Igbaniwọle",
-        enter_password: "Tẹ ọrọ igbaniwọle rẹ sii",
-        remember_me: "Ranti mi",
-        forgot_password: "Gbagbe ọrọ igbaniwọle?",
-        no_account: "Ko ni akọọlẹ?",
-        sign_up: "Forukọsilẹ",
-        create_account: "Ṣẹda Akọọlẹ",
-        join_today: "Darapọ mọ Fashion Media loni",
-        i_am_a: "Mo jẹ:",
-        customer: "Onibara",
-        browse_buy: "Wa ati Ra",
-        vendor: "Olutaja",
-        sell_products: "Ta Awọn Ọja",
-        first_name: "Orukọ Akọkọ",
-        last_name: "Orukọ Idile",
-        business_name: "Orukọ Iṣowo",
-        business_name_placeholder: "Orukọ Iṣowo Rẹ",
-        business_type: "Iru Iṣowo",
-        select_business_type: "Yan iru iṣowo",
-        fabric_supplier: "Olupese Aṣọ",
-        accessories_supplier: "Olupese Ohun Ọṣọ",
-        manufacturer: "Oluṣe",
-        wholesaler: "Olutaja Nla",
-        designer_tailor: "Apẹẹrẹ/Olutun",
-        create_password: "Ṣẹda ọrọ igbaniwọle",
-        confirm_password: "Jẹrisi Ọrọ Igbaniwọle",
-        confirm_password_placeholder: "Jẹrisi ọrọ igbaniwọle rẹ",
-        agree_to: "Mo gba",
-        terms_service: "Awọn Ofin Iṣẹ",
-        and: "ati",
-        privacy_policy: "Eto Aṣiri",
-        have_account: "Ni akọọlẹ tẹlẹ?"
-      },
-      ig: {
-        site_title: "Fashion Media",
-        hero_title: "Chọpụta Ihe Ejiji Kachasị Mma",
-        hero_subtitle: "Nweta akwa dị mma, ihe ịchọ mma na ndị ọzọ site n'aka ndị na-ere ahịa kwadoro",
-        search_placeholder: "Chọọ akwa, ihe ịchọ mma, ihe...",
-        products: "🛍️ Ngwaahịa",
-        services: "👗 Ọrụ",
-        all_products: "🏪 Ngwaahịa Niile",
-        fabrics: "🧵 Akwa",
-        accessories: "💎 Ihe Ịchọ Mma",
-        buttons_zippers: "🔘 Bọtịnụ na Zippers",
-        threads: "🧶 Eriri",
-        lace_trims: "🎀 Lace na Trims",
-        tools_notions: "✂️ Ngwá Ọrụ",
-        all_services: "👗 Ọrụ Niile",
-        evening_wear: "🌟 Uwe Mgbede",
-        bridal: "👰 Nwanyị Lụrụ Di",
-        mens_tailoring: "🤵 Ịkwa Uwe Nwoke",
-        contemporary: "🎨 Nke Oge A",
-        cultural: "🌍 Omenala",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Ngwaahịa Pụrụ Iche",
-        sort_featured: "Hazie site na: Pụrụ Iche",
-        sort_price_low: "Ọnụ Ahịa: Dị Ala ruo Elu",
-        sort_price_high: "Ọnụ Ahịa: Dị Elu ruo Ala",
-        sort_newest: "Ọhụrụ Bu Ụzọ",
-        sort_rating: "Kacha Mma",
-        sort_popular: "Kacha Ewu Ewu",
-        shopping_cart: "Nkata Ịzụ Ahịa",
-        cart_empty: "Nkata gị tọgbọrọ chakoo",
-        total: "Ngụkọta:",
-        checkout: "Kwụọ Ụgwọ",
-        wishlist_title: "Ngwaahịa M Hụrụ N'anya",
-        wishlist_empty: "Enweghị ngwaahịa ahụrụ n'anya ka",
-        sign_in: "Banye",
-        welcome_back: "Nnọọ Nlọghachi",
-        signin_subtitle: "Banye n'akaụntụ Fashion Media gị",
-        email_address: "Adreesị Email",
-        password: "Okwuntụghe",
-        enter_password: "Tinye okwuntụghe gị",
-        remember_me: "Cheta m",
-        forgot_password: "Chefuru okwuntụghe?",
-        no_account: "Enweghị akaụntụ?",
-        sign_up: "Debanye Aha",
-        create_account: "Mepụta Akaụntụ",
-        join_today: "Sonye na Fashion Media taa",
-        i_am_a: "Abụ m:",
-        customer: "Onye Ahịa",
-        browse_buy: "Chọgharịa ma Zụọ",
-        vendor: "Onye Na-ere",
-        sell_products: "Ree Ngwaahịa",
-        first_name: "Aha Mbụ",
-        last_name: "Aha Ikpeazụ",
-        business_name: "Aha Azụmahịa",
-        business_name_placeholder: "Aha Azụmahịa Gị",
-        business_type: "Ụdị Azụmahịa",
-        select_business_type: "Họrọ ụdị azụmahịa",
-        fabric_supplier: "Onye Na-enye Akwa",
-        accessories_supplier: "Onye Na-enye Ihe Ịchọ Mma",
-        manufacturer: "Onye Nrụpụta",
-        wholesaler: "Onye Na-ere N'ọtụtụ",
-        designer_tailor: "Onye Nhazi/Onye Akwa",
-        create_password: "Mepụta okwuntụghe",
-        confirm_password: "Kwado Okwuntụghe",
-        confirm_password_placeholder: "Kwado okwuntụghe gị",
-        agree_to: "Ekwenyere m na",
-        terms_service: "Usoro Ọrụ",
-        and: "na",
-        privacy_policy: "Iwu Nzuzo",
-        have_account: "Nwere akaụntụ?"
-      },
-      sw: {
-        site_title: "Fashion Media",
-        hero_title: "Gundua Vifaa vya Mitindo ya Hali ya Juu",
-        hero_subtitle: "Pata vitambaa vya ubora, vipodozi na vingine kutoka kwa wasambazaji walioidhinishwa",
-        search_placeholder: "Tafuta vitambaa, vipodozi, vifaa...",
-        products: "🛍️ Bidhaa",
-        services: "👗 Huduma",
-        all_products: "🏪 Bidhaa Zote",
-        fabrics: "🧵 Vitambaa",
-        accessories: "💎 Vipodozi",
-        buttons_zippers: "🔘 Vitufe na Zippers",
-        threads: "🧶 Nyuzi",
-        lace_trims: "🎀 Lace na Trims",
-        tools_notions: "✂️ Vifaa vya Kazi",
-        all_services: "👗 Huduma Zote",
-        evening_wear: "🌟 Mavazi ya Jioni",
-        bridal: "👰 Harusi",
-        mens_tailoring: "🤵 Ushonaji wa Wanaume",
-        contemporary: "🎨 Ya Kisasa",
-        cultural: "🌍 Kitamaduni",
-        haute_couture: "✨ Haute Couture",
-        featured_products: "Bidhaa Maalum",
-        sort_featured: "Panga kwa: Maalum",
-        sort_price_low: "Bei: Chini hadi Juu",
-        sort_price_high: "Bei: Juu hadi Chini",
-        sort_newest: "Mpya Kwanza",
-        sort_rating: "Zilizo na Kiwango cha Juu",
-        sort_popular: "Maarufu Zaidi",
-        shopping_cart: "Kikapu cha Ununuzi",
-        cart_empty: "Kikapu chako ni tupu",
-        total: "Jumla:",
-        checkout: "Maliza Ununuzi",
-        wishlist_title: "Bidhaa Ninazopenda",
-        wishlist_empty: "Hakuna bidhaa zinazopendwa bado",
-        sign_in: "Ingia",
-        welcome_back: "Karibu Tena",
-        signin_subtitle: "Ingia kwenye akaunti yako ya Fashion Media",
-        email_address: "Anwani ya Barua Pepe",
-        password: "Nywila",
-        enter_password: "Ingiza nywila yako",
-        remember_me: "Nikumbuke",
-        forgot_password: "Umesahau nywila?",
-        no_account: "Huna akaunti?",
-        sign_up: "Jisajili",
-        create_account: "Unda Akaunti",
-        join_today: "Jiunge na Fashion Media leo",
-        i_am_a: "Mimi ni:",
-        customer: "Mteja",
-        browse_buy: "Vinjari na Nunua",
-        vendor: "Muuzaji",
-        sell_products: "Uza Bidhaa",
-        first_name: "Jina la Kwanza",
-        last_name: "Jina la Mwisho",
-        business_name: "Jina la Biashara",
-        business_name_placeholder: "Jina la Biashara Yako",
-        business_type: "Aina ya Biashara",
-        select_business_type: "Chagua aina ya biashara",
-        fabric_supplier: "Msambazaji wa Vitambaa",
-        accessories_supplier: "Msambazaji wa Vipodozi",
-        manufacturer: "Mtengenezaji",
-        wholesaler: "Muuzaji wa Jumla",
-        designer_tailor: "Mbuni/Mshonaji",
-        create_password: "Unda nywila",
-        confirm_password: "Thibitisha Nywila",
-        confirm_password_placeholder: "Thibitisha nywila yako",
-        agree_to: "Nakubali",
-        terms_service: "Masharti ya Huduma",
-        and: "na",
-        privacy_policy: "Sera ya Faragha",
-        have_account: "Una akaunti?"
-      },
-      ar: {
-        site_title: "فاشن ميديا",
-        hero_title: "اكتشف مواد الأزياء المتميزة",
-        hero_subtitle: "احصل على أقمشة عالية الجودة وإكسسوارات وأكثر من موردين معتمدين",
-        search_placeholder: "البحث عن أقمشة، إكسسوارات، مواد...",
-        products: "🛍️ المنتجات",
-        services: "👗 الخدمات",
-        all_products: "🏪 جميع المنتجات",
-        fabrics: "🧵 الأقمشة",
-        accessories: "💎 الإكسسوارات",
-        buttons_zippers: "🔘 الأزرار والسحابات",
-        threads: "🧶 الخيوط",
-        lace_trims: "🎀 الدانتيل والزخارف",
-        tools_notions: "✂️ الأدوات",
-        all_services: "👗 جميع الخدمات",
-        evening_wear: "🌟 الأزياء المسائية",
-        bridal: "👰 العروس",
-        mens_tailoring: "🤵 خياطة الرجال",
-        contemporary: "🎨 معاصر",
-        cultural: "🌍 ثقافي",
-        haute_couture: "✨ الأزياء الراقية",
-        featured_products: "المنتجات المميزة",
-        sort_featured: "ترتيب حسب: المميز",
-        sort_price_low: "السعر: من الأقل للأعلى",
-        sort_price_high: "السعر: من الأعلى للأقل",
-        sort_newest: "الأحدث أولاً",
-        sort_rating: "الأعلى تقييماً",
-        sort_popular: "الأكثر شعبية",
-        shopping_cart: "سلة التسوق",
-        cart_empty: "سلتك فارغة",
-        total: "المجموع:",
-        checkout: "الدفع",
-        wishlist_title: "المنتجات المفضلة",
-        wishlist_empty: "لا توجد منتجات مفضلة بعد",
-        sign_in: "تسجيل الدخول",
-        welcome_back: "مرحباً بعودتك",
-        signin_subtitle: "سجل دخولك إلى حساب فاشن ميديا",
-        email_address: "عنوان البريد الإلكتروني",
-        password: "كلمة المرور",
-        enter_password: "أدخل كلمة المرور",
-        remember_me: "تذكرني",
-        forgot_password: "نسيت كلمة المرور؟",
-        no_account: "ليس لديك حساب؟",
-        sign_up: "إنشاء حساب",
-        create_account: "إنشاء حساب",
-        join_today: "انضم إلى فاشن ميديا اليوم",
-        i_am_a: "أنا:",
-        customer: "عميل",
-        browse_buy: "تصفح واشتري",
-        vendor: "بائع",
-        sell_products: "بيع المنتجات",
-        first_name: "الاسم الأول",
-        last_name: "اسم العائلة",
-        business_name: "اسم الشركة",
-        business_name_placeholder: "اسم شركتك",
-        business_type: "نوع الشركة",
-        select_business_type: "اختر نوع الشركة",
-        fabric_supplier: "مورد الأقمشة",
-        accessories_supplier: "مورد الإكسسوارات",
-        manufacturer: "مصنع",
-        wholesaler: "تاجر جملة",
-        designer_tailor: "مصمم/خياط",
-        create_password: "إنشاء كلمة مرور",
-        confirm_password: "تأكيد كلمة المرور",
-        confirm_password_placeholder: "أكد كلمة المرور",
-        agree_to: "أوافق على",
-        terms_service: "شروط الخدمة",
-        and: "و",
-        privacy_policy: "سياسة الخصوصية",
-        have_account: "لديك حساب؟"
-      },
-      pt: {
-        site_title: "Fashion Media",
-        hero_title: "Descubra Materiais de Moda Premium",
-        hero_subtitle: "Encontre tecidos de qualidade, acessórios e mais de fornecedores verificados",
-        search_placeholder: "Buscar tecidos, acessórios, materiais...",
-        products: "🛍️ Produtos",
-        services: "👗 Serviços",
-        all_products: "🏪 Todos os Produtos",
-        fabrics: "🧵 Tecidos",
-        accessories: "💎 Acessórios",
-        buttons_zippers: "🔘 Botões e Zíperes",
-        threads: "🧶 Linhas",
-        lace_trims: "🎀 Rendas e Acabamentos",
-        tools_notions: "✂️ Ferramentas",
-        all_services: "👗 Todos os Serviços",
-        evening_wear: "🌟 Trajes de Noite",
-        bridal: "👰 Noiva",
-        mens_tailoring: "🤵 Alfaiataria Masculina",
-        contemporary: "🎨 Contemporâneo",
-        cultural: "🌍 Cultural",
-        haute_couture: "✨ Alta Costura",
-        featured_products: "Produtos em Destaque",
-        sort_featured: "Ordenar por: Destaque",
-        sort_price_low: "Preço: Menor para Maior",
-        sort_price_high: "Preço: Maior para Menor",
-        sort_newest: "Mais Novos Primeiro",
-        sort_rating: "Melhor Avaliados",
-        sort_popular: "Mais Populares",
-        shopping_cart: "Carrinho de Compras",
-        cart_empty: "Seu carrinho está vazio",
-        total: "Total:",
-        checkout: "Finalizar Compra",
-        wishlist_title: "Produtos Favoritos",
-        wishlist_empty: "Nenhum produto favorito ainda",
-        sign_in: "Entrar",
-        welcome_back: "Bem-vindo de Volta",
-        signin_subtitle: "Entre na sua conta Fashion Media",
-        email_address: "Endereço de Email",
-        password: "Senha",
-        enter_password: "Digite sua senha",
-        remember_me: "Lembrar de mim",
-        forgot_password: "Esqueceu a senha?",
-        no_account: "Não tem uma conta?",
-        sign_up: "Cadastrar",
-        create_account: "Criar Conta",
-        join_today: "Junte-se ao Fashion Media hoje",
-        i_am_a: "Eu sou:",
-        customer: "Cliente",
-        browse_buy: "Navegar e Comprar",
-        vendor: "Vendedor",
-        sell_products: "Vender Produtos",
-        first_name: "Primeiro Nome",
-        last_name: "Sobrenome",
-        business_name: "Nome da Empresa",
-        business_name_placeholder: "Nome da Sua Empresa",
-        business_type: "Tipo de Empresa",
-        select_business_type: "Selecione o tipo de empresa",
-        fabric_supplier: "Fornecedor de Tecidos",
-        accessories_supplier: "Fornecedor de Acessórios",
-        manufacturer: "Fabricante",
-        wholesaler: "Atacadista",
-        designer_tailor: "Designer/Alfaiate",
-        create_password: "Criar senha",
-        confirm_password: "Confirmar Senha",
-        confirm_password_placeholder: "Confirme sua senha",
-        agree_to: "Concordo com os",
-        terms_service: "Termos de Serviço",
-        and: "e",
-        privacy_policy: "Política de Privacidade",
-        have_account: "Já tem uma conta?"
-      }
+    // Config and SDK Setup
+    const defaultConfig = {
+      site_title: "Fashion Media",
+      hero_title: "Discover Premium Fashion Materials",
+      hero_subtitle: "Source quality fabrics, accessories & more from verified suppliers"
     };
 
-    // Language Management
-    let currentLanguage = localStorage.getItem('fashionMediaLanguage') || 'en';
-    let isTranslating = false;
-
-    // Set initial language direction for Arabic
-    function setLanguageDirection(lang) {
-      if (lang === 'ar') {
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.documentElement.setAttribute('lang', 'ar');
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.documentElement.setAttribute('lang', lang);
-      }
+    async function onConfigChange(config) {
+      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
     }
 
-    // Translation function
-    function translatePage(targetLang) {
-      if (isTranslating || !translations[targetLang]) return;
-      
-      isTranslating = true;
-      document.body.classList.add('language-loading');
-      
-      // Add translation animation
-      const elementsToTranslate = document.querySelectorAll('[data-translate], [data-translate-placeholder]');
-      elementsToTranslate.forEach(el => el.classList.add('translate-fade', 'translating'));
-      
-      setTimeout(() => {
-        // Translate text content
-        document.querySelectorAll('[data-translate]').forEach(element => {
-          const key = element.getAttribute('data-translate');
-          if (translations[targetLang][key]) {
-            element.textContent = translations[targetLang][key];
-          }
-        });
-        
-        // Translate placeholders
-        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
-          const key = element.getAttribute('data-translate-placeholder');
-          if (translations[targetLang][key]) {
-            element.placeholder = translations[targetLang][key];
-          }
-        });
-        
-        // Update language direction
-        setLanguageDirection(targetLang);
-        
-        // Save language preference
-        currentLanguage = targetLang;
-        localStorage.setItem('fashionMediaLanguage', targetLang);
-        
-        // Update active language option
-        document.querySelectorAll('.language-option').forEach(option => {
-          option.classList.remove('active');
-          if (option.getAttribute('data-lang') === targetLang) {
-            option.classList.add('active');
-          }
-        });
-        
-        // Remove animation classes
-        elementsToTranslate.forEach(el => {
-          el.classList.remove('translating');
-          setTimeout(() => el.classList.remove('translate-fade'), 200);
-        });
-        
-        document.body.classList.remove('language-loading');
-        isTranslating = false;
-        
-        showNotification(`Language changed to ${getLanguageName(targetLang)}`, 'success');
-      }, 300);
-    }
-
-    // Get language display name
-    function getLanguageName(langCode) {
-      const names = {
-        en: 'English',
-        fr: 'Français',
-        ha: 'Hausa',
-        yo: 'Yorùbá',
-        ig: 'Igbo',
-        sw: 'Kiswahili',
-        ar: 'العربية',
-        pt: 'Português'
-      };
-      return names[langCode] || langCode;
-    }
-
-    // Initialize language on page load
-    function initializeLanguage() {
-      setLanguageDirection(currentLanguage);
-      if (currentLanguage !== 'en') {
-        translatePage(currentLanguage);
-      }
-      
-      // Set active language option
-      document.querySelectorAll('.language-option').forEach(option => {
-        option.classList.remove('active');
-        if (option.getAttribute('data-lang') === currentLanguage) {
-          option.classList.add('active');
-        }
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["site_title", config.site_title || defaultConfig.site_title],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle]
+        ])
       });
     }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+    
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+    
+    themeToggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    });
+
+    // Designer/Service Provider Data
+    const designers = [
+      {
+        id: 1,
+        name: "Adunni Oshodi",
+        title: "Luxury Evening Wear Designer",
+        location: "Lagos, Nigeria",
+        experience: "12 years",
+        rating: 4.9,
+        reviews: 287,
+        avatar: "https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Evening Gowns", "Cocktail Dresses", "Red Carpet", "Luxury Ankara"],
+        priceRange: "₦180,000 - ₦850,000",
+        turnaround: "4-6 weeks",
+        description: "Award-winning designer specializing in luxury evening wear with intricate beadwork, Swarovski crystals, and premium African fabrics. Featured in Vogue Africa and Lagos Fashion Week.",
+        portfolio: ["Lagos Fashion Week 2023", "Miss Nigeria Official Designer", "Celebrity Red Carpet Events"],
+        services: ["Custom Evening Gowns", "Red Carpet Styling", "Bridal Party Coordination", "Fashion Consultation"],
+        phone: "+234 803 456 7890",
+        email: "adunni@oshodi-couture.com",
+        instagram: "@adunni_couture",
+        certifications: ["Fashion Institute of Technology Graduate", "LFDW Designer Award 2022"]
+      },
+      {
+        id: 2,
+        name: "Kwame Asante",
+        title: "Contemporary Menswear Designer",
+        location: "Accra, Ghana",
+        experience: "8 years",
+        rating: 4.8,
+        reviews: 156,
+        avatar: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Modern Kente Suits", "Business Casual", "Sustainable Fashion", "Unisex Designs"],
+        priceRange: "₦85,000 - ₦320,000",
+        turnaround: "3-4 weeks",
+        description: "Contemporary menswear designer blending traditional Ghanaian textiles with modern tailoring. Sustainable fashion advocate using eco-friendly materials and ethical production methods.",
+        portfolio: ["Ghana Fashion Week", "Sustainable Fashion Awards", "Corporate Uniform Design"],
+        services: ["Custom Suits", "Corporate Uniforms", "Sustainable Fashion Consulting", "Pattern Making"],
+        phone: "+233 24 567 8901",
+        email: "kwame@asante-designs.com",
+        instagram: "@kwame_asante_designs",
+        certifications: ["Central Saint Martins Graduate", "Sustainable Fashion Certificate"]
+      },
+      {
+        id: 3,
+        name: "Folake Adebayo",
+        title: "Traditional & Cultural Fashion Specialist",
+        location: "Ibadan, Nigeria",
+        experience: "15 years",
+        rating: 4.9,
+        reviews: 342,
+        avatar: "https://images.pexels.com/photos/3785078/pexels-photo-3785078.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Aso Oke", "Traditional Yoruba Wear", "Cultural Fusion", "Ceremonial Attire"],
+        priceRange: "₦65,000 - ₦450,000",
+        turnaround: "2-5 weeks",
+        description: "Master craftsperson preserving and modernizing traditional Yoruba fashion. Specializes in hand-woven Aso Oke, traditional ceremonies, and cultural fashion education.",
+        portfolio: ["Royal Family Commissions", "Cultural Heritage Projects", "International Fashion Exhibitions"],
+        services: ["Traditional Wedding Attire", "Cultural Ceremonies", "Fashion History Consulting", "Textile Weaving Workshops"],
+        phone: "+234 805 123 4567",
+        email: "folake@adebayo-heritage.com",
+        instagram: "@folake_heritage",
+        certifications: ["UNESCO Cultural Heritage Ambassador", "Master Weaver Certification"]
+      },
+      {
+        id: 4,
+        name: "Amina Kone",
+        title: "Bridal & Special Occasion Designer",
+        location: "Abuja, Nigeria",
+        experience: "10 years",
+        rating: 5.0,
+        reviews: 198,
+        avatar: "https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Wedding Dresses", "Bridesmaid Coordination", "Engagement Outfits", "Anniversary Celebrations"],
+        priceRange: "₦250,000 - ₦1,200,000",
+        turnaround: "8-12 weeks",
+        description: "Premier bridal designer creating dream wedding experiences. Combines European couture techniques with African elegance, offering complete bridal party coordination and styling services.",
+        portfolio: ["Celebrity Weddings", "Destination Wedding Specialist", "Bridal Fashion Shows"],
+        services: ["Custom Wedding Gowns", "Bridal Party Styling", "Wedding Planning Consultation", "Honeymoon Wardrobe"],
+        phone: "+234 809 876 5432",
+        email: "amina@kone-bridal.com",
+        instagram: "@amina_bridal_couture",
+        certifications: ["International Bridal Design Certificate", "Wedding Planning Certification"]
+      },
+      {
+        id: 5,
+        name: "Chinedu Okafor",
+        title: "Men's Formal Wear Specialist",
+        location: "Port Harcourt, Nigeria",
+        experience: "18 years",
+        rating: 4.8,
+        reviews: 267,
+        avatar: "https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Custom Suits", "Tuxedos", "Corporate Wear", "Formal Alterations"],
+        priceRange: "₦120,000 - ₦680,000",
+        turnaround: "4-6 weeks",
+        description: "Master tailor with nearly two decades of experience in men's formal wear. Trained in Savile Row techniques, specializing in perfectly fitted garments for executives and special occasions.",
+        portfolio: ["Corporate Executive Clients", "Government Officials", "Wedding Parties", "International Businessmen"],
+        services: ["Bespoke Tailoring", "Corporate Uniforms", "Formal Alterations", "Style Consultation"],
+        phone: "+234 803 234 5678",
+        email: "chinedu@okafor-tailoring.com",
+        instagram: "@chinedu_master_tailor",
+        certifications: ["Savile Row Training Certificate", "Master Tailor Guild Member"]
+      },
+      {
+        id: 6,
+        name: "Ama Serwaa",
+        title: "Haute Couture Designer",
+        location: "Kumasi, Ghana",
+        experience: "11 years",
+        rating: 4.9,
+        reviews: 134,
+        avatar: "https://images.pexels.com/photos/3785082/pexels-photo-3785082.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Haute Couture", "Art-to-Wear", "Avant-Garde", "Fashion Shows"],
+        priceRange: "₦400,000 - ₦1,800,000",
+        turnaround: "8-16 weeks",
+        description: "Visionary haute couture designer creating wearable art pieces that celebrate African heritage while pushing fashion boundaries. Regular participant in international fashion weeks.",
+        portfolio: ["Paris Fashion Week", "Milan Fashion Week", "Art Gallery Collaborations", "Museum Exhibitions"],
+        services: ["Haute Couture Creation", "Fashion Show Styling", "Art Collaborations", "Fashion Photography"],
+        phone: "+233 20 345 6789",
+        email: "ama@serwaa-couture.com",
+        instagram: "@ama_serwaa_couture",
+        certifications: ["École de la Chambre Syndicale Graduate", "International Fashion Designer Award"]
+      },
+      {
+        id: 7,
+        name: "Tunde Bakare",
+        title: "Streetwear & Urban Fashion Designer",
+        location: "Lagos, Nigeria",
+        experience: "6 years",
+        rating: 4.7,
+        reviews: 189,
+        avatar: "https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Streetwear", "Urban Fashion", "Youth Culture", "Brand Collaborations"],
+        priceRange: "₦35,000 - ₦180,000",
+        turnaround: "2-3 weeks",
+        description: "Young, dynamic designer capturing the pulse of African urban culture. Creates trendy streetwear that resonates with the youth while maintaining cultural authenticity.",
+        portfolio: ["Music Video Styling", "Celebrity Collaborations", "Youth Fashion Shows", "Brand Partnerships"],
+        services: ["Streetwear Design", "Brand Collaborations", "Music Video Styling", "Youth Fashion Consulting"],
+        phone: "+234 807 345 6789",
+        email: "tunde@bakare-streetwear.com",
+        instagram: "@tunde_streetwear",
+        certifications: ["Fashion Marketing Certificate", "Youth Culture Specialist"]
+      },
+      {
+        id: 8,
+        name: "Efua Mensah",
+        title: "Children's Fashion Designer",
+        location: "Cape Coast, Ghana",
+        experience: "9 years",
+        rating: 4.8,
+        reviews: 223,
+        avatar: "https://images.pexels.com/photos/3785078/pexels-photo-3785078.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Children's Wear", "School Uniforms", "Party Dresses", "Cultural Outfits"],
+        priceRange: "₦25,000 - ₦120,000",
+        turnaround: "2-4 weeks",
+        description: "Specialized children's fashion designer creating comfortable, stylish, and culturally rich clothing for kids. Focus on quality, safety, and age-appropriate designs.",
+        portfolio: ["School Uniform Contracts", "Children's Fashion Shows", "Celebrity Kids Styling", "Educational Institution Partnerships"],
+        services: ["Children's Custom Clothing", "School Uniform Design", "Party Outfit Creation", "Size Adjustment Services"],
+        phone: "+233 24 456 7890",
+        email: "efua@mensah-kids.com",
+        instagram: "@efua_kids_fashion",
+        certifications: ["Child Safety in Fashion Certificate", "Pediatric Clothing Specialist"]
+      },
+      {
+        id: 9,
+        name: "Segun Adeyemi",
+        title: "Agbada & Traditional Menswear Specialist",
+        location: "Kano, Nigeria",
+        experience: "20 years",
+        rating: 4.9,
+        reviews: 312,
+        avatar: "https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Agbada", "Babanriga", "Traditional Caps", "Ceremonial Wear"],
+        priceRange: "₦80,000 - ₦500,000",
+        turnaround: "3-6 weeks",
+        description: "Master craftsman with two decades of experience in traditional Nigerian menswear. Renowned for exquisite hand-embroidered Agbadas and authentic Northern Nigerian traditional wear.",
+        portfolio: ["Royal Commissions", "Political Leaders", "Traditional Rulers", "International Diplomats"],
+        services: ["Custom Agbada Creation", "Traditional Embroidery", "Ceremonial Outfit Design", "Cultural Fashion Education"],
+        phone: "+234 806 789 0123",
+        email: "segun@adeyemi-traditional.com",
+        instagram: "@segun_traditional_wear",
+        certifications: ["Master Embroiderer", "Traditional Craft Heritage Award"]
+      },
+      {
+        id: 10,
+        name: "Akosua Osei",
+        title: "Plus-Size Fashion Specialist",
+        location: "Takoradi, Ghana",
+        experience: "7 years",
+        rating: 4.8,
+        reviews: 167,
+        avatar: "https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Plus-Size Fashion", "Body Positive Design", "Comfort Wear", "Professional Attire"],
+        priceRange: "₦55,000 - ₦280,000",
+        turnaround: "3-5 weeks",
+        description: "Passionate advocate for inclusive fashion, specializing in beautiful, well-fitted clothing for plus-size women. Creates confidence-boosting designs that celebrate all body types.",
+        portfolio: ["Body Positive Fashion Shows", "Plus-Size Model Styling", "Corporate Plus-Size Collections", "Confidence Building Workshops"],
+        services: ["Plus-Size Custom Clothing", "Body Fitting Consultation", "Confidence Styling", "Size-Inclusive Design"],
+        phone: "+233 31 234 5678",
+        email: "akosua@osei-inclusive.com",
+        instagram: "@akosua_inclusive_fashion",
+        certifications: ["Body Positive Fashion Certificate", "Inclusive Design Specialist"]
+      },
+      {
+        id: 11,
+        name: "Emeka Nwankwo",
+        title: "Fashion Photographer & Stylist",
+        location: "Enugu, Nigeria",
+        experience: "12 years",
+        rating: 4.9,
+        reviews: 245,
+        avatar: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Fashion Photography", "Editorial Styling", "Brand Campaigns", "Portfolio Development"],
+        priceRange: "₦75,000 - ₦400,000",
+        turnaround: "1-2 weeks",
+        description: "Award-winning fashion photographer and stylist capturing the essence of African fashion. Specializes in editorial shoots, brand campaigns, and designer portfolio development.",
+        portfolio: ["Vogue Africa", "Elle Magazine", "Designer Lookbooks", "Fashion Week Coverage"],
+        services: ["Fashion Photography", "Editorial Styling", "Brand Campaign Creation", "Model Portfolio Development"],
+        phone: "+234 802 567 8901",
+        email: "emeka@nwankwo-visuals.com",
+        instagram: "@emeka_fashion_lens",
+        certifications: ["Professional Photography Certificate", "Fashion Styling Diploma"]
+      },
+      {
+        id: 12,
+        name: "Abena Asante",
+        title: "Textile Designer & Print Specialist",
+        location: "Ho, Ghana",
+        experience: "14 years",
+        rating: 4.8,
+        reviews: 198,
+        avatar: "https://images.pexels.com/photos/3785082/pexels-photo-3785082.jpeg?auto=compress&cs=tinysrgb&w=400",
+        coverImage: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=800",
+        specialties: ["Textile Design", "Print Creation", "Fabric Dyeing", "Pattern Development"],
+        priceRange: "₦45,000 - ₦250,000",
+        turnaround: "2-4 weeks",
+        description: "Master textile designer creating unique African-inspired prints and patterns. Combines traditional dyeing techniques with modern design principles to create stunning fabric collections.",
+        portfolio: ["International Fabric Collections", "Designer Collaborations", "Cultural Print Archives", "Sustainable Dyeing Projects"],
+        services: ["Custom Print Design", "Fabric Dyeing Services", "Pattern Development", "Textile Consulting"],
+        phone: "+233 36 345 6789",
+        email: "abena@asante-textiles.com",
+        instagram: "@abena_textile_art",
+        certifications: ["Textile Design Masters", "Sustainable Dyeing Certificate"]
+      }
+    ];
 
     // Sample Product Data
     const products = [
@@ -1069,6 +722,7 @@
         id: 1,
         name: "Premium Cotton Fabric - Navy Blue",
         category: "fabrics",
+        subcategory: "cotton",
         price: 18500,
         unit: "yard",
         moq: "10 yards",
@@ -1085,6 +739,7 @@
         id: 2,
         name: "Silk Chiffon - Elegant Drape",
         category: "fabrics",
+        subcategory: "silk",
         price: 26800,
         unit: "yard",
         moq: "5 yards",
@@ -1202,92 +857,6 @@
     let currentSort = 'featured';
     let currentUser = null;
 
-    // Config and SDK Setup
-    const defaultConfig = {
-      site_title: "Fashion Media",
-      hero_title: "Discover Premium Fashion Materials",
-      hero_subtitle: "Source quality fabrics, accessories & more from verified suppliers"
-    };
-
-    async function onConfigChange(config) {
-      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
-      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
-      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (config) => ({
-          recolorables: [],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ["site_title", config.site_title || defaultConfig.site_title],
-          ["hero_title", config.hero_title || defaultConfig.hero_title],
-          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle]
-        ])
-      });
-    }
-
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const html = document.documentElement;
-    
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
-    
-    themeToggle.addEventListener('click', () => {
-      const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-    });
-
-    // Language switcher event listeners
-    document.getElementById('language-toggle').addEventListener('click', (e) => {
-      e.stopPropagation();
-      const dropdown = document.getElementById('language-dropdown');
-      dropdown.classList.toggle('hidden');
-    });
-
-    // Language option selection
-    document.querySelectorAll('.language-option').forEach(option => {
-      option.addEventListener('click', function() {
-        const selectedLang = this.getAttribute('data-lang');
-        if (selectedLang !== currentLanguage) {
-          translatePage(selectedLang);
-        }
-        document.getElementById('language-dropdown').classList.add('hidden');
-      });
-    });
-
-    // Close language dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('#language-toggle') && !e.target.closest('#language-dropdown')) {
-        document.getElementById('language-dropdown').classList.add('hidden');
-      }
-    });
-
-    // Notification System
-    function showNotification(message, type = 'success') {
-      const notification = document.createElement('div');
-      notification.className = `notification ${type}`;
-      notification.textContent = message;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => notification.classList.add('show'), 100);
-      setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
-      }, 3000);
-    }
-
     // Sorting Functions
     function sortProducts(products, sortBy) {
       const sorted = [...products];
@@ -1297,6 +866,34 @@
           return sorted.sort((a, b) => a.price - b.price);
         case 'price-high':
           return sorted.sort((a, b) => b.price - a.price);
+        case 'newest':
+          return sorted.sort((a, b) => b.id - a.id);
+        case 'rating':
+          return sorted.sort((a, b) => b.rating - a.rating);
+        case 'popular':
+          return sorted.sort((a, b) => b.reviews - a.reviews);
+        case 'featured':
+        default:
+          return sorted;
+      }
+    }
+
+    function sortDesigners(designers, sortBy) {
+      const sorted = [...designers];
+      
+      switch(sortBy) {
+        case 'price-low':
+          return sorted.sort((a, b) => {
+            const aPrice = parseInt(a.priceRange.split(' - ')[0].replace(/[₦,]/g, ''));
+            const bPrice = parseInt(b.priceRange.split(' - ')[0].replace(/[₦,]/g, ''));
+            return aPrice - bPrice;
+          });
+        case 'price-high':
+          return sorted.sort((a, b) => {
+            const aPrice = parseInt(a.priceRange.split(' - ')[1].replace(/[₦,]/g, ''));
+            const bPrice = parseInt(b.priceRange.split(' - ')[1].replace(/[₦,]/g, ''));
+            return bPrice - aPrice;
+          });
         case 'newest':
           return sorted.sort((a, b) => b.id - a.id);
         case 'rating':
@@ -1326,6 +923,148 @@
       }
       
       return starsHTML;
+    }
+
+    // Render Services (Designers)
+    function renderServices(serviceFilter = 'all') {
+      const grid = document.getElementById('products-grid');
+      
+      let filteredDesigners = designers;
+      
+      // Filter designers based on service type
+      if (serviceFilter !== 'all') {
+        switch(serviceFilter) {
+          case 'evening-wear':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('evening') || s.toLowerCase().includes('gown') || s.toLowerCase().includes('cocktail'))
+            );
+            break;
+          case 'bridal':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('bridal') || s.toLowerCase().includes('wedding'))
+            );
+            break;
+          case 'mens-tailoring':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('suit') || s.toLowerCase().includes('tuxedo') || s.toLowerCase().includes('business') || s.toLowerCase().includes('formal') || s.toLowerCase().includes('agbada'))
+            );
+            break;
+          case 'contemporary':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('streetwear') || s.toLowerCase().includes('casual') || s.toLowerCase().includes('contemporary') || s.toLowerCase().includes('sustainable') || s.toLowerCase().includes('urban'))
+            );
+            break;
+          case 'cultural':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('african') || s.toLowerCase().includes('traditional') || s.toLowerCase().includes('cultural') || s.toLowerCase().includes('aso') || s.toLowerCase().includes('yoruba'))
+            );
+            break;
+          case 'haute-couture':
+            filteredDesigners = designers.filter(d => 
+              d.specialties.some(s => s.toLowerCase().includes('couture') || s.toLowerCase().includes('art') || s.toLowerCase().includes('avant'))
+            );
+            break;
+        }
+      }
+      
+      // Apply sorting
+      filteredDesigners = sortDesigners(filteredDesigners, currentSort);
+      
+      if (filteredDesigners.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-12"><p class="text-secondary text-lg">No designers found in this category.</p></div>';
+        return;
+      }
+      
+      const isListView = document.getElementById('list-view-btn').classList.contains('active');
+      
+      if (isListView) {
+        grid.className = 'space-y-4';
+        grid.innerHTML = filteredDesigners.map(designer => `
+          <div class="product-card rounded-xl overflow-hidden shadow-md relative cursor-pointer flex bg-card border border-custom" onclick="openServiceModal(${designer.id})">
+            <div class="relative w-32 h-32 bg-secondary flex-shrink-0">
+              <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <img src="${designer.avatar}" alt="${designer.name}" class="absolute bottom-2 left-2 w-8 h-8 rounded-full border-2 border-white">
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="font-semibold text-primary mb-1">${designer.name}</h4>
+                <p class="text-xs text-secondary mb-1">${designer.title}</p>
+                <p class="text-xs text-secondary mb-2">${designer.location} • ${designer.experience} experience</p>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-sm mr-1">
+                    ${renderStars(designer.rating)}
+                  </div>
+                  <span class="text-xs text-secondary">(${designer.reviews} reviews)</span>
+                </div>
+                <div class="flex flex-wrap gap-1 mb-2">
+                  ${designer.specialties.slice(0, 3).map(specialty => 
+                    `<span class="text-xs bg-secondary text-primary px-2 py-1 rounded">${specialty}</span>`
+                  ).join('')}
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-sm font-bold text-primary">${designer.priceRange}</span>
+                  <p class="text-xs text-secondary">${designer.turnaround}</p>
+                </div>
+                <button 
+                  onclick="event.stopPropagation(); requestService(${designer.id})" 
+                  class="accent-bg text-white px-4 py-2 rounded-lg font-semibold transition-all text-sm"
+                >
+                  Request Service
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6';
+        grid.innerHTML = filteredDesigners.map(designer => `
+          <div class="product-card rounded-xl overflow-hidden shadow-md relative cursor-pointer" onclick="openServiceModal(${designer.id})">
+            <div class="relative h-40 bg-secondary">
+              <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <div class="flex items-center space-x-3">
+                  <img src="${designer.avatar}" alt="${designer.name}" class="w-10 h-10 rounded-full border-2 border-white">
+                  <div>
+                    <h4 class="font-semibold text-white text-sm">${designer.name}</h4>
+                    <p class="text-white/80 text-xs">${designer.location}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3">
+              <h4 class="font-semibold text-primary mb-1 text-sm line-clamp-2">${designer.title}</h4>
+              <div class="flex items-center mb-2">
+                <div class="flex text-xs mr-1">
+                  ${renderStars(designer.rating)}
+                </div>
+                <span class="text-xs text-secondary">(${designer.reviews})</span>
+              </div>
+              <div class="flex flex-wrap gap-1 mb-3">
+                ${designer.specialties.slice(0, 2).map(specialty => 
+                  `<span class="text-xs bg-secondary text-primary px-2 py-1 rounded">${specialty}</span>`
+                ).join('')}
+                ${designer.specialties.length > 2 ? `<span class="text-xs text-secondary">+${designer.specialties.length - 2}</span>` : ''}
+              </div>
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-sm font-bold text-primary">${designer.priceRange}</span>
+                  <p class="text-xs text-secondary">${designer.turnaround}</p>
+                </div>
+              </div>
+              <button 
+                onclick="event.stopPropagation(); requestService(${designer.id})" 
+                class="w-full accent-bg text-white py-2 rounded-lg font-semibold transition-all text-sm"
+              >
+                Request Service
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
     }
 
     // Render Products
@@ -1561,60 +1300,6 @@
       }
     }
 
-    // Open Product Modal
-    function openProductModal(productId) {
-      const product = products.find(p => p.id === productId);
-      const modal = document.getElementById('product-modal');
-      const content = document.getElementById('product-modal-content');
-      
-      content.innerHTML = `
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="relative">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-80 object-cover rounded-lg">
-            ${product.badge ? `<span class="badge ${product.badgeColor}">${product.badge}</span>` : ''}
-          </div>
-          <div>
-            <h2 class="text-2xl font-bold text-primary mb-2">${product.name}</h2>
-            <p class="text-secondary mb-4">${product.vendor}</p>
-            
-            <div class="flex items-center mb-4">
-              <div class="flex text-lg mr-2">
-                ${renderStars(product.rating)}
-              </div>
-              <span class="text-secondary">(${product.reviews} reviews)</span>
-            </div>
-            
-            <div class="mb-4">
-              <span class="text-3xl font-bold text-primary">₦${product.price.toLocaleString()}</span>
-              <span class="text-secondary">/${product.unit}</span>
-            </div>
-            
-            <p class="text-secondary mb-4">Minimum Order: ${product.moq}</p>
-            
-            <p class="text-primary mb-4">${product.description}</p>
-            
-            <div class="bg-secondary p-4 rounded-lg mb-6">
-              <h4 class="font-semibold text-primary mb-2">Product Details</h4>
-              <p class="text-sm text-secondary">${product.details}</p>
-            </div>
-            
-            <div class="flex space-x-4">
-              <button onclick="addToCart(${product.id})" class="flex-1 accent-bg text-white py-3 rounded-lg font-semibold transition-all">
-                Add to Cart
-              </button>
-              <button onclick="toggleWishlist(${product.id})" class="px-6 py-3 border border-custom rounded-lg hover:bg-secondary transition-all">
-                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-      
-      modal.classList.remove('hidden');
-    }
-
     // Navigation
     const productsNavBtn = document.getElementById('products-nav-btn');
     const servicesNavBtn = document.getElementById('services-nav-btn');
@@ -1675,161 +1360,9 @@
       } else {
         servicesNavBtn.classList.add('active');
         document.getElementById('products-title').textContent = 'Design Services';
-        // renderServices('all'); // Services functionality would go here
+        renderServices('all');
       }
     }
-
-    // Category option handlers
-    document.querySelectorAll('.category-option').forEach(option => {
-      option.addEventListener('click', function() {
-        const category = this.dataset.category;
-        
-        closeAllDropdowns();
-        currentCategory = category;
-        
-        const productsTitle = document.getElementById('products-title');
-        if (category === 'all') {
-          productsTitle.textContent = 'Featured Products';
-        } else {
-          productsTitle.textContent = this.textContent.trim();
-        }
-        
-        renderProducts(category);
-      });
-    });
-
-    // Mobile Navigation
-    const mobileProductsBtn = document.getElementById('mobile-products-btn');
-    const mobileServicesBtn = document.getElementById('mobile-services-btn');
-    const mobileCategoryBtn = document.getElementById('mobile-category-btn');
-    const mobileCategoryMenu = document.getElementById('mobile-category-menu');
-
-    mobileProductsBtn.addEventListener('click', () => {
-      switchToMobileSection('products');
-    });
-
-    mobileServicesBtn.addEventListener('click', () => {
-      switchToMobileSection('services');
-    });
-
-    function switchToMobileSection(section) {
-      currentSection = section;
-      
-      // Update mobile nav buttons
-      document.querySelectorAll('.main-nav-btn').forEach(b => b.classList.remove('active'));
-      if (section === 'products') {
-        mobileProductsBtn.classList.add('active');
-        document.getElementById('mobile-category-text').textContent = '🏪 All Products';
-        document.getElementById('products-title').textContent = 'Featured Products';
-        populateMobileCategories('products');
-        renderProducts('all');
-      } else {
-        mobileServicesBtn.classList.add('active');
-        document.getElementById('mobile-category-text').textContent = '👗 All Services';
-        document.getElementById('products-title').textContent = 'Design Services';
-        populateMobileCategories('services');
-        // renderServices('all'); // Services functionality would go here
-      }
-    }
-
-    function populateMobileCategories(section) {
-      const mobileMenu = document.getElementById('mobile-category-menu');
-      
-      if (section === 'products') {
-        mobileMenu.innerHTML = `
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all">
-            🏪 All Products
-          </button>
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics">
-            🧵 Fabrics
-          </button>
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories">
-            💎 Accessories
-          </button>
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons">
-            🔘 Buttons & Zippers
-          </button>
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace">
-            🎀 Lace & Trims
-          </button>
-          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools">
-            ✂️ Tools & Notions
-          </button>
-        `;
-      } else {
-        mobileMenu.innerHTML = `
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="all">
-            👗 All Services
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="evening-wear">
-            🌟 Evening Wear
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="bridal">
-            👰 Bridal
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="mens-tailoring">
-            🤵 Men's Tailoring
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="contemporary">
-            🎨 Contemporary
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="cultural">
-            🌍 Cultural
-          </button>
-          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-service="haute-couture">
-            ✨ Haute Couture
-          </button>
-        `;
-      }
-      
-      // Add event listeners to mobile category options
-      document.querySelectorAll('.mobile-category-option').forEach(option => {
-        option.addEventListener('click', function() {
-          const category = this.dataset.category;
-          document.getElementById('mobile-category-text').textContent = this.textContent.trim();
-          mobileCategoryMenu.classList.add('hidden');
-          renderProducts(category);
-        });
-      });
-    }
-
-    // Mobile category dropdown
-    mobileCategoryBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mobileCategoryMenu.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', () => {
-      mobileCategoryMenu.classList.add('hidden');
-    });
-
-    // Mobile search toggle
-    document.getElementById('mobile-search-btn').addEventListener('click', () => {
-      const searchBar = document.getElementById('mobile-search-bar');
-      searchBar.classList.toggle('hidden');
-      if (!searchBar.classList.contains('hidden')) {
-        document.getElementById('mobile-search-input').focus();
-      }
-    });
-
-    // View toggle buttons
-    document.getElementById('grid-view-btn').addEventListener('click', function() {
-      document.getElementById('list-view-btn').classList.remove('active');
-      this.classList.add('active');
-      renderProducts(currentCategory);
-    });
-
-    document.getElementById('list-view-btn').addEventListener('click', function() {
-      document.getElementById('grid-view-btn').classList.remove('active');
-      this.classList.add('active');
-      renderProducts(currentCategory);
-    });
-
-    // Sort select
-    document.getElementById('sort-select').addEventListener('change', function() {
-      currentSort = this.value;
-      renderProducts(currentCategory);
-    });
 
     // Wishlist Sidebar Controls
     const wishlistBtn = document.getElementById('wishlist-btn');
@@ -1871,17 +1404,6 @@
     cartOverlay.addEventListener('click', () => {
       cartSidebar.classList.add('translate-x-full');
       cartOverlay.classList.add('hidden');
-    });
-
-    // Product Modal Controls
-    document.getElementById('close-product-modal').addEventListener('click', () => {
-      document.getElementById('product-modal').classList.add('hidden');
-    });
-
-    document.getElementById('product-modal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('product-modal')) {
-        document.getElementById('product-modal').classList.add('hidden');
-      }
     });
 
     // Auth Modal Controls
@@ -2075,16 +1597,846 @@
       }
     }
 
-    // Initialize the application
-    function init() {
-      initializeLanguage();
-      renderProducts('all');
-      updateCart();
-      updateWishlist();
+    // Category option handlers
+    document.querySelectorAll('.category-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const category = this.dataset.category;
+        
+        closeAllDropdowns();
+        currentCategory = category;
+        
+        const productsTitle = document.getElementById('products-title');
+        if (category === 'all') {
+          productsTitle.textContent = 'Featured Products';
+        } else {
+          productsTitle.textContent = this.textContent.trim();
+        }
+        
+        renderProducts(category);
+      });
+    });
+
+    // Service option handlers
+    document.querySelectorAll('.service-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const service = this.dataset.service;
+        
+        closeAllDropdowns();
+        currentService = service;
+        
+        const productsTitle = document.getElementById('products-title');
+        if (service === 'all') {
+          productsTitle.textContent = 'Design Services';
+        } else {
+          productsTitle.textContent = this.textContent.trim();
+        }
+        
+        renderServices(service);
+      });
+    });
+
+    // Mobile Navigation
+    const mobileProductsBtn = document.getElementById('mobile-products-btn');
+    const mobileServicesBtn = document.getElementById('mobile-services-btn');
+    const mobileCategoryBtn = document.getElementById('mobile-category-btn');
+    const mobileCategoryMenu = document.getElementById('mobile-category-menu');
+
+    mobileProductsBtn.addEventListener('click', () => {
+      switchToMobileSection('products');
+    });
+
+    mobileServicesBtn.addEventListener('click', () => {
+      switchToMobileSection('services');
+    });
+
+    function switchToMobileSection(section) {
+      currentSection = section;
+      
+      // Update mobile nav buttons
+      document.querySelectorAll('.mobile-main-nav-btn').forEach(b => b.classList.remove('active'));
+      if (section === 'products') {
+        mobileProductsBtn.classList.add('active');
+        document.getElementById('mobile-category-text').textContent = '🏪 All Products';
+        document.getElementById('products-title').textContent = 'Featured Products';
+        populateMobileCategories('products');
+        renderProducts('all');
+      } else {
+        mobileServicesBtn.classList.add('active');
+        document.getElementById('mobile-category-text').textContent = '👗 All Services';
+        document.getElementById('products-title').textContent = 'Design Services';
+        populateMobileCategories('services');
+        renderServices('all');
+      }
     }
 
-    // Start the application
-    init();
+    function populateMobileCategories(section) {
+      const mobileMenu = document.getElementById('mobile-category-menu');
+      
+      if (section === 'products') {
+        mobileMenu.innerHTML = `
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all">
+            🏪 All Products
+          </button>
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics">
+            🧵 Fabrics
+          </button>
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories">
+            💎 Accessories
+          </button>
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons">
+            🔘 Buttons & Zippers
+          </button>
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace">
+            🎀 Lace & Trims
+          </button>
+          <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools">
+            ✂️ Tools & Notions
+          </button>
+        `;
+      } else {
+        mobileMenu.innerHTML = `
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="all">
+            👗 All Services
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="evening-wear">
+            🌟 Evening Wear
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="bridal">
+            👰 Bridal
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="mens-tailoring">
+            🤵 Men's Tailoring
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="contemporary">
+            🎨 Contemporary
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-service="cultural">
+            🌍 Cultural
+          </button>
+          <button class="mobile-service-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-service="haute-couture">
+            ✨ Haute Couture
+          </button>
+        `;
+      }
+      
+      addMobileCategoryListeners();
+    }
+
+    function addMobileCategoryListeners() {
+      document.querySelectorAll('.mobile-category-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const category = this.dataset.category;
+          const text = this.textContent.trim();
+          
+          document.getElementById('mobile-category-text').textContent = text;
+          closeMobileMenu();
+          
+          currentCategory = category;
+          
+          const productsTitle = document.getElementById('products-title');
+          if (category === 'all') {
+            productsTitle.textContent = 'Featured Products';
+          } else {
+            productsTitle.textContent = text;
+          }
+          
+          renderProducts(category);
+        });
+      });
+
+      document.querySelectorAll('.mobile-service-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const service = this.dataset.service;
+          const text = this.textContent.trim();
+          
+          document.getElementById('mobile-category-text').textContent = text;
+          closeMobileMenu();
+          
+          currentService = service;
+          
+          const productsTitle = document.getElementById('products-title');
+          if (service === 'all') {
+            productsTitle.textContent = 'Design Services';
+          } else {
+            productsTitle.textContent = text;
+          }
+          
+          renderServices(service);
+        });
+      });
+    }
+
+    function closeMobileMenu() {
+      mobileCategoryMenu.classList.add('hidden');
+      document.getElementById('mobile-category-arrow').classList.remove('rotate-180');
+    }
+
+    // Mobile category dropdown
+    mobileCategoryBtn.addEventListener('click', () => {
+      mobileCategoryMenu.classList.toggle('hidden');
+      document.getElementById('mobile-category-arrow').classList.toggle('rotate-180');
+    });
+
+    // Mobile search
+    const mobileSearchBtn = document.getElementById('mobile-search-btn');
+    const mobileSearchBar = document.getElementById('mobile-search-bar');
+
+    mobileSearchBtn.addEventListener('click', () => {
+      mobileSearchBar.classList.toggle('hidden');
+    });
+
+    // Notification System
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+      notification.className = `fixed top-20 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-sm`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+    // Service Modal Functions
+    function openServiceModal(designerId) {
+      const designer = designers.find(d => d.id === designerId);
+      if (!designer) return;
+      
+      const modal = document.getElementById('product-modal');
+      const content = document.getElementById('product-modal-content');
+      
+      // Generate sample client testimonials
+      const sampleTestimonials = [
+        { name: "Kemi Adebayo", rating: 5, comment: "Absolutely stunning work! The attention to detail was incredible.", date: "2 weeks ago", service: "Wedding Gown" },
+        { name: "Tolu Ogundimu", rating: 5, comment: "Professional service and beautiful results. Highly recommend!", date: "1 month ago", service: "Corporate Wear" },
+        { name: "Chioma Okwu", rating: 4, comment: "Great experience working with this designer. Will definitely return.", date: "3 weeks ago", service: "Evening Dress" },
+        { name: "Yemi Adesanya", rating: 5, comment: "Exceeded all expectations. The craftsmanship is outstanding.", date: "2 months ago", service: "Traditional Outfit" }
+      ];
+      
+      // Generate sample previous works
+      const sampleWorks = [
+        {
+          id: 1,
+          image: "https://images.pexels.com/photos/6567625/pexels-photo-6567625.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Evening Gown",
+          description: "Custom beaded evening gown for red carpet event",
+          projectTitle: "Lagos Fashion Week 2023",
+          date: "March 2023",
+          availableForPurchase: true,
+          productId: 1
+        },
+        {
+          id: 2,
+          image: "https://images.pexels.com/photos/6567615/pexels-photo-6567615.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Wedding Dress",
+          description: "Traditional Yoruba wedding dress with modern touches",
+          projectTitle: "Adunni & Kemi Wedding",
+          date: "February 2023",
+          availableForPurchase: false,
+          productId: null
+        },
+        {
+          id: 3,
+          image: "https://images.pexels.com/photos/6567611/pexels-photo-6567611.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Corporate Wear",
+          description: "Professional blazer set for executive client",
+          projectTitle: "Executive Collection",
+          date: "January 2023",
+          availableForPurchase: true,
+          productId: 2
+        },
+        {
+          id: 4,
+          image: "https://images.pexels.com/photos/6567608/pexels-photo-6567608.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Cocktail Dress",
+          description: "Elegant cocktail dress for charity gala",
+          projectTitle: "Charity Gala Collection",
+          date: "December 2022",
+          availableForPurchase: true,
+          productId: 3
+        },
+        {
+          id: 5,
+          image: "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Men's Suit",
+          description: "Bespoke three-piece suit with Ankara accents",
+          projectTitle: "Cultural Fusion Series",
+          date: "November 2022",
+          availableForPurchase: false,
+          productId: null
+        },
+        {
+          id: 6,
+          image: "https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=400",
+          serviceType: "Traditional Wear",
+          description: "Hand-embroidered Agbada for cultural ceremony",
+          projectTitle: "Heritage Collection",
+          date: "October 2022",
+          availableForPurchase: true,
+          productId: 4
+        }
+      ];
+      
+      content.innerHTML = `
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Designer Image & Info -->
+          <div class="relative">
+            <div class="relative h-96 rounded-lg overflow-hidden">
+              <img src="${designer.coverImage}" alt="${designer.name}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <div class="flex items-center space-x-4">
+                  <img src="${designer.avatar}" alt="${designer.name}" class="w-16 h-16 rounded-full border-3 border-white">
+                  <div>
+                    <h3 class="text-xl font-bold text-white">${designer.name}</h3>
+                    <p class="text-white/90">${designer.location}</p>
+                    <p class="text-white/80 text-sm">${designer.experience} experience</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Service Details -->
+          <div class="space-y-6">
+            <div>
+              <h2 class="text-2xl font-bold text-primary mb-2">${designer.title}</h2>
+              <p class="text-secondary mb-4">${designer.description}</p>
+              
+              <!-- Rating and Reviews -->
+              <div class="flex items-center mb-4">
+                <div class="flex text-lg mr-2">
+                  ${renderStars(designer.rating)}
+                </div>
+                <span class="text-lg font-semibold text-primary mr-2">${designer.rating}</span>
+                <span class="text-secondary">(${designer.reviews} reviews)</span>
+              </div>
+              
+              <!-- Specialties -->
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary mb-2">Specialties</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${designer.specialties.map(specialty => 
+                    `<span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">${specialty}</span>`
+                  ).join('')}
+                </div>
+              </div>
+              
+              <!-- Pricing & Timeline -->
+              <div class="bg-secondary rounded-lg p-4 mb-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="font-semibold text-primary mb-1">Price Range</h4>
+                    <p class="text-lg font-bold text-primary">${designer.priceRange}</p>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-primary mb-1">Turnaround</h4>
+                    <p class="text-primary">${designer.turnaround}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Contact Information -->
+              <div class="bg-card border border-custom rounded-lg p-4 mb-6">
+                <h4 class="font-semibold text-primary mb-3">Contact Information</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-secondary">📞</span>
+                    <span class="text-primary">${designer.phone}</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-secondary">✉️</span>
+                    <span class="text-primary">${designer.email}</span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-secondary">📱</span>
+                    <span class="text-primary">${designer.instagram}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Action Buttons -->
+              <div class="space-y-3">
+                <button 
+                  onclick="requestService(${designer.id})" 
+                  class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"
+                >
+                  Request Service
+                </button>
+                <button class="w-full border-2 border-custom text-primary py-3 rounded-lg font-semibold transition-all hover:bg-secondary">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Service Details Tabs -->
+        <div class="mt-8 border-t border-custom pt-8">
+          <div class="flex flex-wrap gap-4 sm:gap-8 mb-6">
+            <button class="tab-btn active text-primary font-semibold border-b-2 border-primary pb-2" data-tab="portfolio">
+              Portfolio & Experience
+            </button>
+            <button class="tab-btn text-secondary font-semibold pb-2" data-tab="previous-works">
+              Previous Works
+            </button>
+            <button class="tab-btn text-secondary font-semibold pb-2" data-tab="services">
+              Services Offered
+            </button>
+            <button class="tab-btn text-secondary font-semibold pb-2" data-tab="testimonials">
+              Client Reviews (${designer.reviews})
+            </button>
+          </div>
+          
+          <!-- Portfolio Tab -->
+          <div id="portfolio-tab" class="tab-content">
+            <div class="bg-secondary rounded-lg p-6">
+              <h4 class="font-semibold text-primary mb-4">Portfolio Highlights</h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold text-primary mb-3">Notable Projects</h5>
+                  <ul class="text-secondary space-y-2">
+                    ${designer.portfolio.map(project => `<li>• ${project}</li>`).join('')}
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-primary mb-3">Certifications & Awards</h5>
+                  <ul class="text-secondary space-y-2">
+                    ${designer.certifications.map(cert => `<li>• ${cert}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Previous Works Tab -->
+          <div id="previous-works-tab" class="tab-content hidden">
+            <div class="space-y-6">
+              <div class="bg-secondary rounded-lg p-6">
+                <h4 class="font-semibold text-primary mb-4">Recent Completed Projects</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  ${sampleWorks.map(work => `
+                    <div class="bg-card border border-custom rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                      <div class="flex flex-col sm:flex-row">
+                        <!-- Work Image -->
+                        <div class="relative w-full sm:w-32 h-32 bg-secondary flex-shrink-0">
+                          <img src="${work.image}" alt="${work.serviceType}" class="w-full h-full object-cover">
+                          <div class="absolute top-2 left-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">${work.serviceType}</span>
+                          </div>
+                        </div>
+                        
+                        <!-- Work Details -->
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                          <div>
+                            <h5 class="font-semibold text-primary mb-1 text-sm">${work.projectTitle}</h5>
+                            <p class="text-secondary text-xs mb-2">${work.description}</p>
+                            <p class="text-secondary text-xs mb-3">${work.date}</p>
+                          </div>
+                          
+                          <!-- Action Button -->
+                          <div class="flex justify-end">
+                            ${work.availableForPurchase 
+                              ? `<button 
+                                  onclick="viewSampleProduct(${work.productId})" 
+                                  class="text-xs accent-bg text-white px-3 py-1.5 rounded-lg font-semibold transition-all hover:opacity-90"
+                                >
+                                  View Product
+                                </button>`
+                              : `<button 
+                                  onclick="requestSimilarService(${designer.id}, '${work.serviceType}')" 
+                                  class="text-xs border border-custom text-primary px-3 py-1.5 rounded-lg font-semibold transition-all hover:bg-secondary"
+                                >
+                                  Request Similar
+                                </button>`
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Services Tab -->
+          <div id="services-tab" class="tab-content hidden">
+            <div class="bg-secondary rounded-lg p-6">
+              <h4 class="font-semibold text-primary mb-4">Services Offered</h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                ${designer.services.map(service => `
+                  <div class="bg-card border border-custom rounded-lg p-4">
+                    <h5 class="font-semibold text-primary mb-2">${service}</h5>
+                    <p class="text-secondary text-sm">Professional ${service.toLowerCase()} with attention to detail and quality craftsmanship.</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonials Tab -->
+          <div id="testimonials-tab" class="tab-content hidden">
+            <div class="space-y-6">
+              ${sampleTestimonials.map(testimonial => `
+                <div class="bg-secondary rounded-lg p-6">
+                  <div class="flex justify-between items-start mb-3">
+                    <div>
+                      <h5 class="font-semibold text-primary">${testimonial.name}</h5>
+                      <p class="text-xs text-secondary mb-1">${testimonial.service} • ${testimonial.date}</p>
+                      <div class="flex items-center">
+                        <div class="flex text-sm mr-2">
+                          ${renderStars(testimonial.rating)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-secondary">${testimonial.comment}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Add tab functionality
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tabName = this.dataset.tab;
+          
+          // Update tab buttons
+          document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('active', 'text-primary', 'border-primary');
+            b.classList.add('text-secondary');
+          });
+          this.classList.add('active', 'text-primary', 'border-primary');
+          this.classList.remove('text-secondary');
+          
+          // Update tab content
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.add('hidden');
+          });
+          document.getElementById(tabName + '-tab').classList.remove('hidden');
+        });
+      });
+      
+      modal.classList.remove('hidden');
+    }
+
+    function requestService(designerId) {
+      const designer = designers.find(d => d.id === designerId);
+      if (designer) {
+        showNotification(`Service request sent to ${designer.name}! They will contact you soon.`, 'success');
+      }
+    }
+
+    function viewSampleProduct(productId) {
+      // Close the service modal first
+      document.getElementById('product-modal').classList.add('hidden');
+      
+      // Switch to products section
+      switchToSection('products');
+      
+      // Open the product modal
+      setTimeout(() => {
+        openProductModal(productId);
+      }, 300);
+      
+      showNotification('Viewing related product from designer portfolio', 'success');
+    }
+
+    function requestSimilarService(designerId, serviceType) {
+      const designer = designers.find(d => d.id === designerId);
+      if (designer) {
+        showNotification(`Request sent to ${designer.name} for similar ${serviceType} service!`, 'success');
+      }
+    }
+
+    // Product Modal Functions
+    function openProductModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      const modal = document.getElementById('product-modal');
+      const content = document.getElementById('product-modal-content');
+      
+      // Generate sample reviews
+      const sampleReviews = [
+        { name: "Sarah M.", rating: 5, comment: "Excellent quality fabric! Perfect for my dress project.", date: "2 weeks ago" },
+        { name: "Mike R.", rating: 4, comment: "Good material, fast shipping. Will order again.", date: "1 month ago" },
+        { name: "Lisa K.", rating: 5, comment: "Beautiful texture and color. Highly recommended!", date: "3 weeks ago" },
+        { name: "David L.", rating: 4, comment: "Great value for money. Professional quality.", date: "2 months ago" }
+      ];
+      
+      content.innerHTML = `
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Product Image -->
+          <div class="relative">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-96 object-cover rounded-lg">
+            <button 
+              onclick="toggleWishlist(${product.id})" 
+              class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white bg-opacity-90 flex items-center justify-center hover:bg-opacity-100 transition-all wishlist-heart"
+              data-product-id="${product.id}"
+            >
+              <svg class="w-6 h-6 text-gray-400 hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </button>
+            ${product.badge ? `<span class="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-semibold ${product.badgeColor}">${product.badge}</span>` : ''}
+          </div>
+          
+          <!-- Product Details -->
+          <div class="space-y-6">
+            <div>
+              <h2 class="text-2xl font-bold text-primary mb-2">${product.name}</h2>
+              <p class="text-secondary mb-4">${product.description}</p>
+              
+              <!-- Rating and Reviews -->
+              <div class="flex items-center mb-4">
+                <div class="flex text-lg mr-2">
+                  ${renderStars(product.rating)}
+                </div>
+                <span class="text-lg font-semibold text-primary mr-2">${product.rating}</span>
+                <span class="text-secondary">(${product.reviews} reviews)</span>
+              </div>
+              
+              <!-- Vendor Info -->
+              <div class="bg-secondary rounded-lg p-4 mb-4">
+                <h4 class="font-semibold text-primary mb-1">Sold by</h4>
+                <p class="text-primary font-medium">${product.vendor}</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-sm text-secondary">Verified Supplier</span>
+                  <svg class="w-4 h-4 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Price and MOQ -->
+              <div class="bg-card border border-custom rounded-lg p-4 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                  <div>
+                    <span class="text-3xl font-bold text-primary">₦${product.price.toLocaleString()}</span>
+                    <span class="text-secondary">/${product.unit}</span>
+                  </div>
+                </div>
+                <p class="text-sm text-secondary mb-4">Minimum Order Quantity: ${product.moq}</p>
+                
+                <!-- Quantity Selector -->
+                <div class="flex items-center space-x-4 mb-4">
+                  <label class="text-sm font-semibold text-primary">Quantity:</label>
+                  <div class="flex items-center border border-custom rounded-lg">
+                    <button onclick="decreaseQuantity()" class="px-3 py-2 text-primary hover:bg-secondary">-</button>
+                    <input type="number" id="modal-quantity" value="10" min="1" class="w-20 px-3 py-2 text-center border-0 focus:outline-none">
+                    <button onclick="increaseQuantity()" class="px-3 py-2 text-primary hover:bg-secondary">+</button>
+                  </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="space-y-3">
+                  <button 
+                    onclick="addToCartFromModal(${product.id})" 
+                    class="w-full accent-bg text-white py-3 rounded-lg font-semibold transition-all"
+                  >
+                    Add to Cart
+                  </button>
+                  <button class="w-full border-2 border-custom text-primary py-3 rounded-lg font-semibold transition-all hover:bg-secondary">
+                    Request Quote
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Details Tabs -->
+        <div class="mt-8 border-t border-custom pt-8">
+          <div class="flex space-x-8 mb-6">
+            <button class="tab-btn active text-primary font-semibold border-b-2 border-primary pb-2" data-tab="details">
+              Product Details
+            </button>
+            <button class="tab-btn text-secondary font-semibold pb-2" data-tab="reviews">
+              Reviews (${product.reviews})
+            </button>
+          </div>
+          
+          <!-- Details Tab -->
+          <div id="details-tab" class="tab-content">
+            <div class="bg-secondary rounded-lg p-6">
+              <h4 class="font-semibold text-primary mb-4">Specifications</h4>
+              <p class="text-secondary mb-4">${product.details}</p>
+              
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold text-primary mb-2">Features</h5>
+                  <ul class="text-secondary space-y-1">
+                    <li>• Premium quality materials</li>
+                    <li>• Professional grade</li>
+                    <li>• Fast shipping available</li>
+                    <li>• Bulk discounts available</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-primary mb-2">Applications</h5>
+                  <ul class="text-secondary space-y-1">
+                    <li>• Fashion design</li>
+                    <li>• Home textiles</li>
+                    <li>• Craft projects</li>
+                    <li>• Professional tailoring</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Reviews Tab -->
+          <div id="reviews-tab" class="tab-content hidden">
+            <div class="space-y-6">
+              ${sampleReviews.map(review => `
+                <div class="bg-secondary rounded-lg p-6">
+                  <div class="flex justify-between items-start mb-3">
+                    <div>
+                      <h5 class="font-semibold text-primary">${review.name}</h5>
+                      <div class="flex items-center">
+                        <div class="flex text-sm mr-2">
+                          ${renderStars(review.rating)}
+                        </div>
+                        <span class="text-xs text-secondary">${review.date}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-secondary">${review.comment}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Update wishlist heart state
+      updateModalWishlistHeart(productId);
+      
+      // Add tab functionality
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tabName = this.dataset.tab;
+          
+          // Update tab buttons
+          document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('active', 'text-primary', 'border-primary');
+            b.classList.add('text-secondary');
+          });
+          this.classList.add('active', 'text-primary', 'border-primary');
+          this.classList.remove('text-secondary');
+          
+          // Update tab content
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.add('hidden');
+          });
+          document.getElementById(tabName + '-tab').classList.remove('hidden');
+        });
+      });
+      
+      modal.classList.remove('hidden');
+    }
+
+    function updateModalWishlistHeart(productId) {
+      const isInWishlist = wishlist.some(item => item.id === productId);
+      const heartBtn = document.querySelector('#product-modal [data-product-id="' + productId + '"]');
+      if (heartBtn) {
+        const heartIcon = heartBtn.querySelector('svg');
+        if (isInWishlist) {
+          heartIcon.classList.remove('text-gray-400');
+          heartIcon.classList.add('text-red-500');
+          heartIcon.setAttribute('fill', 'currentColor');
+        } else {
+          heartIcon.classList.remove('text-red-500');
+          heartIcon.classList.add('text-gray-400');
+          heartIcon.setAttribute('fill', 'none');
+        }
+      }
+    }
+
+    function addToCartFromModal(productId) {
+      const quantity = parseInt(document.getElementById('modal-quantity').value) || 1;
+      const product = products.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity: quantity });
+      }
+      
+      updateCart();
+      showNotification(`Added ${quantity} ${product.unit}${quantity > 1 ? 's' : ''} to cart!`, 'success');
+    }
+
+    function increaseQuantity() {
+      const input = document.getElementById('modal-quantity');
+      input.value = parseInt(input.value) + 1;
+    }
+
+    function decreaseQuantity() {
+      const input = document.getElementById('modal-quantity');
+      const currentValue = parseInt(input.value);
+      if (currentValue > 1) {
+        input.value = currentValue - 1;
+      }
+    }
+
+    // Close product modal
+    document.getElementById('close-product-modal').addEventListener('click', () => {
+      document.getElementById('product-modal').classList.add('hidden');
+    });
+
+    document.getElementById('product-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('product-modal')) {
+        document.getElementById('product-modal').classList.add('hidden');
+      }
+    });
+
+    // View Toggle Functions
+    const gridViewBtn = document.getElementById('grid-view-btn');
+    const listViewBtn = document.getElementById('list-view-btn');
+
+    gridViewBtn.addEventListener('click', () => {
+      gridViewBtn.classList.add('active');
+      listViewBtn.classList.remove('active');
+      
+      if (currentSection === 'products') {
+        renderProducts(currentCategory);
+      } else {
+        renderServices(currentService);
+      }
+    });
+
+    listViewBtn.addEventListener('click', () => {
+      listViewBtn.classList.add('active');
+      gridViewBtn.classList.remove('active');
+      
+      if (currentSection === 'products') {
+        renderProducts(currentCategory);
+      } else {
+        renderServices(currentService);
+      }
+    });
+
+    // Sort Select Event Listener
+    document.getElementById('sort-select').addEventListener('change', function() {
+      currentSort = this.value;
+      
+      if (currentSection === 'products') {
+        renderProducts(currentCategory);
+      } else {
+        renderServices(currentService || 'all');
+      }
+    });
+
+    // Initialize
+    populateMobileCategories('products');
+    renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99de4ee2e3345667',t:'MTc2MzAzNzMxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99dee063d73f06e3',t:'MTc2MzA0MzI3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
