@@ -192,7 +192,7 @@
      </div><!-- Actions -->
      <div class="flex items-center space-x-2 sm:space-x-4"><!-- Search Button (Mobile/Tablet) --> <button id="mobile-search-btn" class="lg:hidden text-primary p-1">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-       </svg></button> <!-- Theme Toggle Button --> <button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="theme-toggle" title="Toggle theme"> <span id="theme-icon" class="text-sm sm:text-base">☀️</span> </button> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative hidden sm:block">
+       </svg></button> <!-- Theme Toggle Button --> <button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="theme-toggle" title="Toggle theme"> <span id="theme-icon" class="text-sm sm:text-base">☀️</span> </button> <!-- Wishlist Button (Now visible on all screen sizes) --> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
        </svg><span id="wishlist-count" class="cart-badge hidden">0</span> </button> <button id="cart-btn" class="text-primary hover:opacity-70 transition-opacity relative">
        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -221,6 +221,12 @@
       <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg></button> <!-- Mobile Category Dropdown Menu -->
      <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
+     </div><!-- Mobile Subcategory Dropdown (Hidden by default) -->
+     <div id="mobile-subcategory-dropdown" class="mt-3 hidden"><button id="mobile-subcategory-btn" class="w-full flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary"> <span id="mobile-subcategory-text">Select Subcategory</span>
+       <svg class="w-5 h-5 transform transition-transform" id="mobile-subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+       </svg></button> <!-- Mobile Subcategory Menu -->
+      <div id="mobile-subcategory-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-40"><!-- Dynamic subcategories will be inserted here -->
+      </div>
      </div>
     </div>
    </div>
@@ -3147,6 +3153,15 @@
         // Update current category
         currentCategory = category;
         
+        // Show/hide mobile subcategory dropdown
+        const mobileSubcategoryDropdown = document.getElementById('mobile-subcategory-dropdown');
+        if (category !== 'all' && categorySubcategories[category]) {
+          mobileSubcategoryDropdown.classList.remove('hidden');
+          populateMobileSubcategories(category);
+        } else {
+          mobileSubcategoryDropdown.classList.add('hidden');
+        }
+        
         // Update products title
         const productsTitle = document.getElementById('products-title');
         if (currentCategory === 'all') {
@@ -3161,8 +3176,59 @@
       });
     });
 
+    // Mobile Subcategory Functionality
+    const mobileSubcategoryBtn = document.getElementById('mobile-subcategory-btn');
+    const mobileSubcategoryMenu = document.getElementById('mobile-subcategory-menu');
+    const mobileSubcategoryText = document.getElementById('mobile-subcategory-text');
+    const mobileSubcategoryArrow = document.getElementById('mobile-subcategory-arrow');
+
+    // Populate mobile subcategories
+    function populateMobileSubcategories(category) {
+      const subcategories = categorySubcategories[category];
+      if (!subcategories) return;
+      
+      mobileSubcategoryText.textContent = 'Select Subcategory';
+      mobileSubcategoryMenu.innerHTML = subcategories.map((sub, index) => `
+        <button class="mobile-subcategory-option w-full text-left px-4 py-3 text-sm hover:bg-secondary ${index < subcategories.length - 1 ? 'border-b border-custom' : ''}" data-filter="${sub.filter}">
+          ${sub.name}
+        </button>
+      `).join('');
+      
+      // Add event listeners to subcategory options
+      document.querySelectorAll('.mobile-subcategory-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const filter = this.dataset.filter;
+          const text = this.textContent.trim();
+          
+          // Update button text
+          mobileSubcategoryText.textContent = text;
+          
+          // Close dropdown
+          mobileSubcategoryMenu.classList.add('hidden');
+          mobileSubcategoryArrow.classList.remove('rotate-180');
+          
+          // Filter products by subcategory
+          filterBySubcategory(filter);
+        });
+      });
+    }
+
+    // Mobile Subcategory Dropdown Toggle
+    mobileSubcategoryBtn.addEventListener('click', () => {
+      mobileSubcategoryMenu.classList.toggle('hidden');
+      mobileSubcategoryArrow.classList.toggle('rotate-180');
+    });
+
+    // Close mobile subcategory menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileSubcategoryBtn.contains(e.target) && !mobileSubcategoryMenu.contains(e.target)) {
+        mobileSubcategoryMenu.classList.add('hidden');
+        mobileSubcategoryArrow.classList.remove('rotate-180');
+      }
+    });
+
     // Initial Render
     renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d9c9c9d1f5db2e',t:'MTc2Mjk4OTkyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99da379bd1a79538',t:'MTc2Mjk5NDQyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
