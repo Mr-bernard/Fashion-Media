@@ -178,30 +178,29 @@
  <body><!-- Header -->
   <header class="bg-primary shadow-md sticky top-0 z-50 border-b border-custom">
    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-    <div class="flex justify-between items-center h-14 sm:h-16"><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden text-primary p-1">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg></button> <!-- Logo -->
-     <div class="flex items-center">
-      <h1 id="site-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary">Fashion Media</h1>
-     </div><!-- Desktop Search Bar -->
+    <div class="flex justify-between items-center h-14 sm:h-16"><!-- Logo and Site Title (Home Button) --> <button id="home-btn" class="flex items-center space-x-2 hover:opacity-80 transition-opacity"> <!-- Logo Icon -->
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+       <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" /> <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+      </div><h1 id="site-title" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary">Fashion Media</h1></button> <!-- Desktop Search Bar -->
      <div class="hidden lg:flex flex-1 max-w-2xl mx-8">
       <div class="relative w-full"><input type="text" id="search-input" placeholder="Search fabrics, accessories, materials..." class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
-       <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+       <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
        </svg>
       </div>
      </div><!-- Actions -->
      <div class="flex items-center space-x-2 sm:space-x-4"><!-- Search Button (Mobile/Tablet) --> <button id="mobile-search-btn" class="lg:hidden text-primary p-1">
-       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
        </svg></button> <!-- Theme Toggle Button --> <button class="theme-toggle-btn w-8 h-8 sm:w-10 sm:h-10" id="theme-toggle" title="Toggle theme"> <span id="theme-icon" class="text-sm sm:text-base">☀️</span> </button> <!-- Wishlist Button (Now visible on all screen sizes) --> <button id="wishlist-btn" class="text-primary hover:opacity-70 transition-opacity relative">
-       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
        </svg><span id="wishlist-count" class="cart-badge hidden">0</span> </button> <button id="cart-btn" class="text-primary hover:opacity-70 transition-opacity relative">
-       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
        </svg><span id="cart-count" class="cart-badge hidden">0</span> </button> <button id="signin-btn" class="accent-bg text-white px-3 py-1.5 sm:px-4 sm:py-2 lg:px-6 lg:py-2 rounded-lg font-semibold transition-all text-sm sm:text-base"> Sign In </button>
      </div>
     </div><!-- Mobile Search Bar (Hidden by default) -->
     <div id="mobile-search-bar" class="lg:hidden pb-3 hidden">
      <div class="relative"><input type="text" id="mobile-search-input" placeholder="Search products..." class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none">
-      <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      <svg class="absolute left-3 top-2.5 w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
      </div>
     </div>
@@ -216,24 +215,30 @@
   <section class="bg-primary border-b border-custom sticky top-14 sm:top-16 z-40">
    <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4"><!-- Desktop Category Chips -->
     <div class="hidden md:flex items-center space-x-3 overflow-x-auto pb-2"><button class="category-chip active px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="all"> 🏪 All Products </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="fabrics"> 🧵 Fabrics </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="accessories"> 💎 Accessories </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="threads"> 🧶 Threads </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="category-chip px-4 lg:px-6 py-2 rounded-lg font-medium whitespace-nowrap text-sm lg:text-base" data-category="tools"> ✂️ Tools &amp; Notions </button>
-    </div><!-- Mobile Category Dropdown -->
-    <div class="md:hidden"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text">🏪 All Products</span>
-      <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-      </svg></button> <!-- Mobile Category Dropdown Menu -->
-     <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
-     </div><!-- Mobile Subcategory Dropdown (Hidden by default) -->
-     <div id="mobile-subcategory-dropdown" class="mt-3 hidden"><button id="mobile-subcategory-btn" class="w-full flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary"> <span id="mobile-subcategory-text">Select Subcategory</span>
-       <svg class="w-5 h-5 transform transition-transform" id="mobile-subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-       </svg></button> <!-- Mobile Subcategory Menu -->
-      <div id="mobile-subcategory-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-40"><!-- Dynamic subcategories will be inserted here -->
-      </div>
+    </div><!-- Desktop Subcategory Dropdown -->
+    <div id="desktop-subcategory-dropdown" class="hidden md:block mt-3 hidden"><button id="desktop-subcategory-btn" class="flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary min-w-48"> <span id="desktop-subcategory-text">Select Subcategory</span>
+      <svg class="w-5 h-5 transform transition-transform ml-2" id="desktop-subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg></button> <!-- Desktop Subcategory Menu -->
+     <div id="desktop-subcategory-menu" class="absolute mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-40 min-w-48"><!-- Dynamic subcategories will be inserted here -->
+     </div>
+    </div>
+   </div><!-- Mobile Category Dropdown -->
+   <div class="md:hidden"><button id="mobile-category-btn" class="w-full flex items-center justify-between px-4 py-2 bg-card border border-custom rounded-lg text-primary"> <span id="mobile-category-text">🏪 All Products</span>
+     <svg class="w-5 h-5 transform transition-transform" id="mobile-category-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+     </svg></button> <!-- Mobile Category Dropdown Menu -->
+    <div id="mobile-category-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-50"><button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="all"> 🏪 All Products </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="fabrics"> 🧵 Fabrics </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="accessories"> 💎 Accessories </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="buttons"> 🔘 Buttons &amp; Zippers </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="threads"> 🧶 Threads </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary border-b border-custom" data-category="lace"> 🎀 Lace &amp; Trims </button> <button class="mobile-category-option w-full text-left px-4 py-3 text-sm hover:bg-secondary" data-category="tools"> ✂️ Tools &amp; Notions </button>
+    </div><!-- Subcategory Dropdown (Shows on all screen sizes when category selected) -->
+    <div id="subcategory-dropdown" class="mt-3 hidden"><button id="subcategory-btn" class="w-full flex items-center justify-between px-4 py-2 bg-secondary border border-custom rounded-lg text-primary"> <span id="subcategory-text">Select Subcategory</span>
+      <svg class="w-5 h-5 transform transition-transform" id="subcategory-arrow" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg></button> <!-- Subcategory Menu -->
+     <div id="subcategory-menu" class="absolute left-3 right-3 mt-2 bg-card border border-custom rounded-lg shadow-lg hidden z-40"><!-- Dynamic subcategories will be inserted here -->
      </div>
     </div>
    </div>
   </section><!-- Main Content Area -->
   <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 lg:py-8">
    <div class="flex gap-4 lg:gap-8"><!-- Sidebar Categories (Hidden on mobile/tablet, shown on desktop when category selected) -->
-    <aside id="category-sidebar" class="w-56 lg:w-64 hidden xl:block">
+    <aside id="category-sidebar" class="w-56 lg:w-64 hidden">
      <div class="bg-card rounded-xl border border-custom p-4 lg:p-6 sticky top-28 sm:top-32">
       <h3 id="sidebar-title" class="text-base lg:text-lg font-bold text-primary mb-3 lg:mb-4">Categories</h3>
       <div id="sidebar-content" class="space-y-2"><!-- Dynamic subcategories will be inserted here -->
@@ -252,7 +257,7 @@
   <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50 overflow-y-auto">
    <div class="min-h-full flex items-center justify-center p-4">
     <div class="bg-card rounded-2xl max-w-4xl w-full max-h-[90%] overflow-y-auto relative"><button id="close-product-modal" class="absolute top-4 right-4 z-10 bg-card rounded-full p-2 shadow-lg hover:opacity-70">
-      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
      <div id="product-detail-content" class="p-8"><!-- Product details will be inserted here -->
      </div>
@@ -263,7 +268,7 @@
    <div class="flex flex-col h-full">
     <div class="flex justify-between items-center p-6 border-b border-custom">
      <h3 class="text-xl font-bold text-primary">Shopping Cart</h3><button id="close-cart" class="text-secondary hover:text-primary">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
     </div>
     <div id="cart-items" class="flex-1 overflow-y-auto p-6">
@@ -280,7 +285,7 @@
    <div class="flex flex-col h-full">
     <div class="flex justify-between items-center p-6 border-b border-custom">
      <h3 class="text-xl font-bold text-primary">Products I Love</h3><button id="close-wishlist" class="text-secondary hover:text-primary">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg></button>
     </div>
     <div id="wishlist-items" class="flex-1 overflow-y-auto p-6">
@@ -361,7 +366,7 @@
       <p class="text-secondary">Already have an account? <button id="show-signin" class="text-primary hover:opacity-70 font-semibold">Sign In</button></p>
      </div>
     </div><!-- Close Button --> <button id="close-auth-modal" class="absolute top-4 right-4 text-secondary hover:text-primary">
-     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
      </svg></button>
    </div>
   </div>
@@ -2518,14 +2523,32 @@
               <button onclick="addToCart(${item.id})" class="text-xs accent-bg text-white px-3 py-1 rounded">
                 Add to Cart
               </button>
-              <button onclick="toggleWishlist(${item.id})" class="text-red-500 hover:text-red-700">
-                <svg class="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
+              <button onclick="removeFromWishlist(${item.id})" class="text-xs bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors">
+                Remove
               </button>
             </div>
           </div>
         `).join('');
+      }
+    }
+
+    // Remove from Wishlist
+    function removeFromWishlist(productId) {
+      const existingIndex = wishlist.findIndex(item => item.id === productId);
+      if (existingIndex > -1) {
+        wishlist.splice(existingIndex, 1);
+        
+        // Update heart icon in product grid
+        const heartBtn = document.querySelector(`[data-product-id="${productId}"]`);
+        if (heartBtn) {
+          const heartIcon = heartBtn.querySelector('svg');
+          heartIcon.classList.remove('text-red-500');
+          heartIcon.classList.add('text-gray-400');
+          heartIcon.setAttribute('fill', 'none');
+        }
+        
+        updateWishlist();
+        showWishlistNotification('Removed from wishlist');
       }
     }
 
@@ -2541,29 +2564,10 @@
       }, 2000);
     }
 
-    // Show Category Sidebar (Only on desktop XL screens)
+    // Show Category Sidebar (Disabled - using dropdown instead)
     function showCategorySidebar(category) {
-      const sidebar = document.getElementById('category-sidebar');
-      const sidebarTitle = document.getElementById('sidebar-title');
-      const sidebarContent = document.getElementById('sidebar-content');
-      
-      if (category === 'all') {
-        sidebar.classList.add('hidden');
-        return;
-      }
-      
-      const subcategories = categorySubcategories[category];
-      if (subcategories) {
-        sidebarTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        sidebarContent.innerHTML = subcategories.map(sub => `
-          <button class="w-full text-left px-3 py-2 rounded-lg text-sm text-secondary hover:bg-secondary hover:text-primary transition-colors" onclick="filterBySubcategory('${sub.filter}')">
-            ${sub.name}
-          </button>
-        `).join('');
-        // Only show sidebar on XL screens and above
-        sidebar.classList.remove('hidden');
-        sidebar.classList.add('xl:block');
-      }
+      // Sidebar functionality removed - using mobile-style dropdowns for all screen sizes
+      return;
     }
 
     // Filter by Subcategory
@@ -2665,6 +2669,24 @@
           productsTitle.textContent = 'Featured Products';
         } else {
           productsTitle.textContent = this.textContent.trim();
+        }
+        
+        // Show/hide subcategory dropdown for mobile
+        const subcategoryDropdown = document.getElementById('subcategory-dropdown');
+        if (currentCategory !== 'all' && categorySubcategories[currentCategory]) {
+          subcategoryDropdown.classList.remove('hidden');
+          populateSubcategories(currentCategory);
+        } else {
+          subcategoryDropdown.classList.add('hidden');
+        }
+        
+        // Show/hide desktop subcategory dropdown
+        const desktopSubcategoryDropdown = document.getElementById('desktop-subcategory-dropdown');
+        if (currentCategory !== 'all' && categorySubcategories[currentCategory]) {
+          desktopSubcategoryDropdown.classList.remove('hidden');
+          populateDesktopSubcategories(currentCategory);
+        } else {
+          desktopSubcategoryDropdown.classList.add('hidden');
         }
         
         // Show/hide sidebar and render products
@@ -3153,13 +3175,13 @@
         // Update current category
         currentCategory = category;
         
-        // Show/hide mobile subcategory dropdown
-        const mobileSubcategoryDropdown = document.getElementById('mobile-subcategory-dropdown');
+        // Show/hide subcategory dropdown (works for all screen sizes now)
+        const subcategoryDropdown = document.getElementById('subcategory-dropdown');
         if (category !== 'all' && categorySubcategories[category]) {
-          mobileSubcategoryDropdown.classList.remove('hidden');
-          populateMobileSubcategories(category);
+          subcategoryDropdown.classList.remove('hidden');
+          populateSubcategories(category);
         } else {
-          mobileSubcategoryDropdown.classList.add('hidden');
+          subcategoryDropdown.classList.add('hidden');
         }
         
         // Update products title
@@ -3176,36 +3198,36 @@
       });
     });
 
-    // Mobile Subcategory Functionality
-    const mobileSubcategoryBtn = document.getElementById('mobile-subcategory-btn');
-    const mobileSubcategoryMenu = document.getElementById('mobile-subcategory-menu');
-    const mobileSubcategoryText = document.getElementById('mobile-subcategory-text');
-    const mobileSubcategoryArrow = document.getElementById('mobile-subcategory-arrow');
+    // Subcategory Functionality (Works for all screen sizes)
+    const subcategoryBtn = document.getElementById('subcategory-btn');
+    const subcategoryMenu = document.getElementById('subcategory-menu');
+    const subcategoryText = document.getElementById('subcategory-text');
+    const subcategoryArrow = document.getElementById('subcategory-arrow');
 
-    // Populate mobile subcategories
-    function populateMobileSubcategories(category) {
+    // Populate subcategories
+    function populateSubcategories(category) {
       const subcategories = categorySubcategories[category];
       if (!subcategories) return;
       
-      mobileSubcategoryText.textContent = 'Select Subcategory';
-      mobileSubcategoryMenu.innerHTML = subcategories.map((sub, index) => `
-        <button class="mobile-subcategory-option w-full text-left px-4 py-3 text-sm hover:bg-secondary ${index < subcategories.length - 1 ? 'border-b border-custom' : ''}" data-filter="${sub.filter}">
+      subcategoryText.textContent = 'Select Subcategory';
+      subcategoryMenu.innerHTML = subcategories.map((sub, index) => `
+        <button class="subcategory-option w-full text-left px-4 py-3 text-sm hover:bg-secondary ${index < subcategories.length - 1 ? 'border-b border-custom' : ''}" data-filter="${sub.filter}">
           ${sub.name}
         </button>
       `).join('');
       
       // Add event listeners to subcategory options
-      document.querySelectorAll('.mobile-subcategory-option').forEach(option => {
+      document.querySelectorAll('.subcategory-option').forEach(option => {
         option.addEventListener('click', function() {
           const filter = this.dataset.filter;
           const text = this.textContent.trim();
           
           // Update button text
-          mobileSubcategoryText.textContent = text;
+          subcategoryText.textContent = text;
           
           // Close dropdown
-          mobileSubcategoryMenu.classList.add('hidden');
-          mobileSubcategoryArrow.classList.remove('rotate-180');
+          subcategoryMenu.classList.add('hidden');
+          subcategoryArrow.classList.remove('rotate-180');
           
           // Filter products by subcategory
           filterBySubcategory(filter);
@@ -3213,22 +3235,113 @@
       });
     }
 
-    // Mobile Subcategory Dropdown Toggle
-    mobileSubcategoryBtn.addEventListener('click', () => {
-      mobileSubcategoryMenu.classList.toggle('hidden');
-      mobileSubcategoryArrow.classList.toggle('rotate-180');
+    // Populate desktop subcategories
+    function populateDesktopSubcategories(category) {
+      const subcategories = categorySubcategories[category];
+      if (!subcategories) return;
+      
+      const desktopSubcategoryText = document.getElementById('desktop-subcategory-text');
+      const desktopSubcategoryMenu = document.getElementById('desktop-subcategory-menu');
+      
+      desktopSubcategoryText.textContent = 'Select Subcategory';
+      desktopSubcategoryMenu.innerHTML = subcategories.map((sub, index) => `
+        <button class="desktop-subcategory-option w-full text-left px-4 py-3 text-sm hover:bg-secondary ${index < subcategories.length - 1 ? 'border-b border-custom' : ''}" data-filter="${sub.filter}">
+          ${sub.name}
+        </button>
+      `).join('');
+      
+      // Add event listeners to desktop subcategory options
+      document.querySelectorAll('.desktop-subcategory-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const filter = this.dataset.filter;
+          const text = this.textContent.trim();
+          
+          // Update button text
+          desktopSubcategoryText.textContent = text;
+          
+          // Close dropdown
+          desktopSubcategoryMenu.classList.add('hidden');
+          document.getElementById('desktop-subcategory-arrow').classList.remove('rotate-180');
+          
+          // Filter products by subcategory
+          filterBySubcategory(filter);
+        });
+      });
+    }
+
+    // Subcategory Dropdown Toggle
+    subcategoryBtn.addEventListener('click', () => {
+      subcategoryMenu.classList.toggle('hidden');
+      subcategoryArrow.classList.toggle('rotate-180');
     });
 
-    // Close mobile subcategory menu when clicking outside
+    // Close subcategory menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!mobileSubcategoryBtn.contains(e.target) && !mobileSubcategoryMenu.contains(e.target)) {
-        mobileSubcategoryMenu.classList.add('hidden');
-        mobileSubcategoryArrow.classList.remove('rotate-180');
+      if (!subcategoryBtn.contains(e.target) && !subcategoryMenu.contains(e.target)) {
+        subcategoryMenu.classList.add('hidden');
+        subcategoryArrow.classList.remove('rotate-180');
       }
+    });
+
+    // Desktop Subcategory Dropdown Controls
+    const desktopSubcategoryBtn = document.getElementById('desktop-subcategory-btn');
+    const desktopSubcategoryMenu = document.getElementById('desktop-subcategory-menu');
+    const desktopSubcategoryArrow = document.getElementById('desktop-subcategory-arrow');
+
+    // Desktop Subcategory Dropdown Toggle
+    desktopSubcategoryBtn.addEventListener('click', () => {
+      desktopSubcategoryMenu.classList.toggle('hidden');
+      desktopSubcategoryArrow.classList.toggle('rotate-180');
+    });
+
+    // Close desktop subcategory menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!desktopSubcategoryBtn.contains(e.target) && !desktopSubcategoryMenu.contains(e.target)) {
+        desktopSubcategoryMenu.classList.add('hidden');
+        desktopSubcategoryArrow.classList.remove('rotate-180');
+      }
+    });
+
+    // Home Button Functionality
+    const homeBtn = document.getElementById('home-btn');
+    homeBtn.addEventListener('click', () => {
+      // Reset to initial state
+      currentCategory = 'all';
+      
+      // Reset category chips
+      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+      document.querySelector('.category-chip[data-category="all"]').classList.add('active');
+      
+      // Reset mobile category dropdown
+      document.getElementById('mobile-category-text').textContent = '🏪 All Products';
+      
+      // Hide subcategory dropdowns
+      document.getElementById('subcategory-dropdown').classList.add('hidden');
+      document.getElementById('desktop-subcategory-dropdown').classList.add('hidden');
+      
+      // Reset products title
+      document.getElementById('products-title').textContent = 'Featured Products';
+      
+      // Clear search inputs
+      document.getElementById('search-input').value = '';
+      document.getElementById('mobile-search-input').value = '';
+      
+      // Hide mobile search bar
+      document.getElementById('mobile-search-bar').classList.add('hidden');
+      
+      // Reset sort to featured
+      document.getElementById('sort-select').value = 'featured';
+      currentSort = 'featured';
+      
+      // Render all products
+      renderProducts('all');
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Initial Render
     renderProducts();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99da379bd1a79538',t:'MTc2Mjk5NDQyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99da50eb26659b16',t:'MTc2Mjk5NTQ1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
